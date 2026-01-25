@@ -1,223 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>🍅 Vancouver Food Share</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-max-width: 600px;
-margin: 0 auto;
-padding: 20px;
-background: #f8f9fa;
-}
-.card {
-background: white;
-border-radius: 12px;
-padding: 24px;
-margin: 20px 0;
-box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-button, input, select {
-width: 100%;
-padding: 12px;
-margin: 8px 0;
-font-size: 16px;
-border-radius: 8px;
-border: 1px solid #ddd;
-}
-button {
-background: #10b981;
-color: white;
-font-weight: 600;
-cursor: pointer;
-border: none;
-}
-button.secondary {
-background: #6b7280;
-width: auto;
+  <meta charset="UTF-8" />
+  <title>🍅 Vancouver Food Share</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-padding: 8px 16px;
-}
-button:disabled {
-background: #9ca3af;
-cursor: not-allowed;
-}
-.mode-toggle {
-display: flex;
-gap: 12px;
-}
-.mode-btn {
-background: white;
-border: 2px solid #e5e7eb;
-border-radius: 12px;
-padding: 16px;
-cursor: pointer;
-font-weight: 500;
-color: #1f2937;
-}
-.mode-btn:hover {
-border-color: #10b981;
-}
-.approved-only {
-background: #dcfce7;
-border-left: 4px solid #16a34a;
-padding: 16px;
-margin: 16px 0;
-border-radius: 8px;
-}
-.guardian-info {
-background: #dbeafe;
-border-left: 4px solid #3b82f6;
-padding: 12px;
-margin: 12px 0;
-border-radius: 6px;
-}
-.food-item {
-background: #f0fdf4;
-border-left: 4px solid #10b981;
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-padding: 16px;
-border-radius: 8px;
-margin: 12px 0;
-}
-.footer {
-text-align: center;
-font-size: 13px;
-color: #6b7280;
-}
-</style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f8f9fa;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 20px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    button, input, select {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    button {
+      background: #10b981;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+
+    button.secondary {
+      background: #6b7280;
+      width: auto;
+      padding: 8px 16px;
+    }
+
+    button:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    .mode-toggle {
+      display: flex;
+      gap: 12px;
+    }
+
+    .mode-btn {
+      background: white;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px;
+      cursor: pointer;
+      font-weight: 500;
+      color: #1f2937;
+    }
+
+    .mode-btn:hover {
+      border-color: #10b981;
+    }
+
+    .approved-only {
+      background: #dcfce7;
+      border-left: 4px solid #16a34a;
+      padding: 16px;
+      margin: 16px 0;
+      border-radius: 8px;
+    }
+
+    .guardian-info {
+      background: #dbeafe;
+      border-left: 4px solid #3b82f6;
+      padding: 12px;
+      margin: 12px 0;
+      border-radius: 6px;
+    }
+
+    .food-item {
+      background: #f0fdf4;
+      border-left: 4px solid #10b981;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 12px 0;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      color: #6b7280;
+    }
+  </style>
 </head>
+
 <body>
-<!-- HEADER -->
-<div class="card">
-<h1>🍅 Vancouver Food Share</h1>
-<p>Safe public pickup only. Drop food → list it → anyone picks up.</p>
-</div>
-<!-- ROLE SELECT -->
-<div class="card" id="rolePrompt">
-<h2 style="text-align:center;">What brings you here?</h2>
-<p style="text-align:center;color:#6b7280;">Choose one option to continue.</p>
-<div class="mode-toggle">
-<button class="mode-btn" id="btnGive">🥬 I Have Food</button>
-<button class="mode-btn" id="btnGet">🥗 I Need Food</button>
-</div>
-</div>
-<!-- GIVE MODE -->
-<div class="card" id="giveMode" style="display:none;">
-<button class="secondary" id="backFromGive">← Back</button>
-<h2>Drop Food → List It</h2>
-<div class="approved-only">
-<strong>Step 1:</strong> Drop food at an approved location<br>
-<strong>Step 2:</strong> List it here
-</div>
-<input id="giveFoodType" placeholder="1 bag apples, 5kg potatoes..." />
-<select id="giveLocation">
 
-<option value="">Choose location →</option>
-<option value="fridge">❄️ Grandview Park Community Fridge</option>
-<option value="library">📚 Kits Library Desk</option>
-</select>
-<label>
-<input type="checkbox" id="droppedCheck" />
-Food is already dropped off
-</label>
-<button id="listBtn" disabled>List for Pickup</button>
-</div>
-<!-- GET MODE -->
-<div class="card" id="getMode" style="display:none;">
-<button class="secondary" id="backFromGet">← Back</button>
-<h2>Available Food</h2>
-<input id="familySize" type="number" min="1" value="2" />
-<div class="guardian-info" id="guardianInfo"></div>
-<div id="foodList"></div>
-</div>
-<!-- FOOTER -->
-<div class="card footer">
-️ Guardian active · Fair-share limits · No accounts · No tracking
-</div>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-const rolePrompt = document.getElementById("rolePrompt");
-const giveMode = document.getElementById("giveMode");
-const getMode = document.getElementById("getMode");
-const btnGive = document.getElementById("btnGive");
-const btnGet = document.getElementById("btnGet");
-const backFromGive = document.getElementById("backFromGive");
-const backFromGet = document.getElementById("backFromGet");
-const giveFoodType = document.getElementById("giveFoodType");
-const giveLocation = document.getElementById("giveLocation");
-const droppedCheck = document.getElementById("droppedCheck");
+  <!-- HEADER -->
+  <div class="card">
+    <h1>🍅 Vancouver Food Share</h1>
+    <p>Safe public pickup only. Drop food → list it → anyone picks up.</p>
+  </div>
 
-const listBtn = document.getElementById("listBtn");
-const familySize = document.getElementById("familySize");
-const guardianInfo = document.getElementById("guardianInfo");
-const foodList = document.getElementById("foodList");
-const LOCATIONS = {
-fridge: "Grandview Park Community Fridge",
-library: "Kitsilano Library Desk"
-};
-const GUARDIAN = { KG_PER_PERSON: 2.5, MAX_FAMILY: 15 };
-let food = JSON.parse(localStorage.getItem("food") || "[]");
-function showGive() {
-rolePrompt.style.display = "none";
-giveMode.style.display = "block";
-getMode.style.display = "none";
-}
-function showGet() {
-rolePrompt.style.display = "none";
-giveMode.style.display = "none";
-getMode.style.display = "block";
-updateGetDisplay();
-}
-function back() {
-rolePrompt.style.display = "block";
-giveMode.style.display = "none";
-getMode.style.display = "none";
-}
-btnGive.addEventListener("click", showGive);
-btnGet.addEventListener("click", showGet);
-backFromGive.addEventListener("click", back);
-backFromGet.addEventListener("click", back);
-droppedCheck.addEventListener("change", () => {
-listBtn.disabled = !droppedCheck.checked;
-});
-listBtn.addEventListener("click", () => {
-const type = giveFoodType.value.trim();
-const loc = giveLocation.value;
-if (!type || !loc) return alert("Fill everything in");
+  <!-- ROLE SELECT -->
+  <div class="card" id="rolePrompt">
+    <h2 style="text-align:center;">What brings you here?</h2>
+    <p style="text-align:center;color:#6b7280;">Choose one option to continue.</p>
 
-food.unshift({
-item: type,
-location: LOCATIONS[loc],
-time: new Date().toLocaleString()
-});
-localStorage.setItem("food", JSON.stringify(food));
-giveFoodType.value = "";
-giveLocation.value = "";
-droppedCheck.checked = false;
-listBtn.disabled = true;
-showGet();
-});
-function updateGetDisplay() {
-const size = parseInt(familySize.value) || 2;
-const limit = Math.min(size * GUARDIAN.KG_PER_PERSON,
-GUARDIAN.MAX_FAMILY);
-guardianInfo.innerHTML =
-`You may take up to <strong>${limit.toFixed(1)}kg</strong> today`;
-foodList.innerHTML = food.length
-? food.map(f => `
-<div class="food-item">
-<strong>${f.item}</strong><br>
-📍 ${f.location}<br>
-🕒 ${f.time}
-</div>
-`).join("")
-: "<em>No food available right now</em>";
-}
-});
-</script>
+    <div class="mode-toggle">
+      <button class="mode-btn" id="btnGive">🥬 I Have Food</button>
+      <button class="mode-btn" id="btnGet">🥗 I Need Food</button>
+    </div>
+  </div>
+
+  <!-- GIVE MODE -->
+  <div class="card" id="giveMode" style="display:none;">
+    <button class="secondary" id="backFromGive">← Back</button>
+
+    <h2>Drop Food → List It</h2>
+
+    <div class="approved-only">
+      <strong>Step 1:</strong> Arrange a safe pickup location privately<br>
+      <strong>Step 2:</strong> Drop food and list it here
+    </div>
+
+    <input id="giveFoodType" placeholder="1 bag apples, 5kg potatoes…" />
+
+    <select id="giveLocation">
+      <option value="">Choose location →</option>
+      <option value="pilot">📍 Pilot pickup location (arranged privately)</option>
+    </select>
+
+    <label>
+      <input type="checkbox" id="droppedCheck" />
+      Food is already dropped off
+    </label>
+
+    <button id="listBtn" disabled>List for Pickup</button>
+  </div>
+
+  <!-- GET MODE -->
+  <div class="card" id="getMode" style="display:none;">
+    <button class="secondary" id="backFromGet">← Back</button>
+
+    <h2>Available Food</h2>
+
+    <input id="familySize" type="number" min="1" value="2" />
+
+    <div class="guardian-info" id="guardianInfo"></div>
+
+    <div id="foodList"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="card footer">
+    🛡️ Guardian active · Fair-share limits · No accounts · No tracking
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      const rolePrompt = document.getElementById("rolePrompt");
+      const giveMode = document.getElementById("giveMode");
+      const getMode = document.getElementById("getMode");
+
+      const btnGive = document.getElementById("btnGive");
+      const btnGet = document.getElementById("btnGet");
+      const backFromGive = document.getElementById("backFromGive");
+      const backFromGet = document.getElementById("backFromGet");
+
+      const giveFoodType = document.getElementById("giveFoodType");
+      const giveLocation = document.getElementById("giveLocation");
+      const droppedCheck = document.getElementById("droppedCheck");
+      const listBtn = document.getElementById("listBtn");
+
+      const familySize = document.getElementById("familySize");
+      const guardianInfo = document.getElementById("guardianInfo");
+      const foodList = document.getElementById("foodList");
+
+      const LOCATIONS = {
+        pilot: "Pilot pickup location (arranged privately)"
+      };
+
+      const GUARDIAN = { KG_PER_PERSON: 2.5, MAX_FAMILY: 15 };
+      let food = JSON.parse(localStorage.getItem("food") || "[]");
+
+      function showGive() {
+        rolePrompt.style.display = "none";
+        giveMode.style.display = "block";
+        getMode.style.display = "none";
+      }
+
+      function showGet() {
+        rolePrompt.style.display = "none";
+        giveMode.style.display = "none";
+        getMode.style.display = "block";
+        updateGetDisplay();
+      }
+
+      function back() {
+        rolePrompt.style.display = "block";
+        giveMode.style.display = "none";
+        getMode.style.display = "none";
+      }
+
+      btnGive.addEventListener("click", showGive);
+      btnGet.addEventListener("click", showGet);
+      backFromGive.addEventListener("click", back);
+      backFromGet.addEventListener("click", back);
+
+      droppedCheck.addEventListener("change", () => {
+        listBtn.disabled = !droppedCheck.checked;
+      });
+
+      listBtn.addEventListener("click", () => {
+        const type = giveFoodType.value.trim();
+        const loc = giveLocation.value;
+        if (!type || !loc) return alert("Fill everything in");
+
+        food.unshift({
+          item: type,
+          location: LOCATIONS[loc],
+          time: new Date().toLocaleString()
+        });
+
+        localStorage.setItem("food", JSON.stringify(food));
+        giveFoodType.value = "";
+        giveLocation.value = "";
+        droppedCheck.checked = false;
+        listBtn.disabled = true;
+        showGet();
+      });
+
+      function updateGetDisplay() {
+        const size = parseInt(familySize.value) || 2;
+        const limit = Math.min(size * GUARDIAN.KG_PER_PERSON, GUARDIAN.MAX_FAMILY);
+
+        guardianInfo.innerHTML =
+          `You may take up to <strong>${limit.toFixed(1)}kg</strong> today`;
+
+        foodList.innerHTML = food.length
+          ? food.map(f => `
+              <div class="food-item">
+                <strong>${f.item}</strong><br>
+                📍 ${f.location}<br>
+                🕒 ${f.time}
+              </div>
+            `).join("")
+          : "<em>No food available right now</em>";
+      }
+    });
+  </script>
+
 </body>
 </html>
