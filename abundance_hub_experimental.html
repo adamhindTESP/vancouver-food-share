@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🍅 Vancouver Abundance Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .active-mode { background-color: #059669 !important; color: white !important; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <nav class="bg-green-600 p-4 text-white shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">🍅 Vancouver Abundance</h1>
+            <span class="text-sm bg-green-700 px-3 py-1 rounded-full">🛡️ Guardian Active</span>
+        </div>
+    </nav>
+
+    <main class="container mx-auto py-8 px-4">
+        <!-- Stats Dashboard -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
+                <p class="text-gray-500 text-sm">Community Progress</p>
+                <h3 class="text-2xl font-bold" id="total-kg">0.0kg / 100kg</h3>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-green-500">
+                <p class="text-gray-500 text-sm">Active Listings</p>
+                <h3 class="text-2xl font-bold" id="active-count">0</h3>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-orange-500">
+                <p class="text-gray-500 text-sm">Guardian Vetoes</p>
+                <h3 class="text-2xl font-bold" id="veto-count">0</h3>
+            </div>
+        </div>
+
+        <!-- Mode Toggle -->
+        <div class="flex gap-4 mb-8">
+            <button id="btn-give" onclick="switchMode('give')" class="flex-1 p-4 rounded-xl border-2 border-green-600 text-green-600 font-bold transition active-mode">
+                🥬 I Have Food
+            </button>
+            <button id="btn-get" onclick="switchMode('get')" class="flex-1 p-4 rounded-xl border-2 border-green-600 text-green-600 font-bold transition">
+                🥗 I Need Food
+            </button>
+        </div>
+
+        <!-- GIVE MODE -->
+        <section id="section-give" class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 max-w-2xl mx-auto">
+            <h2 class="text-xl font-bold mb-4 flex items-center">🚜 Drop Food → List It</h2>
+            <div class="bg-green-50 p-4 rounded-lg mb-6 border-l-4 border-green-400 text-sm">
+                <strong>Step 1:</strong> Drop food at approved location <strong>FIRST</strong><br>
+                <strong>Step 2:</strong> List it here so others can pick up.
+            </div>
+            <div class="space-y-4">
+                <input id="prod" type="text" placeholder="Producer Name (e.g. Maria's Farm)" class="w-full p-3 border rounded-lg bg-gray-50">
+                <input id="item" type="text" placeholder="Item (e.g. 5kg Potatoes)" class="w-full p-3 border rounded-lg bg-gray-50">
+                <input id="kg" type="number" min="0.5" step="0.5" placeholder="Amount (kg)" class="w-full p-3 border rounded-lg bg-gray-50">
+                <select id="loc" class="w-full p-3 border rounded-lg bg-gray-50">
+                    <option value="">Choose location</option>
+                    <option value="Grandview Park Fridge">❄️ Grandview Park Fridge (24/7)</option>
+                    <option value="Kits Library Desk">📚 Kits Library Desk</option>
+                </select>
+                <label class="flex items-center gap-2 text-sm text-gray-700 py-2">
+                    <input type="checkbox" id="droppedCheck" onchange="toggleListButton()">
+                    Food is already dropped off
+                </label>
+                <button id="listButton" onclick="addSurplus()" disabled class="w-full bg-gray-400 text-white p-3 rounded-lg font-bold transition cursor-not-allowed">
+                    List for Pickup
+                </button>
+            </div>
+        </section>
+
+        <!-- GET MODE -->
+        <section id="section-get" class="hidden bg-white p-8 rounded-2xl shadow-sm border border-gray-100 max-w-2xl mx-auto">
+            <h2 class="text-xl font-bold mb-4 flex items-center">🥗 Available Abundance</h2>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Family size</label>
+                <input id="familySize" type="number" min="1" max="10" value="2" class="w-full p-3 border rounded-lg bg-gray-50" onchange="updateGuardian()">
+            </div>
+            <div id="guardian-info" class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500 mb-6 hidden">
+                <p id="guardian-text"></p>
+            </div>
+            <div id="resource-list" class="space-y-4">
+                <p class="text-center text-gray-400 py-8 italic">No food listed yet today. Check back soon!</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Local data store (no backend needed)
+        let resources = JSON.parse(localStorage.getItem('resources') || '[]');
+        let claims = JSON.parse(localStorage.getItem('claims') || '[]');
+        let vetoes = 0;
+
+        const GUARDIAN = {
+            MAX_DAILY_KG: 100,
+            KG_PER_PERSON: 2.5,
+            MAX_FAMILY_KG: 15,
+            MIN_KG: 0.5
+        };
+
+        // Daily reset
+        const today = new Date().toDateString();
+        if (localStorage.lastDay !== today) {
+            claims = [];
+            localStorage.setItem('claims', JSON.stringify(claims));
+            localStorage.lastDay = today;
+        }
+
+        function switchMode(mode) {
+            const giveSect = document.getElementById('section-give');
+            const getSect = document.getElementById('section-get');
+            const giveBtn = document.getElementById('btn-give');
+            const getBtn = document.getElementById('btn-get');
+
+            if (mode === 'give') {
+                giveSect.classList.remove('hidden');
+                getSect.classList.add('hidden');
+                giveBtn.classList.add('active-mode');
+                getBtn.classList.remove('active-mode');
+            } else {
+                giveSect.classList.add('hidden');
+                getSect.classList.remove('hidden');
+                giveBtn.classList.remove('active-mode');
+                getBtn.classList.add('active-mode');
+                updateDashboard();
+                updateGuardian();
+            }
+        }
+
+        function toggleListButton() {
+            const check = document.getElementById('droppedCheck');
+            const btn = document.getElementById('listButton');
+            btn.disabled = !check.checked;
+            if (check.checked) {
+                btn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                btn.classList.add('bg-green-600', 'hover:bg-green-700');
+            } else {
+                btn.classList.add('bg-gray-400', 'cursor-not-allowed');
+                btn.classList.remove('bg-green-600', 'hover:bg-green-700');
+            }
+        }
+
+        function addSurplus() {
+            const prod = document.getElementById('prod').value.trim();
+            const item = document.getElementById('item').value.trim();
+            const kg = parseFloat(document.getElementById('kg').value);
+            const loc = document.getElementById('loc').value;
+
+            if (!prod || !item || !kg || !loc || kg < GUARDIAN.MIN_KG) {
+                return alert("Please fill all fields with valid amounts (min 0.5kg)");
+            }
+
+            const resource = {
+                id: Date.now().toString(),
+                producer: prod,
+                item: item,
+                kg: kg,
+                location: loc,
+                time: new Date().toLocaleString(),
+                claimed: false
+            };
+
+            resources.unshift(resource);
+            localStorage.setItem('resources', JSON.stringify(resources));
+            
+            alert(`✅ SUCCESS: ${kg}kg ${item} listed at ${loc}`);
+            
+            // Reset form
+            document.getElementById('prod').value = '';
+            document.getElementById('item').value = '';
+            document.getElementById('kg').value = '';
+            document.getElementById('loc').value = '';
+            document.getElementById('droppedCheck').checked = false;
+            toggleListButton();
+            
+            switchMode('get');
+        }
+
+        function updateDashboard() {
+            const totalKg = resources.reduce((sum, r) => sum + (r.claimed ? 0 : r.kg), 0);
+            const activeCount = resources.filter(r => !r.claimed).length;
+            
+            document.getElementById('total-kg').innerText = `${totalKg.toFixed(1)}kg / 100kg`;
+            document.getElementById('active-count').innerText = activeCount;
+            document.getElementById('veto-count').innerText = vetoes;
+        }
+
+        function updateGuardian() {
+            const familySize = parseInt(document.getElementById('familySize').value) || 2;
+            const limit = Math.min(familySize * GUARDIAN.KG_PER_PERSON, GUARDIAN.MAX_FAMILY_KG);
+            const kgToday = claims.reduce((sum, c) => sum + (c.kg || 0), 0);
+            
+            document.getElementById('guardian-text').innerText = 
+                `Today you can pick up ${limit.toFixed(1)}kg | ${kgToday.toFixed(1)}kg used today`;
+            document.getElementById('guardian-info').classList.remove('hidden');
+            
+            renderResources(limit);
+        }
+
+        function renderResources(limit) {
+            const active = resources.filter(r => !r.claimed);
+            const list = document.getElementById('resource-list');
+            
+            if (active.length === 0) {
+                list.innerHTML = '<p class="text-center text-gray-400 py-8 italic">No food listed yet today. Check back soon!</p>';
+                return;
+            }
+
+            list.innerHTML = active.map(r => `
+                <div class="p-4 border rounded-xl flex justify-between items-center bg-gray-50 border-l-4 border-green-500">
+                    <div>
+                        <p class="font-bold text-lg text-gray-800">${r.item}</p>
+                        <p class="text-sm text-gray-500">📍 ${r.location} by ${r.producer}</p>
+                        <p class="text-xs text-gray-400">${r.time}</p>
+                    </div>
+                    <div class="text-right">
+                        <input type="number" id="kg_${r.id}" min="${GUARDIAN.MIN_KG}" max="${limit}" step="0.5" 
+                               placeholder="kg" class="w-20 p-2 border rounded text-right mb-2">
+                        <button onclick="claim('${r.id}')" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-700 w-full">
+                            Claim
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function claim(id) {
+            const kgInput = document.getElementById(`kg_${id}`);
+            const kg = parseFloat(kgInput.value);
+            const familySize = parseInt(document.getElementById('familySize').value) || 2;
+            const limit = Math.min(familySize * GUARDIAN.KG_PER_PERSON, GUARDIAN.MAX_FAMILY_KG);
+            const kgToday = claims.reduce((sum, c) => sum + (c.kg || 0), 0);
+
+            if (!kg || kg < GUARDIAN.MIN_KG) return alert(`Minimum ${GUARDIAN.MIN_KG}kg`);
+            if (kg > limit) return alert(`Family limit: ${limit.toFixed(1)}kg`);
+            if (kgToday + kg > GUARDIAN.MAX_DAILY_KG) return alert('Daily system limit reached');
+
+            const resource = resources.find(r => r.id === id);
+            resource.claimed = true;
+            claims.push({ kg, resource: resource.item, time: new Date().toLocaleString() });
+            
+            localStorage.setItem('resources', JSON.stringify(resources));
+            localStorage.setItem('claims', JSON.stringify(claims));
+            
+            alert(`✅ CLAIMED: ${kg.toFixed(1)}kg ${resource.item}`);
+            updateDashboard();
+            updateGuardian();
+        }
+
+        // Initialize
+        updateDashboard();
+        setInterval(updateDashboard, 5000);
+    </script>
+</body>
+</html>
+
