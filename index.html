@@ -7,7 +7,6 @@
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
       max-width: 600px;
@@ -15,15 +14,13 @@
       padding: 20px;
       background: #f8f9fa;
     }
-
     .card {
       background: white;
       border-radius: 12px;
       padding: 24px;
-      margin: 20px 0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin: 16px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
-
     button, input, select {
       width: 100%;
       padding: 12px;
@@ -32,78 +29,42 @@
       border-radius: 8px;
       border: 1px solid #ddd;
     }
-
     button {
       background: #10b981;
       color: white;
       font-weight: 600;
-      cursor: pointer;
       border: none;
     }
-
     button.secondary {
       background: #6b7280;
     }
-
     button:disabled {
       background: #9ca3af;
-      cursor: not-allowed;
     }
-
-    .mode-toggle {
-      display: flex;
-      gap: 12px;
-    }
-
-    .mode-btn {
-      background: white;
-      border: 2px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 16px;
-      cursor: pointer;
-      font-weight: 500;
-    }
-
-    .mode-btn:hover {
-      border-color: #10b981;
-    }
-
-    .approved-only {
-      background: #dcfce7;
-      border-left: 4px solid #16a34a;
-      padding: 16px;
-      margin: 16px 0;
-      border-radius: 8px;
-    }
-
-    .guardian-info {
-      background: #dbeafe;
-      border-left: 4px solid #3b82f6;
+    .notice {
+      background: #fff3cd;
+      border-left: 4px solid #f59e0b;
       padding: 12px;
-      margin: 12px 0;
-      border-radius: 6px;
-    }
-
-    .food-item {
-      background: #f0fdf4;
-      border-left: 4px solid #10b981;
-      padding: 16px;
       border-radius: 8px;
-      margin: 12px 0;
+      margin-top: 12px;
+      font-size: 14px;
     }
-
-    .footer {
+    .guardian {
       text-align: center;
       font-size: 13px;
       color: #6b7280;
     }
-
-    .pill {
-      background: #fef3c7;
-      border-left: 4px solid #f59e0b;
+    .food-item {
+      background: #f0fdf4;
+      border-left: 4px solid #10b981;
       padding: 12px;
-      border-radius: 6px;
-      margin-top: 12px;
+      border-radius: 8px;
+      margin: 8px 0;
+    }
+    .link {
+      color: #2563eb;
+      text-decoration: underline;
+      cursor: pointer;
       font-size: 14px;
     }
   </style>
@@ -111,179 +72,134 @@
 
 <body>
 
-  <!-- HEADER -->
-  <div class="card">
-    <h1>🍅 Vancouver Food Share</h1>
-    <p>Safe public pickup only. Drop food → list it → anyone can pick up.</p>
-
-    <div class="pill">
-      <strong>Pilot project.</strong> Locations below have been manually verified.
-      Please use safe, public pickup points only.
-    </div>
+<!-- HEADER -->
+<div class="card">
+  <h1>🍅 Vancouver Food Share</h1>
+  <p>Safe public pickup only. Drop food → list it → anyone can pick up.</p>
+  <div class="notice">
+    <strong>Pilot project.</strong> Locations below are manually verified.
+    Please use safe, public pickup points only.
   </div>
+</div>
 
-  <!-- ROLE SELECT -->
-  <div class="card" id="rolePrompt">
-    <h2 style="text-align:center;">What brings you here?</h2>
-    <p style="text-align:center;color:#6b7280;">Choose one option to continue.</p>
+<!-- VERIFIED LOCATIONS -->
+<div class="card">
+  <h3>📍 Verified Pickup Locations</h3>
+  <ul style="margin-top:8px; padding-left:18px;">
+    <li><strong>Kitsilano Fridge</strong> — Alley behind 3066 W 13th Ave</li>
+    <li><strong>Victoria Drive Fridge</strong> — Alley behind 4040 Victoria Dr</li>
+    <li><strong>Main Street Fridge</strong> — 3718 Main St (Buzz to enter)</li>
+    <li><strong>Food Stash Fridge</strong> — Alley at E 4th & Scotia</li>
+    <li><strong>East Hastings LOAF</strong> — 2297 E Hastings St</li>
+  </ul>
+</div>
 
-    <div class="mode-toggle">
-      <button class="mode-btn" id="btnGive">🥬 I Have Food</button>
-      <button class="mode-btn" id="btnGet">🥗 I Need Food</button>
-    </div>
-  </div>
+<!-- ROLE SELECT -->
+<div class="card" id="role">
+  <h3>What brings you here?</h3>
+  <button onclick="showGive()">🥬 I Have Food</button>
+  <button onclick="showGet()">🥗 I Need Food</button>
+</div>
 
-  <!-- GIVE MODE -->
-  <div class="card" id="giveMode" style="display:none;">
-    <button class="secondary" id="backFromGive">← Back</button>
+<!-- GIVE MODE -->
+<div class="card" id="give" style="display:none;">
+  <button class="secondary" onclick="back()">← Back</button>
+  <h3>Drop Food → List It</h3>
 
-    <h2>Drop Food → List It</h2>
+  <input id="foodDesc" placeholder="e.g. apples, bread, vegetables" />
+  <select id="location">
+    <option value="">Choose location…</option>
+    <option>Kitsilano Fridge</option>
+    <option>Victoria Drive Fridge</option>
+    <option>Main Street Fridge</option>
+    <option>Food Stash Fridge</option>
+    <option>East Hastings LOAF</option>
+  </select>
 
-    <div class="approved-only">
-      <strong>Step 1:</strong> Drop food at a verified public fridge<br>
-      <strong>Step 2:</strong> List it here so others can find it
-    </div>
+  <label>
+    <input type="checkbox" id="confirmDrop" /> Food is already dropped off
+  </label>
 
-    <input id="giveFoodType" placeholder="e.g. apples, bread, vegetables" />
+  <button id="listBtn" disabled onclick="addFood()">List for pickup</button>
+</div>
 
-    <select id="giveLocation">
-      <option value="">Choose verified location →</option>
+<!-- GET MODE -->
+<div class="card" id="get" style="display:none;">
+  <button class="secondary" onclick="back()">← Back</button>
+  <button onclick="renderFood()">Refresh</button>
+
+  <h3>Food Listings</h3>
+  <select id="people" onchange="renderFood()">
+    <option value="1">1 person</option>
+    <option value="2">2 people</option>
+    <option value="3">3 people</option>
+    <option value="4">4 people</option>
+  </select>
+
+  <div id="limit" class="notice"></div>
+  <div id="listings"></div>
+</div>
+
+<!-- STORAGE PARTNER -->
+<div class="card">
+  <span class="link" onclick="toggleSponsor()">Are you a place that can store food?</span>
+  <div id="sponsor" style="display:none; margin-top:12px;">
+    <input placeholder="Place name" />
+    <input placeholder="Address / neighbourhood" />
+    <select>
+      <option>Has a fridge</option>
+      <option>No fridge</option>
     </select>
-
-    <label>
-      <input type="checkbox" id="droppedCheck" />
-      Food is already dropped off
-    </label>
-
-    <button id="listBtn" disabled>List for Pickup</button>
+    <button disabled>Apply (pilot)</button>
   </div>
+</div>
 
-  <!-- GET MODE -->
-  <div class="card" id="getMode" style="display:none;">
-    <button class="secondary" id="backFromGet">← Back</button>
-
-    <h2>Food Listings</h2>
-    <p style="color:#6b7280;">How many people are you feeding? (max 4)</p>
-
-    <select id="familySize">
-      <option value="1">1 person</option>
-      <option value="2">2 people</option>
-      <option value="3">3 people</option>
-      <option value="4">4 people</option>
-    </select>
-
-    <div class="guardian-info" id="guardianInfo"></div>
-
-    <button class="secondary" id="refreshBtn">Refresh</button>
-
-    <div id="foodList"></div>
-  </div>
-
-  <!-- FOOTER -->
-  <div class="card footer">
-    🛡️ Guardian active · Fair-share limits · No accounts · No tracking
-  </div>
+<div class="guardian">
+  🛡️ Guardian active · Fair-share limits · No accounts · No tracking
+</div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+  const food = JSON.parse(localStorage.getItem("food") || "[]");
 
-  const LOCATIONS = {
-    kits13: { name: "Kitsilano Fridge", details: "Alley behind 3066 W 13th Ave" },
-    vicDrive: { name: "Victoria Drive Fridge", details: "Alley behind 4040 Victoria Dr" },
-    mainSt: { name: "Main Street Fridge", details: "3718 Main St (Buzz to enter)" },
-    east4th: { name: "Food Stash Fridge", details: "Alley at E 4th & Scotia" },
-    dachi: { name: "East Hastings LOAF", details: "2297 E Hastings St" }
-  };
-
-  const KG_PER_PERSON = 2.5;
-  const MAX_PEOPLE = 4;
-  const EXPIRY_HOURS = 24;
-
-  let food = JSON.parse(localStorage.getItem("food") || "[]");
-
-  const giveLocation = document.getElementById("giveLocation");
-  Object.entries(LOCATIONS).forEach(([key, loc]) => {
-    const opt = document.createElement("option");
-    opt.value = key;
-    opt.textContent = `${loc.name} — ${loc.details}`;
-    giveLocation.appendChild(opt);
-  });
-
-  const rolePrompt = document.getElementById("rolePrompt");
-  const giveMode = document.getElementById("giveMode");
-  const getMode = document.getElementById("getMode");
-
-  document.getElementById("btnGive").onclick = () => {
-    rolePrompt.style.display = "none";
-    giveMode.style.display = "block";
-  };
-
-  document.getElementById("btnGet").onclick = () => {
-    rolePrompt.style.display = "none";
-    getMode.style.display = "block";
-    updateGetDisplay();
-  };
-
-  document.getElementById("backFromGive").onclick =
-  document.getElementById("backFromGet").onclick = () => {
-    rolePrompt.style.display = "block";
-    giveMode.style.display = "none";
-    getMode.style.display = "none";
-  };
-
-  document.getElementById("droppedCheck").onchange = e => {
+  document.getElementById("confirmDrop").onchange = e =>
     document.getElementById("listBtn").disabled = !e.target.checked;
-  };
 
-  document.getElementById("listBtn").onclick = () => {
-    const item = document.getElementById("giveFoodType").value.trim();
-    const locKey = giveLocation.value;
-    if (!item || !locKey) return alert("Please fill everything in.");
-
-    food.unshift({
-      item,
-      location: LOCATIONS[locKey],
-      time: Date.now()
-    });
-
-    localStorage.setItem("food", JSON.stringify(food));
-    document.getElementById("giveFoodType").value = "";
-    giveLocation.value = "";
-    document.getElementById("droppedCheck").checked = false;
-    document.getElementById("listBtn").disabled = true;
-
-    rolePrompt.style.display = "none";
-    giveMode.style.display = "none";
-    getMode.style.display = "block";
-    updateGetDisplay();
-  };
-
-  document.getElementById("refreshBtn").onclick = updateGetDisplay;
-  document.getElementById("familySize").onchange = updateGetDisplay;
-
-  function updateGetDisplay() {
-    const now = Date.now();
-    food = food.filter(f => (now - f.time) < EXPIRY_HOURS * 3600000);
-    localStorage.setItem("food", JSON.stringify(food));
-
-    const people = Math.min(parseInt(document.getElementById("familySize").value), MAX_PEOPLE);
-    const limit = people * KG_PER_PERSON;
-
-    document.getElementById("guardianInfo").innerHTML =
-      `To keep things fair, you may take up to <strong>${limit.toFixed(1)}kg</strong> today.`;
-
-    const list = document.getElementById("foodList");
-    list.innerHTML = food.length
-      ? food.map(f => `
-          <div class="food-item">
-            <strong>${f.item}</strong><br>
-            📍 ${f.location.name}<br>
-            <small>${f.location.details}</small>
-          </div>
-        `).join("")
-      : "<em>No food available right now. Check back later.</em>";
+  function showGive() {
+    role.style.display = "none";
+    give.style.display = "block";
   }
-});
+  function showGet() {
+    role.style.display = "none";
+    get.style.display = "block";
+    renderFood();
+  }
+  function back() {
+    give.style.display = get.style.display = "none";
+    role.style.display = "block";
+  }
+  function toggleSponsor() {
+    sponsor.style.display = sponsor.style.display === "none" ? "block" : "none";
+  }
+  function addFood() {
+    food.unshift({
+      item: foodDesc.value,
+      loc: location.value,
+      time: new Date().toLocaleString()
+    });
+    localStorage.setItem("food", JSON.stringify(food));
+    foodDesc.value = "";
+    location.value = "";
+    confirmDrop.checked = false;
+    listBtn.disabled = true;
+    showGet();
+  }
+  function renderFood() {
+    const p = parseInt(people.value);
+    limit.innerHTML = `You may take up to <strong>${(p*2.5).toFixed(1)}kg</strong> today (pilot max 4 people).`;
+    listings.innerHTML = food.length
+      ? food.map(f => `<div class="food-item"><strong>${f.item}</strong><br>${f.loc}<br>${f.time}</div>`).join("")
+      : "<em>No food available right now.</em>";
+  }
 </script>
 
 </body>
