@@ -108,7 +108,7 @@
       margin-top: 10px;
     }
 
-    .guardian {
+    .guidance {
       background: #eff6ff;
       border-left: 4px solid #3b82f6;
       padding: 14px;
@@ -128,6 +128,8 @@
     .hidden {
       display: none;
     }
+
+    a { text-decoration: none; }
   </style>
 </head>
 
@@ -137,18 +139,18 @@
   <div class="card">
     <h1>🍅 Vancouver Food Share</h1>
     <p>
-      Safe public pickup only.  
+      Safe public pickup only.<br />
       Drop food → list it → anyone can pick up.
     </p>
 
     <div class="pilot">
       <strong>Pilot project.</strong><br />
-      This is an independent, lightweight directory for community food-sharing locations.
-      Listings are opt-in and may be added or removed at the request of the host.
+      This site is an independent, lightweight directory for community food-sharing locations.
+      Please follow each location’s posted guidelines.
     </div>
   </div>
 
-  <!-- VERIFIED LOCATIONS -->
+  <!-- LOCATIONS -->
   <div class="card locations">
     <h2>📍 Community Pickup Locations</h2>
     <ul>
@@ -161,15 +163,13 @@
 
     <p class="note">
       These are public, volunteer-maintained community fridges.
-      This site does not operate, manage, or stock any location.
-      Availability and guidelines are set by each host.
+      Thank you to the volunteers who care for and maintain them.
     </p>
   </div>
 
   <!-- ROLE SELECT -->
   <div class="card" id="roleSelect">
     <h2>What brings you here?</h2>
-
     <button class="primary" onclick="showGive()">🥬 I Have Food</button>
     <button class="primary" onclick="showGet()">🥗 I Need Food</button>
   </div>
@@ -179,15 +179,14 @@
     <button class="secondary" onclick="goBack()">← Back</button>
 
     <h2>Drop Food → List It</h2>
-
     <p>
-      Step 1: Drop food at a public location above.  
+      Step 1: Drop food at one of the public locations above.<br />
       Step 2: List it here so others know it’s available.
     </p>
 
-    <input id="foodDesc" placeholder="e.g. apples, bread, vegetables" />
+    <input placeholder="e.g. apples, bread, vegetables" />
 
-    <select id="pickupLocation">
+    <select>
       <option value="">Choose pickup location…</option>
       <option>Kitsilano Fridge</option>
       <option>Victoria Drive Fridge</option>
@@ -211,24 +210,24 @@
     <h2>Food Listings</h2>
 
     <label>How many people are you feeding?</label>
-    <select id="familySize">
+    <select>
       <option>1</option>
       <option>2</option>
       <option>3</option>
       <option>4+</option>
     </select>
 
-    <div class="guardian">
+    <div class="guidance">
       <strong>Optional pickup guidance:</strong><br />
-      To help ensure food reaches as many people as possible, please consider
-      taking no more than <strong>~2.5kg per person</strong> per visit when supplies are limited.
+      When supplies are limited, please consider taking no more than
+      <strong>~2.5kg per person</strong> per visit so food can reach more people.
       This is a courtesy suggestion only — not a rule or restriction.
     </div>
 
     <p><em>No food listed right now. Please check back later.</em></p>
   </div>
 
-  <!-- SPONSOR / STORAGE PARTNER -->
+  <!-- STORAGE PARTNER -->
   <div class="card">
     <h2>🏠 Are you a place that can store food?</h2>
     <p>
@@ -236,17 +235,19 @@
       and other public-facing spaces can apply to be listed.
     </p>
 
-    <button class="outline">Apply to be a storage partner</button>
+    <a href="mailto:adam.hind005@gmail.com?subject=Storage%20Partner%20Request">
+      <button class="outline">Contact to be listed</button>
+    </a>
 
     <p class="note">
-      Listings are opt-in, reviewed manually, and removable at any time.
-      No fees. No obligations.
+      Listings are opt-in and coordinated manually by email.
+      No obligation. No fees.
     </p>
   </div>
 
   <!-- FOOTER -->
   <div class="footer">
-    Independent community tool · Listings opt-in · No accounts · No tracking<br />
+    Independent community tool · Opt-in listings · No accounts · No tracking<br />
     Guidance shown is optional and non-enforced
   </div>
 
