@@ -4,20 +4,16 @@
   <meta charset="UTF-8" />
   <title>🍅 Vancouver Food Share</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
+
   <style>
-    * { 
-      box-sizing: border-box; 
-      margin: 0; 
-      padding: 0; 
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       max-width: 680px;
       margin: 0 auto;
       padding: 24px 20px;
-      background: linear-gradient(to bottom, #f8faf8, #ffffff);
+      background: #f9faf9;
       color: #1f2937;
       line-height: 1.6;
     }
@@ -27,15 +23,15 @@
       border-radius: 16px;
       padding: 28px;
       margin-bottom: 24px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-      border: 1px solid #f3f4f6;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+      border: 1px solid #f1f5f9;
     }
 
     h1 {
-      font-size: 32px;
+      font-size: 30px;
       margin-bottom: 8px;
-      letter-spacing: -0.5px;
       color: #111827;
+      letter-spacing: -0.4px;
     }
 
     h2 {
@@ -60,44 +56,32 @@
     li {
       margin-bottom: 10px;
       color: #374151;
-      padding-left: 4px;
     }
 
-    li strong {
-      color: #111827;
-    }
+    li strong { color: #111827; }
 
     button {
       width: 100%;
-      padding: 16px;
+      padding: 15px;
       margin-top: 12px;
       font-size: 16px;
       font-weight: 600;
       border-radius: 12px;
       border: none;
       cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: inherit;
+      transition: background 0.2s ease;
     }
 
     button.primary {
       background: #10b981;
-      color: white;
+      color: #ffffff;
     }
 
-    button.primary:hover {
-      background: #059669;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
-    }
+    button.primary:hover { background: #059669; }
 
     button.secondary {
       background: #6b7280;
       color: white;
-    }
-
-    button.secondary:hover {
-      background: #4b5563;
     }
 
     button.outline {
@@ -106,14 +90,9 @@
       color: #10b981;
     }
 
-    button.outline:hover {
-      background: #f0fdf4;
-    }
-
     button:disabled {
       background: #d1d5db;
       cursor: not-allowed;
-      transform: none;
     }
 
     input, select {
@@ -123,14 +102,12 @@
       border-radius: 10px;
       border: 1.5px solid #d1d5db;
       font-size: 15px;
-      font-family: inherit;
-      transition: border-color 0.2s;
     }
 
     input:focus, select:focus {
       outline: none;
       border-color: #10b981;
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+      box-shadow: 0 0 0 3px rgba(16,185,129,0.12);
     }
 
     label {
@@ -140,26 +117,21 @@
       margin-top: 14px;
       font-size: 15px;
       color: #374151;
-      cursor: pointer;
     }
 
     input[type="checkbox"] {
-      width: auto;
-      margin: 0;
-      cursor: pointer;
       width: 18px;
       height: 18px;
     }
 
     .hero {
-      background: linear-gradient(135deg, #ecfdf5 0%, #ffffff 100%);
       border-left: 5px solid #10b981;
     }
 
     .tagline {
-      font-size: 17px;
-      margin-bottom: 16px;
+      font-size: 16px;
       color: #374151;
+      margin-bottom: 16px;
     }
 
     .steps {
@@ -170,13 +142,13 @@
     }
 
     .step {
-      background: #f9fafb;
+      background: #fafafa;
       border-radius: 12px;
-      padding: 18px;
+      padding: 16px;
       font-size: 14px;
       color: #374151;
       text-align: center;
-      border: 1px solid #e5e7eb;
+      border: 1px dashed #e5e7eb;
     }
 
     .locations {
@@ -187,15 +159,11 @@
     .pilot {
       background: #fff7ed;
       border-left: 5px solid #f59e0b;
-      padding: 16px;
+      padding: 14px;
       border-radius: 10px;
       margin-top: 16px;
       color: #92400e;
       font-size: 14px;
-    }
-
-    .pilot strong {
-      color: #78350f;
     }
 
     .note {
@@ -212,57 +180,15 @@
       margin-top: 40px;
       padding-top: 24px;
       border-top: 1px solid #e5e7eb;
-      line-height: 1.6;
     }
 
-    .hidden { 
-      display: none; 
-    }
+    .hidden { display: none; }
 
-    a { 
-      text-decoration: none; 
-    }
-
-    /* Mobile refinements */
     @media (max-width: 500px) {
-      body {
-        padding: 16px 14px;
-      }
-
-      .card {
-        padding: 22px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-
-      h2 {
-        font-size: 20px;
-      }
-
-      .steps {
-        grid-template-columns: 1fr;
-      }
-
-      button {
-        padding: 14px;
-      }
-    }
-
-    /* Accessibility improvements */
-    button:focus, 
-    input:focus, 
-    select:focus {
-      outline: 3px solid #10b981;
-      outline-offset: 2px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        transition: none !important;
-        animation: none !important;
-      }
+      body { padding: 16px 14px; }
+      h1 { font-size: 26px; }
+      h2 { font-size: 20px; }
+      .steps { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -284,8 +210,8 @@
 
     <div class="pilot">
       <strong>Pilot Project</strong><br>
-      This is an independent, lightweight directory for community food-sharing. 
-      Please follow each location's posted guidelines.
+      Independent, lightweight directory for community food-sharing.
+      Please follow each location’s posted guidelines.
     </div>
   </div>
 
@@ -301,9 +227,8 @@
     </ul>
 
     <p class="note">
-      These are volunteer-maintained community spaces. 
-      Thank you to everyone who cares for and maintains them. 
-      Availability changes quickly and nothing is reserved.
+      Volunteer-maintained community spaces. Availability changes quickly.
+      Nothing is reserved.
     </p>
   </div>
 
@@ -320,21 +245,13 @@
     <h2>Drop Food → Share Location</h2>
 
     <p>
-      Please drop food first at one of the public locations above,
+      Please drop food first at one of the public locations,
       then list it here so others know where to look.
     </p>
 
-    <input 
-      id="foodDescription"
-      type="text"
-      placeholder="e.g., apples, bread, vegetables" 
-      aria-label="Food description"
-    />
+    <input id="foodDescription" placeholder="e.g. apples, bread, vegetables" />
 
-    <select 
-      id="locationSelect"
-      aria-label="Pickup location"
-    >
+    <select id="locationSelect">
       <option value="">Choose location…</option>
       <option>Kitsilano Fridge</option>
       <option>Victoria Drive Fridge</option>
@@ -345,13 +262,12 @@
 
     <label>
       <input type="checkbox" id="dropped" />
-      <span>I confirm food is already dropped off</span>
+      I confirm food is already dropped off
     </label>
 
     <button id="listBtn" disabled class="primary">Share Location</button>
 
     <p class="note">
-      Your listing will help others find food quickly. 
       No personal information is stored.
     </p>
   </div>
@@ -362,22 +278,19 @@
     <h2>Available Food Listings</h2>
 
     <p class="note">
-      Food moves fast and nothing here is reserved. 
-      If a location is empty when you arrive, please try another nearby.
+      Food moves fast. Nothing here is reserved.
     </p>
 
-    <div id="foodListings">
-      <p style="color: #9ca3af; font-style: italic; margin-top: 20px; text-align: center;">
-        No locations reported recently. Please check back soon.
-      </p>
-    </div>
+    <p style="text-align:center; color:#9ca3af; font-style:italic;">
+      No locations reported recently. Please check back soon.
+    </p>
   </div>
 
-  <!-- HOST PARTNER -->
+  <!-- HOST -->
   <div class="card">
     <h2>🏠 Can Your Space Host Food?</h2>
     <p>
-      Cafés, churches, housing co-ops, nonprofits, and other 
+      Cafés, churches, housing co-ops, nonprofits, and other
       public-facing spaces can help by hosting food pickups.
     </p>
 
@@ -386,66 +299,39 @@
     </a>
 
     <p class="note">
-      Please mention whether you can store 
-      <strong>perishable food (refrigerated)</strong> or 
-      <strong>non-perishable food only</strong>. 
-      Listings are opt-in and coordinated manually. No fees.
+      Please mention whether you can store
+      <strong>perishable (refrigerated)</strong> or
+      <strong>non-perishable</strong> food.
     </p>
   </div>
 
-  <!-- FOOTER -->
   <div class="footer">
-    Independent community resource · Opt-in listings · No accounts · No tracking
-    <br>
+    Independent community resource · Opt-in listings · No accounts · No tracking<br>
     Made with care for Vancouver
   </div>
 
   <script>
-    // Elements
     const role = document.getElementById("roleSelect");
     const give = document.getElementById("giveMode");
     const get = document.getElementById("getMode");
     const dropped = document.getElementById("dropped");
     const listBtn = document.getElementById("listBtn");
 
-    // Navigation
-    function showGive() {
-      role.classList.add("hidden");
-      give.classList.remove("hidden");
-    }
+    function showGive() { role.classList.add("hidden"); give.classList.remove("hidden"); }
+    function showGet() { role.classList.add("hidden"); get.classList.remove("hidden"); }
+    function goBack() { give.classList.add("hidden"); get.classList.add("hidden"); role.classList.remove("hidden"); }
 
-    function showGet() {
-      role.classList.add("hidden");
-      get.classList.remove("hidden");
-    }
-
-    function goBack() {
-      give.classList.add("hidden");
-      get.classList.add("hidden");
-      role.classList.remove("hidden");
-    }
-
-    // Enable button only when checkbox is checked
     dropped.addEventListener("change", () => {
       listBtn.disabled = !dropped.checked;
     });
 
-    // Future: Add listing functionality
     listBtn.addEventListener("click", () => {
-      const food = document.getElementById("foodDescription").value.trim();
-      const location = document.getElementById("locationSelect").value;
-      
-      if (food && location && dropped.checked) {
-        alert(`✅ Thank you!\n\nFood: ${food}\nLocation: ${location}\n\nYour listing will appear shortly.`);
-        
-        // Reset form
-        document.getElementById("foodDescription").value = "";
-        document.getElementById("locationSelect").value = "";
-        dropped.checked = false;
-        listBtn.disabled = true;
-        
-        goBack();
-      }
+      alert("Thanks for sharing. Your listing helps others find food.");
+      document.getElementById("foodDescription").value = "";
+      document.getElementById("locationSelect").value = "";
+      dropped.checked = false;
+      listBtn.disabled = true;
+      goBack();
     });
   </script>
 
