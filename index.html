@@ -67,10 +67,6 @@
       color: #1f2937;
     }
 
-    .mode-btn:hover {
-      border-color: #10b981;
-    }
-
     .approved-only {
       background: #dcfce7;
       border-left: 4px solid #16a34a;
@@ -95,6 +91,11 @@
       margin: 12px 0;
     }
 
+    .muted {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
     .footer {
       text-align: center;
       font-size: 13px;
@@ -108,14 +109,38 @@
   <!-- HEADER -->
   <div class="card">
     <h1>🍅 Vancouver Food Share</h1>
-    <p>Safe public pickup only. Drop food → list it → anyone can pick up.</p>
+    <p class="muted">
+      Safe public pickup only. Drop food → list it → anyone can pick up.<br>
+      Listings expire after 24 hours.
+    </p>
+  </div>
+
+  <!-- APPROVED LOCATIONS -->
+  <div class="card">
+    <h2>🏠 Approved Storage Locations</h2>
+    <p class="muted">Food may only be listed at approved public locations.</p>
+    <ul id="locationList" class="muted"></ul>
+
+    <hr style="margin:16px 0">
+
+    <h3>Want to help store food?</h3>
+    <p class="muted">Apply to become a storage partner.</p>
+
+    <input id="sponsorName" placeholder="Place name" />
+    <input id="sponsorAddress" placeholder="Address / neighbourhood" />
+
+    <select id="sponsorFridge">
+      <option value="">Has a fridge?</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    <button id="applySponsor">Apply</button>
   </div>
 
   <!-- ROLE SELECT -->
   <div class="card" id="rolePrompt">
     <h2 style="text-align:center;">What brings you here?</h2>
-    <p style="text-align:center;color:#6b7280;">Choose one option to continue.</p>
-
     <div class="mode-toggle">
       <button class="mode-btn" id="btnGive">🥬 I Have Food</button>
       <button class="mode-btn" id="btnGet">🥗 I Need Food</button>
@@ -125,19 +150,20 @@
   <!-- GIVE MODE -->
   <div class="card" id="giveMode" style="display:none;">
     <button class="secondary" id="backFromGive">← Back</button>
-
     <h2>Drop Food → List It</h2>
 
     <div class="approved-only">
-      <strong>Step 1:</strong> Drop food at a safe public location<br>
-      <strong>Step 2:</strong> List it here so others can find it
+      <strong>Step 1:</strong> Drop food at an approved public location<br>
+      <strong>Step 2:</strong> List it here (expires in 24h)
     </div>
 
     <input id="giveFoodType" placeholder="e.g. 1 bag apples, 5kg potatoes" />
 
-    <input id="giveLocation" placeholder="Pickup location (public & safe)" />
+    <select id="giveLocation">
+      <option value="">Choose approved location →</option>
+    </select>
 
-    <label>
+    <label class="muted">
       <input type="checkbox" id="droppedCheck" />
       Food is already dropped off
     </label>
@@ -148,10 +174,9 @@
   <!-- GET MODE -->
   <div class="card" id="getMode" style="display:none;">
     <button class="secondary" id="backFromGet">← Back</button>
-
     <h2>Food Listings</h2>
-    <p style="color:#6b7280;">How many people are you feeding? (max 4)</p>
 
+    <label class="muted">How many people are you feeding? (max 4)</label>
     <select id="familySize">
       <option value="1">1 person</option>
       <option value="2">2 people</option>
@@ -160,7 +185,6 @@
     </select>
 
     <div class="guardian-info" id="guardianInfo"></div>
-
     <div id="foodList"></div>
   </div>
 
@@ -169,100 +193,162 @@
     🛡️ Guardian active · Fair-share limits · No accounts · No tracking
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
+<script>
+document.addEventListener("DOMContentLoaded", () => {
 
-      const rolePrompt = document.getElementById("rolePrompt");
-      const giveMode = document.getElementById("giveMode");
-      const getMode = document.getElementById("getMode");
+  const KG_PER_PERSON = 2.5;
+  const MAX_PEOPLE = 4;
+  const EXPIRY_MS = 24 * 60 * 60 * 1000;
+  const BANNED = ["bitcoin","weapon","drug","glory","shoot"];
 
-      const btnGive = document.getElementById("btnGive");
-      const btnGet = document.getElementById("btnGet");
-      const backFromGive = document.getElementById("backFromGive");
-      const backFromGet = document.getElementById("backFromGet");
+  let food = JSON.parse(localStorage.getItem("food") || "[]");
+  let sponsors = JSON.parse(localStorage.getItem("sponsors") || "[]");
 
-      const giveFoodType = document.getElementById("giveFoodType");
-      const giveLocation = document.getElementById("giveLocation");
-      const droppedCheck = document.getElementById("droppedCheck");
-      const listBtn = document.getElementById("listBtn");
-
-      const familySize = document.getElementById("familySize");
-      const guardianInfo = document.getElementById("guardianInfo");
-      const foodList = document.getElementById("foodList");
-
-      const KG_PER_PERSON = 2.5;
-      const MAX_PEOPLE = 4;
-
-      let food = JSON.parse(localStorage.getItem("food") || "[]");
-
-      function showGive() {
-        rolePrompt.style.display = "none";
-        giveMode.style.display = "block";
-        getMode.style.display = "none";
-      }
-
-      function showGet() {
-        rolePrompt.style.display = "none";
-        giveMode.style.display = "none";
-        getMode.style.display = "block";
-        updateGetDisplay();
-      }
-
-      function back() {
-        rolePrompt.style.display = "block";
-        giveMode.style.display = "none";
-        getMode.style.display = "none";
-      }
-
-      btnGive.onclick = showGive;
-      btnGet.onclick = showGet;
-      backFromGive.onclick = back;
-      backFromGet.onclick = back;
-
-      droppedCheck.onchange = () => {
-        listBtn.disabled = !droppedCheck.checked;
-      };
-
-      listBtn.onclick = () => {
-        const item = giveFoodType.value.trim();
-        const loc = giveLocation.value.trim();
-        if (!item || !loc) return alert("Please describe the food and location.");
-
-        food.unshift({
-          item,
-          location: loc,
-          time: new Date().toLocaleString()
-        });
-
-        localStorage.setItem("food", JSON.stringify(food));
-        giveFoodType.value = "";
-        giveLocation.value = "";
-        droppedCheck.checked = false;
-        listBtn.disabled = true;
-        showGet();
-      };
-
-      familySize.onchange = updateGetDisplay;
-
-      function updateGetDisplay() {
-        const people = Math.min(parseInt(familySize.value), MAX_PEOPLE);
-        const limitKg = people * KG_PER_PERSON;
-
-        guardianInfo.innerHTML =
-          `To keep things fair, you may take up to <strong>${limitKg.toFixed(1)}kg</strong> today.`;
-
-        foodList.innerHTML = food.length
-          ? food.map(f => `
-              <div class="food-item">
-                <strong>${f.item}</strong><br>
-                📍 ${f.location}<br>
-                🕒 ${f.time}
-              </div>
-            `).join("")
-          : "<em>No food available right now. Check back later.</em>";
-      }
+  // Seed one approved location if empty
+  if (sponsors.length === 0) {
+    sponsors.push({
+      name: "Grandview Park Community Fridge",
+      address: "Grandview",
+      fridge: true,
+      approved: true
     });
-  </script>
+    localStorage.setItem("sponsors", JSON.stringify(sponsors));
+  }
+
+  const rolePrompt = document.getElementById("rolePrompt");
+  const giveMode = document.getElementById("giveMode");
+  const getMode = document.getElementById("getMode");
+
+  const btnGive = document.getElementById("btnGive");
+  const btnGet = document.getElementById("btnGet");
+  const backFromGive = document.getElementById("backFromGive");
+  const backFromGet = document.getElementById("backFromGet");
+
+  const giveFoodType = document.getElementById("giveFoodType");
+  const giveLocation = document.getElementById("giveLocation");
+  const droppedCheck = document.getElementById("droppedCheck");
+  const listBtn = document.getElementById("listBtn");
+
+  const familySize = document.getElementById("familySize");
+  const guardianInfo = document.getElementById("guardianInfo");
+  const foodList = document.getElementById("foodList");
+
+  const locationList = document.getElementById("locationList");
+  const sponsorName = document.getElementById("sponsorName");
+  const sponsorAddress = document.getElementById("sponsorAddress");
+  const sponsorFridge = document.getElementById("sponsorFridge");
+  const applySponsor = document.getElementById("applySponsor");
+
+  function refreshSponsors() {
+    locationList.innerHTML = "";
+    giveLocation.innerHTML = '<option value="">Choose approved location →</option>';
+
+    sponsors.filter(s => s.approved).forEach((s, i) => {
+      locationList.innerHTML += `<li>✅ ${s.name} (${s.fridge ? "Fridge" : "No fridge"})</li>`;
+      giveLocation.innerHTML += `<option value="${i}">${s.name}</option>`;
+    });
+  }
+
+  refreshSponsors();
+
+  applySponsor.onclick = () => {
+    if (!sponsorName.value || !sponsorAddress.value || !sponsorFridge.value) {
+      alert("Please fill all fields.");
+      return;
+    }
+    sponsors.push({
+      name: sponsorName.value,
+      address: sponsorAddress.value,
+      fridge: sponsorFridge.value === "yes",
+      approved: false
+    });
+    localStorage.setItem("sponsors", JSON.stringify(sponsors));
+    sponsorName.value = sponsorAddress.value = sponsorFridge.value = "";
+    alert("Application received. Pending approval.");
+  };
+
+  function showGive() {
+    rolePrompt.style.display = "none";
+    giveMode.style.display = "block";
+    getMode.style.display = "none";
+  }
+
+  function showGet() {
+    rolePrompt.style.display = "none";
+    giveMode.style.display = "none";
+    getMode.style.display = "block";
+    updateGetDisplay();
+  }
+
+  function back() {
+    rolePrompt.style.display = "block";
+    giveMode.style.display = "none";
+    getMode.style.display = "none";
+  }
+
+  btnGive.onclick = showGive;
+  btnGet.onclick = showGet;
+  backFromGive.onclick = back;
+  backFromGet.onclick = back;
+
+  droppedCheck.onchange = () => {
+    listBtn.disabled = !droppedCheck.checked;
+  };
+
+  listBtn.onclick = () => {
+    const item = giveFoodType.value.trim();
+    const locIndex = giveLocation.value;
+
+    if (!item || locIndex === "") {
+      alert("Please describe the food and choose a location.");
+      return;
+    }
+
+    if (BANNED.some(w => item.toLowerCase().includes(w))) {
+      alert("Please list food items only.");
+      return;
+    }
+
+    food.unshift({
+      item,
+      location: sponsors[locIndex].name,
+      time: Date.now(),
+      expires: Date.now() + EXPIRY_MS
+    });
+
+    localStorage.setItem("food", JSON.stringify(food));
+    giveFoodType.value = "";
+    giveLocation.value = "";
+    droppedCheck.checked = false;
+    listBtn.disabled = true;
+    showGet();
+  };
+
+  familySize.onchange = updateGetDisplay;
+
+  function updateGetDisplay() {
+    const people = Math.min(parseInt(familySize.value), MAX_PEOPLE);
+    const limitKg = people * KG_PER_PERSON;
+
+    guardianInfo.innerHTML =
+      `To keep things fair, you may take up to <strong>${limitKg.toFixed(1)}kg</strong> today.`;
+
+    const now = Date.now();
+    food = food.filter(f => f.expires > now);
+    localStorage.setItem("food", JSON.stringify(food));
+
+    foodList.innerHTML = food.length
+      ? food.map(f => `
+          <div class="food-item">
+            <strong>${f.item}</strong><br>
+            📍 ${f.location}<br>
+            ⏳ Expires in ${Math.ceil((f.expires - now)/3600000)}h
+          </div>
+        `).join("")
+      : "<em>No food available right now. Check back later.</em>";
+  }
+});
+</script>
 
 </body>
 </html>
