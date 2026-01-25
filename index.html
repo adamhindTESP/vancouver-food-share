@@ -7,148 +7,105 @@
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      max-width: 680px;
+      max-width: 600px;
       margin: 0 auto;
-      padding: 18px;
+      padding: 20px;
       background: #f8f9fa;
-      color: #111827;
     }
+
     .card {
       background: white;
-      border-radius: 14px;
-      padding: 22px;
-      margin: 14px 0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      border: 1px solid #eef2f7;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 20px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    h1 { font-size: 34px; line-height: 1.1; margin-bottom: 10px; }
-    h2 { font-size: 24px; margin: 10px 0 8px; }
-    p { color: #374151; line-height: 1.35; }
-    .muted { color: #6b7280; }
-    .small { font-size: 13px; }
-    .pill {
-      display: inline-block;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      border: 1px solid #e5e7eb;
-      color: #374151;
-      background: #f9fafb;
-      margin-top: 8px;
-    }
-    button, input, select, textarea {
+
+    button, input, select {
       width: 100%;
       padding: 12px;
-      margin: 9px 0;
+      margin: 8px 0;
       font-size: 16px;
-      border-radius: 10px;
-      border: 1px solid #d1d5db;
-      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #ddd;
     }
-    textarea { min-height: 86px; resize: vertical; }
+
     button {
       background: #10b981;
       color: white;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
       border: none;
     }
+
     button.secondary {
       background: #6b7280;
-      width: auto;
-      padding: 10px 14px;
-      display: inline-block;
-      border-radius: 10px;
     }
-    button.ghost {
-      background: #fff;
-      color: #111827;
-      border: 1px solid #d1d5db;
-    }
+
     button:disabled {
       background: #9ca3af;
       cursor: not-allowed;
     }
+
     .mode-toggle {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
       gap: 12px;
-      margin-top: 14px;
     }
+
     .mode-btn {
       background: white;
       border: 2px solid #e5e7eb;
-      border-radius: 14px;
+      border-radius: 12px;
       padding: 16px;
       cursor: pointer;
-      font-weight: 700;
-      color: #111827;
+      font-weight: 500;
     }
-    .mode-btn:hover { border-color: #10b981; }
 
-    .banner {
-      background: #fff7ed;
-      border-left: 4px solid #fb923c;
-      padding: 12px 12px;
-      border-radius: 10px;
-      margin-top: 10px;
+    .mode-btn:hover {
+      border-color: #10b981;
     }
-    .info {
+
+    .approved-only {
+      background: #dcfce7;
+      border-left: 4px solid #16a34a;
+      padding: 16px;
+      margin: 16px 0;
+      border-radius: 8px;
+    }
+
+    .guardian-info {
       background: #dbeafe;
       border-left: 4px solid #3b82f6;
       padding: 12px;
       margin: 12px 0;
-      border-radius: 10px;
-      color: #111827;
+      border-radius: 6px;
     }
-    .success {
-      background: #dcfce7;
-      border-left: 4px solid #16a34a;
-      padding: 12px;
-      border-radius: 10px;
-      margin: 12px 0;
-    }
-    .warn {
-      background: #fef2f2;
-      border-left: 4px solid #ef4444;
-      padding: 12px;
-      border-radius: 10px;
-      margin: 12px 0;
-      color: #111827;
-    }
+
     .food-item {
       background: #f0fdf4;
-      border-left: 5px solid #10b981;
-      padding: 14px;
-      border-radius: 12px;
+      border-left: 4px solid #10b981;
+      padding: 16px;
+      border-radius: 8px;
       margin: 12px 0;
     }
-    .row {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-    .row > * { flex: 1; }
+
     .footer {
       text-align: center;
       font-size: 13px;
       color: #6b7280;
     }
-    .linklike {
-      color: #2563eb;
-      text-decoration: underline;
-      background: none;
-      border: none;
-      padding: 0;
-      margin: 0;
-      cursor: pointer;
-      font-size: 13px;
+
+    .pill {
+      background: #fef3c7;
+      border-left: 4px solid #f59e0b;
+      padding: 12px;
+      border-radius: 6px;
+      margin-top: 12px;
+      font-size: 14px;
     }
-    .divider { height: 1px; background: #e5e7eb; margin: 12px 0; }
-    .right { text-align: right; }
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
   </style>
 </head>
 
@@ -157,15 +114,16 @@
   <!-- HEADER -->
   <div class="card">
     <h1>🍅 Vancouver Food Share</h1>
-    <p class="muted">Safe public pickup only. Drop food → list it → anyone can pick up.</p>
-    <div class="banner small">
-      <strong>Pilot project.</strong> Locations and partners are being verified. Please use only safe public pickup points.
+    <p>Safe public pickup only. Drop food → list it → anyone can pick up.</p>
+
+    <div class="pill">
+      <strong>Pilot project.</strong> Locations below have been manually verified.
+      Please use safe, public pickup points only.
     </div>
-    <div class="pill">🛡️ Guardian active · Fair-share limits · No accounts · No tracking</div>
   </div>
 
-  <!-- HOME / ROLE SELECT -->
-  <div class="card" id="screenHome">
+  <!-- ROLE SELECT -->
+  <div class="card" id="rolePrompt">
     <h2 style="text-align:center;">What brings you here?</h2>
     <p style="text-align:center;color:#6b7280;">Choose one option to continue.</p>
 
@@ -173,62 +131,39 @@
       <button class="mode-btn" id="btnGive">🥬 I Have Food</button>
       <button class="mode-btn" id="btnGet">🥗 I Need Food</button>
     </div>
-
-    <div class="divider"></div>
-
-    <p class="small muted">
-      Want to help store food (business/community space)?
-      <button class="linklike" id="openPartner">Apply as a storage partner</button>
-    </p>
   </div>
 
   <!-- GIVE MODE -->
-  <div class="card" id="screenGive" style="display:none;">
-    <div class="row">
-      <button class="secondary" id="backFromGive">← Back</button>
-      <div class="right small muted">Listings expire in <strong>24 hours</strong>.</div>
-    </div>
+  <div class="card" id="giveMode" style="display:none;">
+    <button class="secondary" id="backFromGive">← Back</button>
 
     <h2>Drop Food → List It</h2>
 
-    <div class="success small">
-      <strong>Step 1:</strong> Drop food at a safe public spot (or verified partner location)<br>
+    <div class="approved-only">
+      <strong>Step 1:</strong> Drop food at a verified public fridge<br>
       <strong>Step 2:</strong> List it here so others can find it
     </div>
 
-    <label class="small muted">Food description</label>
-    <input id="giveFoodType" maxlength="80" placeholder="e.g. apples, bread, vegetables (sealed preferred)" />
+    <input id="giveFoodType" placeholder="e.g. apples, bread, vegetables" />
 
-    <label class="small muted">Area / neighbourhood (not an exact home address)</label>
-    <input id="giveArea" maxlength="60" placeholder="e.g. Commercial–Broadway, Kits, Metrotown" />
+    <select id="giveLocation">
+      <option value="">Choose verified location →</option>
+    </select>
 
-    <label class="small muted">Pickup instructions (optional)</label>
-    <textarea id="giveNotes" maxlength="180" placeholder="e.g. ‘Inside lobby by mailboxes’ (keep it public + safe)"></textarea>
-
-    <label class="row small" style="align-items:flex-start;">
-      <input type="checkbox" id="droppedCheck" style="width:auto; margin-top:3px;" />
-      <span>
-        Food is already dropped off (required)
-        <div class="small muted">This prevents “phantom listings.”</div>
-      </span>
+    <label>
+      <input type="checkbox" id="droppedCheck" />
+      Food is already dropped off
     </label>
 
-    <button id="listBtn" disabled>List for pickup (24h)</button>
-
-    <div class="warn small">
-      <strong>Safety note:</strong> Do not post exact residential addresses. Use public, safe pickup points only.
-    </div>
+    <button id="listBtn" disabled>List for Pickup</button>
   </div>
 
   <!-- GET MODE -->
-  <div class="card" id="screenGet" style="display:none;">
-    <div class="row">
-      <button class="secondary" id="backFromGet">← Back</button>
-      <button class="ghost" id="refreshBtn">Refresh</button>
-    </div>
+  <div class="card" id="getMode" style="display:none;">
+    <button class="secondary" id="backFromGet">← Back</button>
 
     <h2>Food Listings</h2>
-    <p class="muted small">How many people are you feeding? (max 4)</p>
+    <p style="color:#6b7280;">How many people are you feeding? (max 4)</p>
 
     <select id="familySize">
       <option value="1">1 person</option>
@@ -237,344 +172,119 @@
       <option value="4">4 people</option>
     </select>
 
-    <div class="info" id="guardianInfo"></div>
+    <div class="guardian-info" id="guardianInfo"></div>
+
+    <button class="secondary" id="refreshBtn">Refresh</button>
 
     <div id="foodList"></div>
-
-    <div class="divider"></div>
-    <p class="small muted">
-      See something unsafe or spammy?
-      <button class="linklike" id="clearLocal">Clear my device’s local data</button>
-    </p>
   </div>
 
-  <!-- STORAGE PARTNER / SPONSOR APPLY -->
-  <div class="card" id="screenPartner" style="display:none;">
-    <div class="row">
-      <button class="secondary" id="backFromPartner">← Back</button>
-      <div class="right small muted">For businesses & community spaces</div>
-    </div>
-
-    <h2>Storage Partner Application</h2>
-    <p class="muted">
-      If you can host a safe pickup point (fridge/shelf/desk), apply here.
-      <strong>This is an application only — not automatic approval.</strong>
-    </p>
-
-    <label class="small muted">Place name</label>
-    <input id="partnerName" maxlength="80" placeholder="e.g. Friendly Café, Community Center" />
-
-    <label class="small muted">Neighbourhood / general address</label>
-    <input id="partnerArea" maxlength="80" placeholder="e.g. Mount Pleasant (near Main St)" />
-
-    <label class="small muted">Storage type</label>
-    <select id="partnerStorage">
-      <option value="">Select…</option>
-      <option value="fridge">Has a fridge</option>
-      <option value="shelf">Has a shelf / dry storage</option>
-      <option value="desk">Has a front desk / staff handoff</option>
-    </select>
-
-    <label class="small muted">Contact (optional)</label>
-    <input id="partnerContact" maxlength="80" placeholder="Email or phone (optional)" />
-
-    <button id="partnerApplyBtn">Submit application</button>
-
-    <div class="info small" id="partnerThanks" style="display:none;"></div>
-
-    <div class="divider"></div>
-
-    <h3 style="margin:10px 0 6px;">Approved locations</h3>
-    <p class="small muted" id="approvedLocationsText">
-      None yet. We’re verifying partners. (You can add approved locations later once confirmed.)
-    </p>
-  </div>
-
+  <!-- FOOTER -->
   <div class="card footer">
     🛡️ Guardian active · Fair-share limits · No accounts · No tracking
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // --------- CONFIG ----------
-      const KG_PER_PERSON = 2.5;
-      const MAX_PEOPLE = 4;
-      const LISTING_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
-      const MAX_LISTINGS_PER_DEVICE_PER_DAY = 10;
+<script>
+document.addEventListener("DOMContentLoaded", () => {
 
-      // Very simple spam filter (not perfect, but helps)
-      const BANNED_SUBSTRINGS = [
-        "bitcoin", "glory hole", "shooters", "weapon", "guns", "cocaine",
-        "meth", "sex", "porn", "kill", "murder"
-      ];
+  const LOCATIONS = {
+    kits13: { name: "Kitsilano Fridge", details: "Alley behind 3066 W 13th Ave" },
+    vicDrive: { name: "Victoria Drive Fridge", details: "Alley behind 4040 Victoria Dr" },
+    mainSt: { name: "Main Street Fridge", details: "3718 Main St (Buzz to enter)" },
+    east4th: { name: "Food Stash Fridge", details: "Alley at E 4th & Scotia" },
+    dachi: { name: "East Hastings LOAF", details: "2297 E Hastings St" }
+  };
 
-      // --------- STORAGE KEYS ----------
-      const KEY_FOOD = "vfs_food_v2";
-      const KEY_POSTLOG = "vfs_postlog_v2";
-      const KEY_PARTNER_APPS = "vfs_partner_apps_v1";
+  const KG_PER_PERSON = 2.5;
+  const MAX_PEOPLE = 4;
+  const EXPIRY_HOURS = 24;
 
-      // --------- ELEMENTS ----------
-      const screenHome = document.getElementById("screenHome");
-      const screenGive = document.getElementById("screenGive");
-      const screenGet = document.getElementById("screenGet");
-      const screenPartner = document.getElementById("screenPartner");
+  let food = JSON.parse(localStorage.getItem("food") || "[]");
 
-      const btnGive = document.getElementById("btnGive");
-      const btnGet = document.getElementById("btnGet");
-      const openPartner = document.getElementById("openPartner");
+  const giveLocation = document.getElementById("giveLocation");
+  Object.entries(LOCATIONS).forEach(([key, loc]) => {
+    const opt = document.createElement("option");
+    opt.value = key;
+    opt.textContent = `${loc.name} — ${loc.details}`;
+    giveLocation.appendChild(opt);
+  });
 
-      const backFromGive = document.getElementById("backFromGive");
-      const backFromGet = document.getElementById("backFromGet");
-      const backFromPartner = document.getElementById("backFromPartner");
+  const rolePrompt = document.getElementById("rolePrompt");
+  const giveMode = document.getElementById("giveMode");
+  const getMode = document.getElementById("getMode");
 
-      const giveFoodType = document.getElementById("giveFoodType");
-      const giveArea = document.getElementById("giveArea");
-      const giveNotes = document.getElementById("giveNotes");
-      const droppedCheck = document.getElementById("droppedCheck");
-      const listBtn = document.getElementById("listBtn");
+  document.getElementById("btnGive").onclick = () => {
+    rolePrompt.style.display = "none";
+    giveMode.style.display = "block";
+  };
 
-      const familySize = document.getElementById("familySize");
-      const guardianInfo = document.getElementById("guardianInfo");
-      const foodList = document.getElementById("foodList");
-      const refreshBtn = document.getElementById("refreshBtn");
-      const clearLocal = document.getElementById("clearLocal");
+  document.getElementById("btnGet").onclick = () => {
+    rolePrompt.style.display = "none";
+    getMode.style.display = "block";
+    updateGetDisplay();
+  };
 
-      const partnerName = document.getElementById("partnerName");
-      const partnerArea = document.getElementById("partnerArea");
-      const partnerStorage = document.getElementById("partnerStorage");
-      const partnerContact = document.getElementById("partnerContact");
-      const partnerApplyBtn = document.getElementById("partnerApplyBtn");
-      const partnerThanks = document.getElementById("partnerThanks");
-      const approvedLocationsText = document.getElementById("approvedLocationsText");
+  document.getElementById("backFromGive").onclick =
+  document.getElementById("backFromGet").onclick = () => {
+    rolePrompt.style.display = "block";
+    giveMode.style.display = "none";
+    getMode.style.display = "none";
+  };
 
-      // --------- STATE ----------
-      let food = safeParse(localStorage.getItem(KEY_FOOD), []);
-      let postlog = safeParse(localStorage.getItem(KEY_POSTLOG), { day: todayKey(), count: 0 });
-      let partnerApps = safeParse(localStorage.getItem(KEY_PARTNER_APPS), []);
+  document.getElementById("droppedCheck").onchange = e => {
+    document.getElementById("listBtn").disabled = !e.target.checked;
+  };
 
-      // Daily reset of post log
-      if (postlog.day !== todayKey()) {
-        postlog = { day: todayKey(), count: 0 };
-        localStorage.setItem(KEY_POSTLOG, JSON.stringify(postlog));
-      }
+  document.getElementById("listBtn").onclick = () => {
+    const item = document.getElementById("giveFoodType").value.trim();
+    const locKey = giveLocation.value;
+    if (!item || !locKey) return alert("Please fill everything in.");
 
-      // --------- NAV ----------
-      function show(screen) {
-        screenHome.style.display = "none";
-        screenGive.style.display = "none";
-        screenGet.style.display = "none";
-        screenPartner.style.display = "none";
-        screen.style.display = "block";
-        window.scrollTo(0, 0);
-      }
-
-      btnGive.onclick = () => show(screenGive);
-      btnGet.onclick = () => { show(screenGet); updateGetDisplay(); };
-      openPartner.onclick = () => { show(screenPartner); renderApprovedLocations(); };
-
-      backFromGive.onclick = () => show(screenHome);
-      backFromGet.onclick = () => show(screenHome);
-      backFromPartner.onclick = () => show(screenHome);
-
-      refreshBtn.onclick = () => updateGetDisplay();
-
-      clearLocal.onclick = () => {
-        if (!confirm("Clear local data for this device? This only affects your device.")) return;
-        localStorage.removeItem(KEY_FOOD);
-        localStorage.removeItem(KEY_POSTLOG);
-        localStorage.removeItem(KEY_PARTNER_APPS);
-        food = [];
-        partnerApps = [];
-        postlog = { day: todayKey(), count: 0 };
-        alert("Cleared local data on this device.");
-        updateGetDisplay();
-      };
-
-      // --------- GIVE FLOW ----------
-      droppedCheck.onchange = () => {
-        listBtn.disabled = !droppedCheck.checked;
-      };
-
-      listBtn.onclick = () => {
-        const item = (giveFoodType.value || "").trim();
-        const area = (giveArea.value || "").trim();
-        const notes = (giveNotes.value || "").trim();
-
-        // Basic validation
-        if (!item || !area) return alert("Please add food description + area/neighbourhood.");
-        if (!droppedCheck.checked) return alert("Please confirm the food is already dropped off.");
-
-        // Anti-spam: daily per-device cap
-        if (postlog.count >= MAX_LISTINGS_PER_DEVICE_PER_DAY) {
-          return alert("Listing limit reached for this device today. Try again tomorrow.");
-        }
-
-        // Anti-troll: banned words
-        const combined = (item + " " + area + " " + notes).toLowerCase();
-        if (containsBanned(combined)) {
-          return alert("That listing looks unsafe/inappropriate. Please keep it food-only and public-safe.");
-        }
-
-        // Discourage exact addresses (simple heuristic)
-        if (looksLikeExactAddress(area) || looksLikeExactAddress(notes)) {
-          return alert("Please don’t post exact addresses. Use neighbourhood + public pickup instructions only.");
-        }
-
-        const now = Date.now();
-        const listing = {
-          id: "l_" + now + "_" + Math.random().toString(16).slice(2),
-          item,
-          area,
-          notes,
-          createdAt: now,
-          expiresAt: now + LISTING_TTL_MS
-        };
-
-        food.unshift(listing);
-        localStorage.setItem(KEY_FOOD, JSON.stringify(food));
-
-        postlog.count += 1;
-        localStorage.setItem(KEY_POSTLOG, JSON.stringify(postlog));
-
-        // Reset form
-        giveFoodType.value = "";
-        giveArea.value = "";
-        giveNotes.value = "";
-        droppedCheck.checked = false;
-        listBtn.disabled = true;
-
-        alert("✅ Listed for pickup (expires in 24 hours).");
-        show(screenGet);
-        updateGetDisplay();
-      };
-
-      // --------- GET FLOW ----------
-      familySize.onchange = updateGetDisplay;
-
-      function updateGetDisplay() {
-        pruneExpired();
-
-        const people = Math.min(parseInt(familySize.value || "1", 10), MAX_PEOPLE);
-        const limitKg = people * KG_PER_PERSON;
-
-        guardianInfo.innerHTML =
-          `To keep things fair, you may take up to <strong>${limitKg.toFixed(1)}kg</strong> today. ` +
-          `<span class="small muted">(Pilot limit · max ${MAX_PEOPLE} people)</span>`;
-
-        if (!food.length) {
-          foodList.innerHTML = `<p class="muted"><em>No food available right now. Check back later.</em></p>`;
-          return;
-        }
-
-        foodList.innerHTML = food.map(f => {
-          const minutesLeft = Math.max(0, Math.floor((f.expiresAt - Date.now()) / 60000));
-          const hoursLeft = Math.floor(minutesLeft / 60);
-          const mins = minutesLeft % 60;
-          const timeLeft = hoursLeft > 0 ? `${hoursLeft}h ${mins}m` : `${mins}m`;
-
-          return `
-            <div class="food-item">
-              <div style="display:flex; justify-content:space-between; gap:10px;">
-                <div>
-                  <div style="font-size:18px; font-weight:800;">${escapeHtml(f.item)}</div>
-                  <div class="small muted">📍 ${escapeHtml(f.area)}</div>
-                  ${f.notes ? `<div class="small muted">📝 ${escapeHtml(f.notes)}</div>` : ""}
-                </div>
-                <div class="small muted right">
-                  <div class="mono">⏱ ${timeLeft}</div>
-                  <div class="mono">expires</div>
-                </div>
-              </div>
-            </div>
-          `;
-        }).join("");
-      }
-
-      function pruneExpired() {
-        const now = Date.now();
-        const before = food.length;
-        food = food.filter(f => typeof f.expiresAt === "number" && f.expiresAt > now);
-        if (food.length !== before) {
-          localStorage.setItem(KEY_FOOD, JSON.stringify(food));
-        }
-      }
-
-      // --------- PARTNER APPLY ----------
-      partnerApplyBtn.onclick = () => {
-        const name = (partnerName.value || "").trim();
-        const area = (partnerArea.value || "").trim();
-        const storage = (partnerStorage.value || "").trim();
-        const contact = (partnerContact.value || "").trim();
-
-        if (!name || !area || !storage) {
-          return alert("Please fill: place name, area, and storage type.");
-        }
-
-        const combined = (name + " " + area + " " + contact).toLowerCase();
-        if (containsBanned(combined)) {
-          return alert("That application looks unsafe/inappropriate. Please keep it clean and accurate.");
-        }
-
-        partnerApps.unshift({
-          name, area, storage, contact,
-          submittedAt: Date.now()
-        });
-
-        localStorage.setItem(KEY_PARTNER_APPS, JSON.stringify(partnerApps));
-
-        partnerThanks.style.display = "block";
-        partnerThanks.innerHTML =
-          `✅ Thanks! Application saved on this device (pilot mode).<br>` +
-          `<span class="small muted">Next step: you (Adam) verify and then add as “Approved” in the code later.</span>`;
-
-        partnerName.value = "";
-        partnerArea.value = "";
-        partnerStorage.value = "";
-        partnerContact.value = "";
-      };
-
-      function renderApprovedLocations() {
-        // For now: none pre-filled (because you’re not sure yet).
-        // Later, you’ll hardcode verified partners here OR load from a real backend.
-        approvedLocationsText.innerHTML =
-          `None yet. We’re verifying partners. <span class="small muted">(Pilot mode)</span>`;
-      }
-
-      // --------- HELPERS ----------
-      function safeParse(str, fallback) {
-        try { return str ? JSON.parse(str) : fallback; } catch { return fallback; }
-      }
-
-      function todayKey() {
-        const d = new Date();
-        return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-      }
-
-      function containsBanned(textLower) {
-        return BANNED_SUBSTRINGS.some(w => textLower.includes(w));
-      }
-
-      function looksLikeExactAddress(text) {
-        const t = (text || "").toLowerCase();
-        // crude heuristics: street numbers + common address terms
-        const hasNumber = /\d{2,}/.test(t);
-        const hasStreetWord = /(st\.|street|ave|avenue|rd\.|road|blvd|boulevard|lane|ln\.|drive|dr\.|suite|unit|apt|apartment)/.test(t);
-        return hasNumber && hasStreetWord;
-      }
-
-      function escapeHtml(str) {
-        return String(str)
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;")
-          .replaceAll('"', "&quot;")
-          .replaceAll("'", "&#039;");
-      }
-
-      // Initial view
-      show(screenHome);
+    food.unshift({
+      item,
+      location: LOCATIONS[locKey],
+      time: Date.now()
     });
-  </script>
+
+    localStorage.setItem("food", JSON.stringify(food));
+    document.getElementById("giveFoodType").value = "";
+    giveLocation.value = "";
+    document.getElementById("droppedCheck").checked = false;
+    document.getElementById("listBtn").disabled = true;
+
+    rolePrompt.style.display = "none";
+    giveMode.style.display = "none";
+    getMode.style.display = "block";
+    updateGetDisplay();
+  };
+
+  document.getElementById("refreshBtn").onclick = updateGetDisplay;
+  document.getElementById("familySize").onchange = updateGetDisplay;
+
+  function updateGetDisplay() {
+    const now = Date.now();
+    food = food.filter(f => (now - f.time) < EXPIRY_HOURS * 3600000);
+    localStorage.setItem("food", JSON.stringify(food));
+
+    const people = Math.min(parseInt(document.getElementById("familySize").value), MAX_PEOPLE);
+    const limit = people * KG_PER_PERSON;
+
+    document.getElementById("guardianInfo").innerHTML =
+      `To keep things fair, you may take up to <strong>${limit.toFixed(1)}kg</strong> today.`;
+
+    const list = document.getElementById("foodList");
+    list.innerHTML = food.length
+      ? food.map(f => `
+          <div class="food-item">
+            <strong>${f.item}</strong><br>
+            📍 ${f.location.name}<br>
+            <small>${f.location.details}</small>
+          </div>
+        `).join("")
+      : "<em>No food available right now. Check back later.</em>";
+  }
+});
+</script>
 
 </body>
 </html>
