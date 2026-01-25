@@ -119,9 +119,10 @@
 
     .footer {
       text-align: center;
-      font-size: 13px;
+      font-size: 12px;
       color: #6b7280;
       margin-top: 30px;
+      line-height: 1.4;
     }
 
     .hidden {
@@ -141,15 +142,15 @@
     </p>
 
     <div class="pilot">
-      <strong>Pilot project.</strong>
-      This site is a lightweight directory for existing community food-sharing locations.
-      Please follow each location’s posted guidelines.
+      <strong>Pilot project.</strong><br />
+      This is an independent, lightweight directory for community food-sharing locations.
+      Listings are opt-in and may be added or removed at the request of the host.
     </div>
   </div>
 
   <!-- VERIFIED LOCATIONS -->
   <div class="card locations">
-    <h2>📍 Verified Pickup Locations</h2>
+    <h2>📍 Community Pickup Locations</h2>
     <ul>
       <li><strong>Kitsilano Fridge</strong> — Alley behind 3066 W 13th Ave</li>
       <li><strong>Victoria Drive Fridge</strong> — Alley behind 4040 Victoria Dr</li>
@@ -160,8 +161,8 @@
 
     <p class="note">
       These are public, volunteer-maintained community fridges.
-      Vancouver Food Share does not operate or manage these locations.
-      Thank you to the volunteers who maintain them.
+      This site does not operate, manage, or stock any location.
+      Availability and guidelines are set by each host.
     </p>
   </div>
 
@@ -180,7 +181,7 @@
     <h2>Drop Food → List It</h2>
 
     <p>
-      Step 1: Drop food at one of the verified public locations above.  
+      Step 1: Drop food at a public location above.  
       Step 2: List it here so others know it’s available.
     </p>
 
@@ -209,16 +210,19 @@
 
     <h2>Food Listings</h2>
 
-    <label>How many people are you feeding? (max 4)</label>
+    <label>How many people are you feeding?</label>
     <select id="familySize">
       <option>1</option>
       <option>2</option>
       <option>3</option>
-      <option>4</option>
+      <option>4+</option>
     </select>
 
     <div class="guardian">
-      To keep things fair, you may take up to <strong>2.5kg</strong> today.
+      <strong>Optional pickup guidance:</strong><br />
+      To help ensure food reaches as many people as possible, please consider
+      taking no more than <strong>~2.5kg per person</strong> per visit when supplies are limited.
+      This is a courtesy suggestion only — not a rule or restriction.
     </div>
 
     <p><em>No food listed right now. Please check back later.</em></p>
@@ -229,19 +233,21 @@
     <h2>🏠 Are you a place that can store food?</h2>
     <p>
       Community fridges, cafés, churches, housing co-ops, nonprofits,
-      and other public-facing spaces can help by offering safe pickup or storage.
+      and other public-facing spaces can apply to be listed.
     </p>
 
     <button class="outline">Apply to be a storage partner</button>
 
     <p class="note">
-      Partners are reviewed manually. No obligation. No fees.
+      Listings are opt-in, reviewed manually, and removable at any time.
+      No fees. No obligations.
     </p>
   </div>
 
   <!-- FOOTER -->
   <div class="footer">
-    🛡️ Guardian active · Fair-share limits · No accounts · No tracking
+    Independent community tool · Listings opt-in · No accounts · No tracking<br />
+    Guidance shown is optional and non-enforced
   </div>
 
   <script>
