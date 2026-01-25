@@ -24,7 +24,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    button, input {
+    button, input, select {
       width: 100%;
       padding: 12px;
       margin: 8px 0;
@@ -71,22 +71,20 @@
       border-color: #10b981;
     }
 
-    .notice {
-      background: #ecfeff;
-      border-left: 4px solid #06b6d4;
-      padding: 14px;
+    .approved-only {
+      background: #dcfce7;
+      border-left: 4px solid #16a34a;
+      padding: 16px;
+      margin: 16px 0;
       border-radius: 8px;
-      margin: 14px 0;
-      font-size: 14px;
     }
 
     .guardian-info {
-      background: #eef2ff;
-      border-left: 4px solid #6366f1;
+      background: #dbeafe;
+      border-left: 4px solid #3b82f6;
       padding: 12px;
-      border-radius: 6px;
       margin: 12px 0;
-      font-size: 14px;
+      border-radius: 6px;
     }
 
     .food-item {
@@ -101,11 +99,6 @@
       text-align: center;
       font-size: 13px;
       color: #6b7280;
-    }
-
-    label {
-      font-size: 14px;
-      color: #374151;
     }
   </style>
 </head>
@@ -133,19 +126,20 @@
   <div class="card" id="giveMode" style="display:none;">
     <button class="secondary" id="backFromGive">← Back</button>
 
-    <h2>Share Food</h2>
+    <h2>Drop Food → List It</h2>
 
-    <div class="notice">
-      Please only list food that is already placed in a **safe, public pickup spot**  
-      (porch, lobby, table, fridge, etc.).  
-      No private meetups.
+    <div class="approved-only">
+      <strong>Step 1:</strong> Drop food at a safe public location<br>
+      <strong>Step 2:</strong> List it here so others can find it
     </div>
 
-    <input id="giveFoodType" placeholder="Example: 1 bag of apples, loaf of bread…" />
+    <input id="giveFoodType" placeholder="e.g. 1 bag apples, 5kg potatoes" />
+
+    <input id="giveLocation" placeholder="Pickup location (public & safe)" />
 
     <label>
       <input type="checkbox" id="droppedCheck" />
-      Food is already dropped off and ready for pickup
+      Food is already dropped off
     </label>
 
     <button id="listBtn" disabled>List for Pickup</button>
@@ -156,9 +150,14 @@
     <button class="secondary" id="backFromGet">← Back</button>
 
     <h2>Food Listings</h2>
+    <p style="color:#6b7280;">How many people are you feeding? (max 4)</p>
 
-    <label>How many people are you feeding?</label>
-    <input id="familySize" type="number" min="1" value="1" />
+    <select id="familySize">
+      <option value="1">1 person</option>
+      <option value="2">2 people</option>
+      <option value="3">3 people</option>
+      <option value="4">4 people</option>
+    </select>
 
     <div class="guardian-info" id="guardianInfo"></div>
 
@@ -183,6 +182,7 @@
       const backFromGet = document.getElementById("backFromGet");
 
       const giveFoodType = document.getElementById("giveFoodType");
+      const giveLocation = document.getElementById("giveLocation");
       const droppedCheck = document.getElementById("droppedCheck");
       const listBtn = document.getElementById("listBtn");
 
@@ -190,7 +190,9 @@
       const guardianInfo = document.getElementById("guardianInfo");
       const foodList = document.getElementById("foodList");
 
-      const GUARDIAN = { KG_PER_PERSON: 2.5, MAX_FAMILY: 15 };
+      const KG_PER_PERSON = 2.5;
+      const MAX_PEOPLE = 4;
+
       let food = JSON.parse(localStorage.getItem("food") || "[]");
 
       function showGive() {
@@ -222,33 +224,39 @@
       };
 
       listBtn.onclick = () => {
-        const type = giveFoodType.value.trim();
-        if (!type) return alert("Please describe the food.");
+        const item = giveFoodType.value.trim();
+        const loc = giveLocation.value.trim();
+        if (!item || !loc) return alert("Please describe the food and location.");
 
         food.unshift({
-          item: type,
+          item,
+          location: loc,
           time: new Date().toLocaleString()
         });
 
         localStorage.setItem("food", JSON.stringify(food));
         giveFoodType.value = "";
+        giveLocation.value = "";
         droppedCheck.checked = false;
         listBtn.disabled = true;
         showGet();
       };
 
+      familySize.onchange = updateGetDisplay;
+
       function updateGetDisplay() {
-        const size = parseInt(familySize.value) || 1;
-        const limit = Math.min(size * GUARDIAN.KG_PER_PERSON, GUARDIAN.MAX_FAMILY);
+        const people = Math.min(parseInt(familySize.value), MAX_PEOPLE);
+        const limitKg = people * KG_PER_PERSON;
 
         guardianInfo.innerHTML =
-          `To keep things fair, you may take up to <strong>${limit.toFixed(1)}kg</strong> today.`;
+          `To keep things fair, you may take up to <strong>${limitKg.toFixed(1)}kg</strong> today.`;
 
         foodList.innerHTML = food.length
           ? food.map(f => `
               <div class="food-item">
                 <strong>${f.item}</strong><br>
-                🕒 Listed ${f.time}
+                📍 ${f.location}<br>
+                🕒 ${f.time}
               </div>
             `).join("")
           : "<em>No food available right now. Check back later.</em>";
