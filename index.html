@@ -7,200 +7,270 @@
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
       max-width: 600px;
       margin: 0 auto;
       padding: 20px;
       background: #f8f9fa;
+      color: #111827;
     }
+
     .card {
-      background: white;
-      border-radius: 12px;
-      padding: 24px;
-      margin: 16px 0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     }
-    button, input, select {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      font-size: 16px;
-      border-radius: 8px;
-      border: 1px solid #ddd;
+
+    h1, h2 {
+      margin-bottom: 10px;
     }
+
+    p {
+      color: #4b5563;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    ul {
+      margin-left: 18px;
+      margin-top: 10px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
     button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    button.primary {
       background: #10b981;
       color: white;
-      font-weight: 600;
-      border: none;
     }
+
     button.secondary {
       background: #6b7280;
+      color: white;
     }
+
+    button.outline {
+      background: white;
+      border: 2px solid #10b981;
+      color: #10b981;
+    }
+
     button:disabled {
       background: #9ca3af;
+      cursor: not-allowed;
     }
-    .notice {
-      background: #fff3cd;
-      border-left: 4px solid #f59e0b;
+
+    input, select {
+      width: 100%;
       padding: 12px;
+      margin-top: 8px;
       border-radius: 8px;
-      margin-top: 12px;
+      border: 1px solid #d1d5db;
+      font-size: 15px;
+    }
+
+    .pilot {
+      background: #fff7ed;
+      border-left: 4px solid #f59e0b;
+      padding: 14px;
+      border-radius: 8px;
+      margin-top: 14px;
+      color: #92400e;
       font-size: 14px;
     }
+
+    .locations {
+      background: #f0fdf4;
+      border-left: 4px solid #10b981;
+      padding: 16px;
+      border-radius: 8px;
+    }
+
+    .note {
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 10px;
+    }
+
     .guardian {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      padding: 14px;
+      border-radius: 8px;
+      margin: 14px 0;
+      font-size: 14px;
+    }
+
+    .footer {
       text-align: center;
       font-size: 13px;
       color: #6b7280;
+      margin-top: 30px;
     }
-    .food-item {
-      background: #f0fdf4;
-      border-left: 4px solid #10b981;
-      padding: 12px;
-      border-radius: 8px;
-      margin: 8px 0;
-    }
-    .link {
-      color: #2563eb;
-      text-decoration: underline;
-      cursor: pointer;
-      font-size: 14px;
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="card">
-  <h1>🍅 Vancouver Food Share</h1>
-  <p>Safe public pickup only. Drop food → list it → anyone can pick up.</p>
-  <div class="notice">
-    <strong>Pilot project.</strong> Locations below are manually verified.
-    Please use safe, public pickup points only.
+  <!-- HEADER -->
+  <div class="card">
+    <h1>🍅 Vancouver Food Share</h1>
+    <p>
+      Safe public pickup only.  
+      Drop food → list it → anyone can pick up.
+    </p>
+
+    <div class="pilot">
+      <strong>Pilot project.</strong>
+      This site is a lightweight directory for existing community food-sharing locations.
+      Please follow each location’s posted guidelines.
+    </div>
   </div>
-</div>
 
-<!-- VERIFIED LOCATIONS -->
-<div class="card">
-  <h3>📍 Verified Pickup Locations</h3>
-  <ul style="margin-top:8px; padding-left:18px;">
-    <li><strong>Kitsilano Fridge</strong> — Alley behind 3066 W 13th Ave</li>
-    <li><strong>Victoria Drive Fridge</strong> — Alley behind 4040 Victoria Dr</li>
-    <li><strong>Main Street Fridge</strong> — 3718 Main St (Buzz to enter)</li>
-    <li><strong>Food Stash Fridge</strong> — Alley at E 4th & Scotia</li>
-    <li><strong>East Hastings LOAF</strong> — 2297 E Hastings St</li>
-  </ul>
-</div>
+  <!-- VERIFIED LOCATIONS -->
+  <div class="card locations">
+    <h2>📍 Verified Pickup Locations</h2>
+    <ul>
+      <li><strong>Kitsilano Fridge</strong> — Alley behind 3066 W 13th Ave</li>
+      <li><strong>Victoria Drive Fridge</strong> — Alley behind 4040 Victoria Dr</li>
+      <li><strong>Main Street Fridge</strong> — 3718 Main St (buzz to enter)</li>
+      <li><strong>Food Stash Fridge</strong> — Alley at E 4th & Scotia</li>
+      <li><strong>East Hastings LOAF</strong> — 2297 E Hastings St</li>
+    </ul>
 
-<!-- ROLE SELECT -->
-<div class="card" id="role">
-  <h3>What brings you here?</h3>
-  <button onclick="showGive()">🥬 I Have Food</button>
-  <button onclick="showGet()">🥗 I Need Food</button>
-</div>
+    <p class="note">
+      These are public, volunteer-maintained community fridges.
+      Vancouver Food Share does not operate or manage these locations.
+      Thank you to the volunteers who maintain them.
+    </p>
+  </div>
 
-<!-- GIVE MODE -->
-<div class="card" id="give" style="display:none;">
-  <button class="secondary" onclick="back()">← Back</button>
-  <h3>Drop Food → List It</h3>
+  <!-- ROLE SELECT -->
+  <div class="card" id="roleSelect">
+    <h2>What brings you here?</h2>
 
-  <input id="foodDesc" placeholder="e.g. apples, bread, vegetables" />
-  <select id="location">
-    <option value="">Choose location…</option>
-    <option>Kitsilano Fridge</option>
-    <option>Victoria Drive Fridge</option>
-    <option>Main Street Fridge</option>
-    <option>Food Stash Fridge</option>
-    <option>East Hastings LOAF</option>
-  </select>
+    <button class="primary" onclick="showGive()">🥬 I Have Food</button>
+    <button class="primary" onclick="showGet()">🥗 I Need Food</button>
+  </div>
 
-  <label>
-    <input type="checkbox" id="confirmDrop" /> Food is already dropped off
-  </label>
+  <!-- GIVE MODE -->
+  <div class="card hidden" id="giveMode">
+    <button class="secondary" onclick="goBack()">← Back</button>
 
-  <button id="listBtn" disabled onclick="addFood()">List for pickup</button>
-</div>
+    <h2>Drop Food → List It</h2>
 
-<!-- GET MODE -->
-<div class="card" id="get" style="display:none;">
-  <button class="secondary" onclick="back()">← Back</button>
-  <button onclick="renderFood()">Refresh</button>
+    <p>
+      Step 1: Drop food at one of the verified public locations above.  
+      Step 2: List it here so others know it’s available.
+    </p>
 
-  <h3>Food Listings</h3>
-  <select id="people" onchange="renderFood()">
-    <option value="1">1 person</option>
-    <option value="2">2 people</option>
-    <option value="3">3 people</option>
-    <option value="4">4 people</option>
-  </select>
+    <input id="foodDesc" placeholder="e.g. apples, bread, vegetables" />
 
-  <div id="limit" class="notice"></div>
-  <div id="listings"></div>
-</div>
-
-<!-- STORAGE PARTNER -->
-<div class="card">
-  <span class="link" onclick="toggleSponsor()">Are you a place that can store food?</span>
-  <div id="sponsor" style="display:none; margin-top:12px;">
-    <input placeholder="Place name" />
-    <input placeholder="Address / neighbourhood" />
-    <select>
-      <option>Has a fridge</option>
-      <option>No fridge</option>
+    <select id="pickupLocation">
+      <option value="">Choose pickup location…</option>
+      <option>Kitsilano Fridge</option>
+      <option>Victoria Drive Fridge</option>
+      <option>Main Street Fridge</option>
+      <option>Food Stash Fridge</option>
+      <option>East Hastings LOAF</option>
     </select>
-    <button disabled>Apply (pilot)</button>
+
+    <label>
+      <input type="checkbox" id="dropped" />
+      Food is already dropped off
+    </label>
+
+    <button id="listBtn" disabled class="primary">List for pickup</button>
   </div>
-</div>
 
-<div class="guardian">
-  🛡️ Guardian active · Fair-share limits · No accounts · No tracking
-</div>
+  <!-- GET MODE -->
+  <div class="card hidden" id="getMode">
+    <button class="secondary" onclick="goBack()">← Back</button>
 
-<script>
-  const food = JSON.parse(localStorage.getItem("food") || "[]");
+    <h2>Food Listings</h2>
 
-  document.getElementById("confirmDrop").onchange = e =>
-    document.getElementById("listBtn").disabled = !e.target.checked;
+    <label>How many people are you feeding? (max 4)</label>
+    <select id="familySize">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+    </select>
 
-  function showGive() {
-    role.style.display = "none";
-    give.style.display = "block";
-  }
-  function showGet() {
-    role.style.display = "none";
-    get.style.display = "block";
-    renderFood();
-  }
-  function back() {
-    give.style.display = get.style.display = "none";
-    role.style.display = "block";
-  }
-  function toggleSponsor() {
-    sponsor.style.display = sponsor.style.display === "none" ? "block" : "none";
-  }
-  function addFood() {
-    food.unshift({
-      item: foodDesc.value,
-      loc: location.value,
-      time: new Date().toLocaleString()
+    <div class="guardian">
+      To keep things fair, you may take up to <strong>2.5kg</strong> today.
+    </div>
+
+    <p><em>No food listed right now. Please check back later.</em></p>
+  </div>
+
+  <!-- SPONSOR / STORAGE PARTNER -->
+  <div class="card">
+    <h2>🏠 Are you a place that can store food?</h2>
+    <p>
+      Community fridges, cafés, churches, housing co-ops, nonprofits,
+      and other public-facing spaces can help by offering safe pickup or storage.
+    </p>
+
+    <button class="outline">Apply to be a storage partner</button>
+
+    <p class="note">
+      Partners are reviewed manually. No obligation. No fees.
+    </p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    🛡️ Guardian active · Fair-share limits · No accounts · No tracking
+  </div>
+
+  <script>
+    const role = document.getElementById("roleSelect");
+    const give = document.getElementById("giveMode");
+    const get = document.getElementById("getMode");
+    const dropped = document.getElementById("dropped");
+    const listBtn = document.getElementById("listBtn");
+
+    function showGive() {
+      role.classList.add("hidden");
+      give.classList.remove("hidden");
+    }
+
+    function showGet() {
+      role.classList.add("hidden");
+      get.classList.remove("hidden");
+    }
+
+    function goBack() {
+      give.classList.add("hidden");
+      get.classList.add("hidden");
+      role.classList.remove("hidden");
+    }
+
+    dropped.addEventListener("change", () => {
+      listBtn.disabled = !dropped.checked;
     });
-    localStorage.setItem("food", JSON.stringify(food));
-    foodDesc.value = "";
-    location.value = "";
-    confirmDrop.checked = false;
-    listBtn.disabled = true;
-    showGet();
-  }
-  function renderFood() {
-    const p = parseInt(people.value);
-    limit.innerHTML = `You may take up to <strong>${(p*2.5).toFixed(1)}kg</strong> today (pilot max 4 people).`;
-    listings.innerHTML = food.length
-      ? food.map(f => `<div class="food-item"><strong>${f.item}</strong><br>${f.loc}<br>${f.time}</div>`).join("")
-      : "<em>No food available right now.</em>";
-  }
-</script>
+  </script>
 
 </body>
 </html>
