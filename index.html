@@ -9,55 +9,76 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      max-width: 600px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 680px;
       margin: 0 auto;
       padding: 20px;
-      background: #f8f9fa;
-      color: #111827;
+      background: linear-gradient(to bottom, #f8faf8, #ffffff);
+      color: #1f2937;
+      line-height: 1.6;
     }
 
     .card {
       background: #ffffff;
-      border-radius: 14px;
-      padding: 22px;
-      margin-bottom: 20px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      border-radius: 16px;
+      padding: 26px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+      border: 1px solid #f3f4f6;
     }
 
-    h1, h2 {
+    h1 {
+      font-size: 30px;
+      margin-bottom: 6px;
+      color: #111827;
+    }
+
+    h2 {
+      font-size: 21px;
       margin-bottom: 10px;
+      color: #111827;
+      font-weight: 600;
     }
 
     p {
+      font-size: 15px;
       color: #4b5563;
-      line-height: 1.5;
       margin-bottom: 12px;
     }
 
     ul {
-      margin-left: 18px;
+      margin-left: 20px;
       margin-top: 10px;
     }
 
     li {
       margin-bottom: 8px;
+      color: #374151;
+    }
+
+    li strong {
+      color: #111827;
     }
 
     button {
       width: 100%;
       padding: 14px;
       margin-top: 10px;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
-      border-radius: 10px;
+      border-radius: 12px;
       border: none;
       cursor: pointer;
+      transition: all 0.2s ease;
     }
 
     button.primary {
       background: #10b981;
       color: white;
+    }
+
+    button.primary:hover {
+      background: #059669;
     }
 
     button.secondary {
@@ -72,7 +93,7 @@
     }
 
     button:disabled {
-      background: #9ca3af;
+      background: #d1d5db;
       cursor: not-allowed;
     }
 
@@ -80,16 +101,53 @@
       width: 100%;
       padding: 12px;
       margin-top: 8px;
-      border-radius: 8px;
+      border-radius: 10px;
       border: 1px solid #d1d5db;
       font-size: 15px;
     }
 
+    label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      font-size: 14px;
+      color: #374151;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #ecfdf5 0%, #ffffff 100%);
+      border-left: 5px solid #10b981;
+    }
+
+    .flow {
+      font-size: 15px;
+      color: #374151;
+      background: #f9fafb;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px dashed #e5e7eb;
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    .arrow {
+      margin: 0 6px;
+      color: #10b981;
+      font-weight: 600;
+    }
+
     .pilot {
       background: #fff7ed;
-      border-left: 4px solid #f59e0b;
+      border-left: 5px solid #f59e0b;
       padding: 14px;
-      border-radius: 8px;
+      border-radius: 10px;
       margin-top: 14px;
       color: #92400e;
       font-size: 14px;
@@ -97,53 +155,60 @@
 
     .locations {
       background: #f0fdf4;
-      border-left: 4px solid #10b981;
-      padding: 16px;
-      border-radius: 8px;
+      border-left: 5px solid #10b981;
     }
 
     .note {
       font-size: 13px;
       color: #6b7280;
       margin-top: 10px;
+      line-height: 1.5;
     }
 
     .footer {
       text-align: center;
       font-size: 12px;
-      color: #6b7280;
-      margin-top: 30px;
-      line-height: 1.4;
+      color: #9ca3af;
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+      line-height: 1.5;
     }
 
-    .hidden {
-      display: none;
-    }
+    .hidden { display: none; }
 
-    a { text-decoration: none; }
+    @media (max-width: 500px) {
+      h1 { font-size: 26px; }
+      h2 { font-size: 19px; }
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <div class="card">
+  <!-- HERO -->
+  <div class="card hero">
     <h1>🍅 Vancouver Food Share</h1>
-    <p>
-      Safe public pickup only.<br />
-      Drop food → list it → anyone can pick up.
-    </p>
+    <p>A simple community page to help food move freely across Vancouver.</p>
+
+    <div class="flow">
+      🥬 Drop food at a public location
+      <span class="arrow">→</span>
+      📍 Share where it is
+      <span class="arrow">→</span>
+      🥗 Anyone can pick up
+    </div>
 
     <div class="pilot">
-      <strong>Pilot project.</strong><br />
-      This site is an independent, lightweight directory for community food-sharing locations.
+      <strong>Pilot project.</strong><br>
+      Independent, lightweight directory for community food-sharing.
       Please follow each location’s posted guidelines.
     </div>
   </div>
 
   <!-- LOCATIONS -->
   <div class="card locations">
-    <h2>📍 Community Pickup Locations</h2>
+    <h2>📍 Public Food-Sharing Locations</h2>
     <ul>
       <li><strong>Kitsilano Fridge</strong> — Alley behind 3066 W 13th Ave</li>
       <li><strong>Victoria Drive Fridge</strong> — Alley behind 4040 Victoria Dr</li>
@@ -153,32 +218,28 @@
     </ul>
 
     <p class="note">
-      These are public, volunteer-maintained community fridges.
-      Thank you to the volunteers who care for and maintain them.
+      Volunteer-maintained community spaces.
+      Availability changes quickly and nothing is reserved.
     </p>
   </div>
 
-  <!-- ROLE SELECT -->
+  <!-- ACTIONS -->
   <div class="card" id="roleSelect">
-    <h2>What brings you here?</h2>
-    <button class="primary" onclick="showGive()">🥬 I Have Food</button>
-    <button class="primary" onclick="showGet()">🥗 I Need Food</button>
+    <h2>How can we help today?</h2>
+    <button class="primary" onclick="showGive()">🥬 I Have Food to Share</button>
+    <button class="primary" onclick="showGet()">🥗 I’m Looking for Food</button>
   </div>
 
-  <!-- GIVE MODE -->
+  <!-- GIVE -->
   <div class="card hidden" id="giveMode">
     <button class="secondary" onclick="goBack()">← Back</button>
+    <h2>Drop Food → Share Location</h2>
 
-    <h2>Drop Food → List It</h2>
-    <p>
-      Step 1: Drop food at one of the public locations above.<br />
-      Step 2: List it here so others know it’s available.
-    </p>
+    <p>Drop food first, then list where it is so others know where to look.</p>
 
-    <input placeholder="e.g. apples, bread, vegetables" />
-
-    <select>
-      <option value="">Choose pickup location…</option>
+    <input id="food" placeholder="e.g. apples, bread, vegetables" />
+    <select id="location">
+      <option value="">Choose location…</option>
       <option>Kitsilano Fridge</option>
       <option>Victoria Drive Fridge</option>
       <option>Main Street Fridge</option>
@@ -188,48 +249,51 @@
 
     <label>
       <input type="checkbox" id="dropped" />
-      Food is already dropped off
+      I confirm food is already dropped off
     </label>
 
-    <button id="listBtn" disabled class="primary">List for pickup</button>
+    <button id="listBtn" disabled class="primary">Share Location</button>
+
+    <p class="note">No accounts. No tracking. No personal data stored.</p>
   </div>
 
-  <!-- GET MODE -->
+  <!-- GET -->
   <div class="card hidden" id="getMode">
     <button class="secondary" onclick="goBack()">← Back</button>
+    <h2>Available Food</h2>
 
-    <h2>Food Listings</h2>
-
-    <p><em>No food listed right now. Please check back later.</em></p>
-  </div>
-
-  <!-- STORAGE PARTNER -->
-  <div class="card">
-    <h2>🏠 Are you a place that can store food?</h2>
-    <p>
-      Community fridges, cafés, churches, housing co-ops, nonprofits,
-      and other public-facing spaces can apply to be listed.
+    <p class="note">
+      Food moves fast. If a location is empty, please try another nearby.
     </p>
 
-    <a href="mailto:adam.hind005@gmail.com?subject=Storage%20Partner%20Request">
+    <p style="text-align:center; color:#9ca3af; font-style:italic;">
+      No recent listings. Please check back soon.
+    </p>
+  </div>
+
+  <!-- HOST -->
+  <div class="card">
+    <h2>🏠 Can your space host food?</h2>
+    <p>
+      Cafés, churches, housing co-ops, nonprofits, and other public-facing spaces
+      can apply to be listed.
+    </p>
+
+    <a href="mailto:adam.hind005@gmail.com?subject=Food%20Share%20Location%20Request">
       <button class="outline">Contact to be listed</button>
     </a>
 
     <p class="note">
-      When you contact us, please let us know whether you can store
-      <strong>perishable food (refrigerated)</strong> or
-      <strong>non-perishable food only</strong>.
-    </p>
-
-    <p class="note">
-      Listings are opt-in and coordinated manually by email.
-      No obligation. No fees.
+      Please mention whether you can store
+      <strong>perishable (refrigerated)</strong> or
+      <strong>non-perishable only</strong>.
+      Listings are opt-in. No fees.
     </p>
   </div>
 
   <!-- FOOTER -->
   <div class="footer">
-    Independent community tool · Opt-in listings · No accounts · No tracking
+    Independent community resource · Opt-in listings · No accounts · No tracking
   </div>
 
   <script>
@@ -257,6 +321,11 @@
 
     dropped.addEventListener("change", () => {
       listBtn.disabled = !dropped.checked;
+    });
+
+    listBtn.addEventListener("click", () => {
+      alert("Thank you for sharing food with your community.");
+      goBack();
     });
   </script>
 
