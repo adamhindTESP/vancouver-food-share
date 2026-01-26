@@ -12,7 +12,7 @@ Open your index.html file in a text editor (like Notepad, TextEdit, or VS Code) 
 • Contact Email: Search for adam.hind005@gmail.com and replace it with your own contact email so local hosts can reach you.
 • Drop-off Options: Ensure the <select> options in the `` section match the names of the locations you listed above.
 3. Translate (Optional)
-Because all the text is in plain English within the HTML tags (like <p>, <h2>, and <span>), you can easily translate the site into any language.
+Because all the text is in plain English within the HTML tags you can easily translate the site into any language.
 
 Pro-Tip: You can paste the entire code into an AI like Gemini and say: "Translate all the user-facing text in this code to Spanish (or any language) and change the city to Madrid." It will give you back a fully translated, ready-to-go file.
 
