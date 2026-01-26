@@ -12,7 +12,7 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       max-width: 680px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 18px;
       background: #fafafa;
       color: #1f2937;
       line-height: 1.6;
@@ -21,22 +21,22 @@
     .card {
       background: #ffffff;
       border-radius: 16px;
-      padding: 26px;
-      margin-bottom: 22px;
+      padding: 22px;
+      margin-bottom: 20px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.04);
       border: 1px solid #f0f0f0;
     }
 
     h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
+      font-size: 24px;
+      margin-bottom: 6px;
       font-weight: 700;
       color: #111827;
     }
 
     h2 {
-      font-size: 20px;
-      margin-bottom: 12px;
+      font-size: 19px;
+      margin-bottom: 10px;
       font-weight: 600;
       color: #111827;
     }
@@ -44,14 +44,10 @@
     p {
       font-size: 15px;
       color: #4b5563;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+    ul { list-style: none; }
 
     li {
       background: #fafafa;
@@ -94,14 +90,14 @@
 
     button {
       width: 100%;
-      padding: 15px;
+      padding: 14px;
       margin-top: 12px;
       font-size: 16px;
       font-weight: 600;
       border-radius: 12px;
       border: none;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: background 0.2s ease;
     }
 
     button.primary {
@@ -109,27 +105,19 @@
       color: white;
     }
 
-    button.primary:hover {
-      background: #059669;
-    }
+    button.primary:hover { background: #059669; }
 
     button.secondary {
       background: #6b7280;
       color: white;
     }
 
-    button.secondary:hover {
-      background: #4b5563;
-    }
+    button.secondary:hover { background: #4b5563; }
 
     button.outline {
       background: white;
       border: 2px solid #10b981;
       color: #10b981;
-    }
-
-    button.outline:hover {
-      background: #f0fdf4;
     }
 
     button:disabled {
@@ -155,17 +143,16 @@
       color: #374151;
     }
 
-    .hero {
-      border-left: 4px solid #10b981;
-    }
+    .hero { border-left: 4px solid #10b981; }
 
     .flow {
       background: #fafafa;
-      padding: 16px;
+      padding: 14px;
       border-radius: 10px;
       border: 1px solid #e5e7eb;
       text-align: center;
-      margin-top: 16px;
+      margin-top: 14px;
+      font-size: 14px;
     }
 
     .arrow { margin: 0 6px; color: #10b981; }
@@ -173,9 +160,9 @@
     .respect-time {
       background: #eff6ff;
       border-left: 4px solid #3b82f6;
-      padding: 16px;
+      padding: 14px;
       border-radius: 10px;
-      margin-top: 16px;
+      margin-top: 14px;
       font-size: 14px;
       color: #1e40af;
     }
@@ -183,9 +170,9 @@
     .disclaimer {
       background: #fef3c7;
       border-left: 4px solid #f59e0b;
-      padding: 16px;
+      padding: 14px;
       border-radius: 10px;
-      margin-top: 16px;
+      margin-top: 14px;
       font-size: 14px;
       color: #92400e;
     }
@@ -200,8 +187,8 @@
       text-align: center;
       font-size: 13px;
       color: #9ca3af;
-      margin-top: 40px;
-      padding-top: 24px;
+      margin-top: 36px;
+      padding-top: 20px;
       border-top: 1px solid #e5e7eb;
     }
 
@@ -226,14 +213,14 @@
 
   <div class="respect-time">
     <strong>We respect your time.</strong><br>
-    Food at community fridges is often claimed within minutes.  
-    This page only shows optional community reports — many donations are never reported.  
+    Food at community fridges is often claimed within minutes.
+    This page shows optional community reports only — many donations are never reported.
     Please only make the trip if it works for you.
   </div>
 
   <div class="disclaimer">
     <strong>Pilot project.</strong><br>
-    This is an independent, lightweight directory.  
+    This is an independent, lightweight directory.
     Hosts are not responsible for monitoring, storing, or guaranteeing availability.
   </div>
 </div>
@@ -243,8 +230,8 @@
   <h2>📍 Community Food-Sharing Locations</h2>
 
   <div class="disclaimer">
-    <strong>Important:</strong>  
-    This page does not show everything that may be available.  
+    <strong>Important:</strong>
+    This page does not show everything that may be available.
     Food moves quickly and many donations go unreported.
   </div>
 
@@ -286,26 +273,27 @@
   </ul>
 
   <p class="note">
-    These are volunteer-maintained community spaces.  
-    Status reflects only community-submitted activity, not actual availability.
+    These are volunteer-maintained community spaces.
+    Status reflects community-submitted activity only, not actual availability.
   </p>
 </div>
 
 <!-- ACTIONS -->
 <div class="card" id="roleSelect">
   <h2>How can we help today?</h2>
-  <button class="primary" onclick="showGive()">🥬 I Dropped Food (optional report)</button>
+  <button class="primary" onclick="showGive()">🥬 Share a Food Drop (optional)</button>
   <button class="primary" onclick="showGet()">🥗 I'm Looking for Food</button>
 </div>
 
 <!-- GIVE -->
 <div class="card hidden" id="giveMode">
   <button class="secondary" onclick="goBack()">← Back</button>
-  <h2>Report Drop Activity</h2>
+  <h2>Share a Food Drop</h2>
 
   <p>
-    If you’ve already dropped food at a public location, you can optionally report it here.  
-    This helps show community activity patterns — not inventory.
+    If you’ve already dropped food at a public location,
+    you can optionally note it here. This helps show community activity patterns —
+    not inventory.
   </p>
 
   <select id="location">
@@ -319,14 +307,13 @@
 
   <label>
     <input type="checkbox" id="dropped" />
-    <span>I confirm food is already dropped off</span>
+    <span>I confirm food has already been dropped off</span>
   </label>
 
-  <button id="listBtn" disabled class="primary">Submit activity report</button>
+  <button id="listBtn" disabled class="primary">Submit activity</button>
 
   <p class="note">
-    Reporting is optional.  
-    No food details or personal information are collected.
+    Reporting is optional. No food details or personal information are collected.
   </p>
 </div>
 
@@ -336,13 +323,13 @@
   <h2>Community Activity</h2>
 
   <div class="respect-time">
-    <strong>Reminder:</strong>  
-    Food availability changes quickly.  
+    <strong>Reminder:</strong>
+    Food availability changes quickly.
     Consider checking locations you’re already passing by.
   </div>
 
-  <p class="note" style="text-align:center; margin-top:20px;">
-    No recent community reports.  
+  <p class="note" style="text-align:center; margin-top:18px;">
+    No recent community reports.
     This does not mean locations are empty.
   </p>
 </div>
@@ -352,12 +339,12 @@
   <h2>🏠 Can Your Space Host Food?</h2>
 
   <p>
-    Cafés, churches, housing co-ops, nonprofits, and other public-facing spaces  
+    Cafés, churches, housing co-ops, nonprofits, and other public-facing spaces
     can help by offering a visible drop-off spot.
   </p>
 
   <div class="note" style="background:#f9fafb; padding:14px; border-radius:8px;">
-    Hosts are not responsible for monitoring or guaranteeing availability.  
+    Hosts are not responsible for monitoring or guaranteeing availability.
     Participation is opt-in and can be changed at any time.
   </div>
 
@@ -368,7 +355,7 @@
 
 <!-- FOOTER -->
 <div class="footer">
-  Independent community resource · Opt-in listings · No accounts · No tracking  
+  Independent community resource · Opt-in listings · No accounts · No tracking
   <br>Not affiliated with host organizations · Made with care for Vancouver
 </div>
 
@@ -400,7 +387,7 @@
   });
 
   listBtn.addEventListener("click", () => {
-    alert("Thank you. Your report helps show community activity patterns.");
+    alert("Thank you — your report helps show community activity patterns.");
     document.getElementById("location").value = "";
     dropped.checked = false;
     listBtn.disabled = true;
@@ -409,12 +396,12 @@
 
   function showGuidelines() {
     alert(
-      "Location-specific donation guidelines will be provided by host organizations.\n\n" +
+      "Location-specific donation guidelines are provided by host organizations.\n\n" +
       "Common examples:\n" +
       "• Label items with dates\n" +
       "• No alcohol or raw meat\n" +
       "• Follow posted hours\n\n" +
-      "Please always follow signs at the location."
+      "Always follow signs at the location."
     );
   }
 </script>
