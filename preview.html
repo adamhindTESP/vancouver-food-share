@@ -136,11 +136,18 @@
 
     label {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 10px;
       margin-top: 14px;
       font-size: 15px;
       color: #374151;
+      line-height: 1.4;
+    }
+
+    label span {
+      display: block;
+      flex: 1;
+      word-break: break-word;
     }
 
     .hero { border-left: 4px solid #10b981; }
@@ -291,7 +298,7 @@
   <h2>Share a Food Drop</h2>
 
   <p>
-    If you’ve already dropped food at a public location,
+    If you've already dropped food at a public location,
     you can optionally note it here. This helps show community activity patterns —
     not inventory.
   </p>
@@ -307,7 +314,7 @@
 
   <label>
     <input type="checkbox" id="dropped" />
-    <span>I confirm food has already been dropped off</span>
+    <span>I confirm the food has already been dropped off</span>
   </label>
 
   <button id="listBtn" disabled class="primary">Submit activity</button>
@@ -325,7 +332,7 @@
   <div class="respect-time">
     <strong>Reminder:</strong>
     Food availability changes quickly.
-    Consider checking locations you’re already passing by.
+    Consider checking locations you're already passing by.
   </div>
 
   <p class="note" style="text-align:center; margin-top:18px;">
