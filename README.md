@@ -132,5 +132,8 @@ If you have questions, suggestions, or want help adapting this for your communit
 
 ---
 
+Want to use this in your own city?
+See ADAPT_FOR_YOUR_CITY.md￼
+
 Thanks for checking this out —  
 and thank you to everyone working to share food with dignity 💛
