@@ -1,4 +1,5 @@
 🛠 How to Launch This in Your City
+
 This project is a "Single-File App." That means everything—the design, the logic, and the content—lives inside one single file (index.html). You don't need a database, a server, or a budget to get this running for your community.
 1. Get the Code
 • The Manual Way: Create a new file on your computer named index.html. Open the code from this project, copy everything, and paste it into your new file.
