@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
-    /* 1. RESET & BASE STYLES */
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -19,7 +18,6 @@
       line-height: 1.6;
     }
 
-    /* 2. CARD SYSTEM */
     .card {
       background: #ffffff;
       border-radius: 16px;
@@ -29,13 +27,11 @@
       border: 1px solid #f0f0f0;
     }
 
-    /* 3. TYPOGRAPHY */
     h1 { font-size: 24px; margin-bottom: 6px; font-weight: 700; color: #111827; }
     h2 { font-size: 19px; margin-bottom: 10px; font-weight: 600; color: #111827; }
     p { font-size: 15px; color: #4b5563; margin-bottom: 12px; }
     .note { font-size: 13px; color: #6b7280; margin-top: 12px; }
 
-    /* 4. LIST STYLES */
     ul { list-style: none; }
     li {
       background: #fafafa;
@@ -47,7 +43,16 @@
     li strong { display: block; margin-bottom: 4px; color: #111827; }
     .address { font-size: 14px; color: #6b7280; }
 
-    /* 5. INTERACTIVE ELEMENTS */
+    .status-badge {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      background: #f3f4f6;
+      color: #6b7280;
+    }
+
     button {
       width: 100%;
       padding: 14px;
@@ -57,13 +62,12 @@
       border-radius: 12px;
       border: none;
       cursor: pointer;
-      transition: all 0.2s ease;
     }
+
     button.primary { background: #10b981; color: white; }
-    button.primary:hover { background: #059669; }
     button.secondary { background: #6b7280; color: white; }
     button.outline { background: white; border: 2px solid #10b981; color: #10b981; }
-    button:disabled { background: #d1d5db; cursor: not-allowed; color: #9ca3af; }
+    button:disabled { background: #d1d5db; color: #9ca3af; cursor: not-allowed; }
 
     select, input {
       width: 100%;
@@ -74,16 +78,20 @@
       font-size: 15px;
     }
 
-    /* 6. SPECIAL BOXES */
     .hero { border-left: 4px solid #10b981; }
-    .respect-time { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 14px; border-radius: 10px; color: #1e40af; font-size: 14px; }
-    .disclaimer { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 14px; border-radius: 10px; color: #92400e; font-size: 14px; }
-    
-    /* 7. GLOBAL/REUSE (QUIET & SEPARATED) */
-    .reuse { 
-      margin-top: 60px; /* Strong separation */
-      background: #f8fafc; 
-      border: 1px dashed #cbd5e1; 
+    .respect-time {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      padding: 14px;
+      border-radius: 10px;
+      color: #1e40af;
+      font-size: 14px;
+    }
+
+    .reuse {
+      margin-top: 60px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
       opacity: 0.9;
     }
 
@@ -97,24 +105,28 @@
     }
 
     .hidden { display: none; }
-    .status-badge { display: inline-block; padding: 4px 8px; border-radius: 6px; font-size: 12px; background: #f3f4f6; color: #6b7280; margin-top: 6px; }
   </style>
 </head>
 
 <body>
 
+<!-- HERO -->
 <div class="card hero">
   <h1>🍅 Vancouver Food Share</h1>
   <p>A simple, community-run directory to help food move freely across Vancouver.</p>
+
   <div class="respect-time">
     <strong>We respect your time.</strong><br>
-    Food is often claimed within minutes. Many donations go unreported.
+    Food at community fridges is often claimed quickly.
+    This page shows optional community activity only.
     Please only make the trip if it works for you.
   </div>
 </div>
 
+<!-- LOCATIONS -->
 <div class="card">
   <h2>📍 Food-Sharing Locations</h2>
+
   <ul>
     <li>
       <strong>Kitsilano Fridge</strong>
@@ -142,17 +154,31 @@
       <span class="status-badge">No recent reports</span>
     </li>
   </ul>
+
+  <p class="note">
+    These are volunteer-maintained community spaces.
+    Status reflects community-submitted activity only, not actual availability.
+  </p>
 </div>
 
+<!-- ACTIONS -->
 <div class="card" id="roleSelect">
   <h2>How can we help today?</h2>
   <button class="primary" onclick="showGive()">🥬 Share a Food Drop (optional)</button>
   <button class="primary" onclick="showGet()">🥗 I'm Looking for Food</button>
 </div>
 
+<!-- GIVE -->
 <div class="card hidden" id="giveMode">
   <button class="secondary" onclick="goBack()">← Back</button>
   <h2 style="margin-top:15px;">Share a Food Drop</h2>
+
+  <p>
+    If you’ve already dropped food at a public location,
+    you can optionally note it here.
+    This helps show community activity patterns — not inventory.
+  </p>
+
   <select id="location">
     <option value="">Choose location…</option>
     <option>Kitsilano Fridge</option>
@@ -161,39 +187,87 @@
     <option>Food Stash Fridge</option>
     <option>East Hastings LOAF</option>
   </select>
-  <label style="display:flex; align-items:center; gap:10px; margin-top:15px;">
-    <input type="checkbox" id="dropped" style="width:20px; height:20px;">
-    <span>The food is already dropped off</span>
-  </label>
-  <button id="listBtn" disabled class="primary">Submit activity</button>
-</div>
 
-<div class="card hidden" id="getMode">
-  <button class="secondary" onclick="goBack()">← Back</button>
-  <h2 style="margin-top:15px;">Community Activity</h2>
-  <p class="note" style="text-align:center; padding:20px;">
-    No recent reports. This does not mean locations are empty; it just means no one has noted a drop-off recently.
+  <label style="display:flex; gap:10px; margin-top:15px;">
+    <input type="checkbox" id="dropped" style="width:20px; height:20px;">
+    <span>I confirm the food has already been dropped off</span>
+  </label>
+
+  <button id="listBtn" disabled class="primary">Submit activity</button>
+
+  <p class="note">
+    Reporting is optional. No food details or personal information are collected.
   </p>
 </div>
 
+<!-- GET -->
+<div class="card hidden" id="getMode">
+  <button class="secondary" onclick="goBack()">← Back</button>
+  <h2 style="margin-top:15px;">Community Activity</h2>
+
+  <p class="note" style="text-align:center; padding:20px;">
+    No recent reports.
+    This does not mean locations are empty.
+  </p>
+</div>
+
+<!-- HOST -->
 <div class="card">
   <h2>🏠 Can Your Space Host Food?</h2>
-  <p>Cafés, churches, and nonprofits can help by offering a visible drop-off spot.</p>
+
+  <p>
+    Cafés, churches, housing co-ops, nonprofits, and other public-facing spaces
+    can help by offering a visible, community-accessible drop-off spot.
+  </p>
+
+  <div class="note" style="background:#f9fafb; padding:14px; border-radius:8px;">
+    <strong>How hosting works:</strong><br>
+    This directory lists locations and optional community activity only.
+    Hosts are not responsible for monitoring food, managing inventory,
+    guaranteeing availability, or coordinating pickups.
+  </div>
+
+  <p class="note">
+    Each host defines their own donation guidelines. These may include:
+  </p>
+
+  <ul>
+    <li style="background:none; border:none; padding:4px 0;">• Whether perishable food is accepted</li>
+    <li style="background:none; border:none; padding:4px 0;">• What items are allowed or not allowed</li>
+    <li style="background:none; border:none; padding:4px 0;">• Labeling or date requirements</li>
+    <li style="background:none; border:none; padding:4px 0;">• Hours of access or entry instructions</li>
+  </ul>
+
+  <p class="note">
+    Donors are asked to follow posted guidelines at each location.
+    If guidelines change, hosts can simply let us know and listings will be updated.
+  </p>
+
+  <p class="note" style="font-style:italic;">
+    When reaching out, please include whether perishable food is accepted
+    and any guidelines you’d like donors to follow.
+  </p>
+
   <a href="mailto:adam.hind005@gmail.com?subject=Food%20Share%20Location%20Request">
     <button class="outline">Contact to be listed</button>
   </a>
 </div>
 
+<!-- REUSE -->
 <div class="card reuse">
   <h2 style="font-size:17px;">🌍 Want this for your city?</h2>
   <p style="font-size:14px;">
-    This code is open and can be adapted by anyone to support food sharing in their own community.
+    This page is one local example.
+    The code is open and can be copied by anyone to support food sharing
+    in their own community.
   </p>
+
   <div class="note">
-    • Change city names <br>
-    • Update locations <br>
-    • Translate as needed
+    • Change the city name<br>
+    • Replace the locations<br>
+    • Translate the text into any language
   </div>
+
   <a href="https://github.com/adamhindTESP/vancouver-food-share" target="_blank">
     <button class="outline" style="margin-top:10px; font-size:14px; border-color:#cbd5e1; color:#64748b;">
       View reusable code
@@ -203,7 +277,7 @@
 
 <div class="footer">
   Independent community resource · No accounts · No tracking
-  <br>Made for Vancouver & beyond
+  <br>Made for Vancouver — reusable everywhere
 </div>
 
 <script>
@@ -218,8 +292,9 @@
   function goBack()   { give.classList.add("hidden"); get.classList.add("hidden"); role.classList.remove("hidden"); }
 
   dropped.addEventListener("change", () => { listBtn.disabled = !dropped.checked; });
+
   listBtn.addEventListener("click", () => {
-    alert("Thank you. This helps show community activity patterns.");
+    alert("Thank you — this helps show community activity patterns.");
     location.reload();
   });
 </script>
