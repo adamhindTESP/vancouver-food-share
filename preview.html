@@ -30,15 +30,15 @@
     h1 {
       font-size: 28px;
       margin-bottom: 8px;
-      color: #111827;
       font-weight: 700;
+      color: #111827;
     }
 
     h2 {
       font-size: 20px;
       margin-bottom: 12px;
-      color: #111827;
       font-weight: 600;
+      color: #111827;
     }
 
     p {
@@ -48,18 +48,48 @@
     }
 
     ul {
-      margin-left: 20px;
-      margin-top: 10px;
-      margin-bottom: 10px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
 
     li {
-      margin-bottom: 10px;
-      color: #374151;
+      background: #fafafa;
+      padding: 14px;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      border-left: 3px solid #e5e7eb;
     }
 
     li strong {
+      display: block;
+      margin-bottom: 4px;
       color: #111827;
+    }
+
+    .address {
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .status-badge {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #f3f4f6;
+      color: #6b7280;
+    }
+
+    .location-link {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 13px;
+      color: #6b7280;
+      text-decoration: underline;
+      cursor: pointer;
     }
 
     button {
@@ -72,7 +102,6 @@
       border: none;
       cursor: pointer;
       transition: all 0.2s ease;
-      font-family: inherit;
     }
 
     button.primary {
@@ -108,19 +137,13 @@
       cursor: not-allowed;
     }
 
-    input, select {
+    select, input {
       width: 100%;
       padding: 13px;
       margin-top: 10px;
       border-radius: 10px;
       border: 1.5px solid #d1d5db;
       font-size: 15px;
-      font-family: inherit;
-    }
-
-    input:focus, select:focus {
-      outline: none;
-      border-color: #10b981;
     }
 
     label {
@@ -130,38 +153,22 @@
       margin-top: 14px;
       font-size: 15px;
       color: #374151;
-      cursor: pointer;
-    }
-
-    input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      margin: 0;
-      cursor: pointer;
     }
 
     .hero {
-      background: #ffffff;
       border-left: 4px solid #10b981;
     }
 
     .flow {
-      font-size: 15px;
-      color: #374151;
       background: #fafafa;
       padding: 16px;
       border-radius: 10px;
       border: 1px solid #e5e7eb;
-      margin-top: 16px;
       text-align: center;
-      line-height: 1.6;
+      margin-top: 16px;
     }
 
-    .arrow {
-      margin: 0 8px;
-      color: #10b981;
-      font-weight: 600;
-    }
+    .arrow { margin: 0 6px; color: #10b981; }
 
     .respect-time {
       background: #eff6ff;
@@ -171,53 +178,22 @@
       margin-top: 16px;
       font-size: 14px;
       color: #1e40af;
-      line-height: 1.6;
     }
 
-    .respect-time strong {
-      color: #1e3a8a;
-    }
-
-    .pilot {
-      background: #fffbeb;
+    .disclaimer {
+      background: #fef3c7;
       border-left: 4px solid #f59e0b;
-      padding: 14px;
+      padding: 16px;
       border-radius: 10px;
       margin-top: 16px;
+      font-size: 14px;
       color: #92400e;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .locations {
-      background: #f0fdf4;
-      border-left: 4px solid #10b981;
-    }
-
-    .activity-badge {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 600;
-      margin-left: 8px;
-    }
-
-    .active {
-      background: #d1fae5;
-      color: #065f46;
-    }
-
-    .quiet {
-      background: #f3f4f6;
-      color: #6b7280;
     }
 
     .note {
       font-size: 13px;
       color: #6b7280;
       margin-top: 12px;
-      line-height: 1.5;
     }
 
     .footer {
@@ -227,218 +203,221 @@
       margin-top: 40px;
       padding-top: 24px;
       border-top: 1px solid #e5e7eb;
-      line-height: 1.6;
     }
 
     .hidden { display: none; }
-
-    a { text-decoration: none; }
-
-    @media (max-width: 500px) {
-      body { padding: 16px 14px; }
-      .card { padding: 22px; }
-      h1 { font-size: 24px; }
-      h2 { font-size: 18px; }
-    }
   </style>
 </head>
 
 <body>
 
-  <!-- HERO -->
-  <div class="card hero">
-    <h1>🍅 Vancouver Food Share</h1>
-    <p>A simple community page to help food move freely across Vancouver.</p>
+<!-- HERO -->
+<div class="card hero">
+  <h1>🍅 Vancouver Food Share</h1>
+  <p>A simple, community-run directory to help food move freely across Vancouver.</p>
 
-    <div class="flow">
-      🥬 Drop food at a public location
-      <span class="arrow">→</span>
-      📍 Share where it is
-      <span class="arrow">→</span>
-      🥗 Anyone can pick up
-    </div>
-
-    <div class="respect-time">
-      <strong>We respect your time.</strong><br>
-      Food at community fridges is often claimed within minutes of arrival. 
-      This page shows recent activity patterns, not current inventory. 
-      Please only make the trip if it works for you.
-    </div>
-
-    <div class="pilot">
-      <strong>Pilot Project</strong><br>
-      This is an independent, lightweight directory for community food-sharing. 
-      Please follow each location's posted guidelines.
-    </div>
+  <div class="flow">
+    🥬 Drop food at a public location
+    <span class="arrow">→</span>
+    📍 Optional: share activity
+    <span class="arrow">→</span>
+    🥗 Anyone can pick up
   </div>
 
-  <!-- LOCATIONS -->
-  <div class="card locations">
-    <h2>📍 Public Food-Sharing Locations</h2>
-    <ul>
-      <li>
-        <strong>Kitsilano Fridge</strong> — Alley behind 3066 W 13th Ave
-        <span class="activity-badge active">Active</span>
-      </li>
-      <li>
-        <strong>Victoria Drive Fridge</strong> — Alley behind 4040 Victoria Dr
-        <span class="activity-badge active">Active</span>
-      </li>
-      <li>
-        <strong>Main Street Fridge</strong> — 3718 Main St (buzz to enter)
-        <span class="activity-badge quiet">Quiet today</span>
-      </li>
-      <li>
-        <strong>Food Stash Fridge</strong> — Alley at E 4th & Scotia
-        <span class="activity-badge active">Active</span>
-      </li>
-      <li>
-        <strong>East Hastings LOAF</strong> — 2297 E Hastings St
-        <span class="activity-badge quiet">Quiet today</span>
-      </li>
-    </ul>
-
-    <p class="note">
-      <strong>Activity badges show recent drop patterns, not current availability.</strong>
-      These are volunteer-maintained community spaces. 
-      Thank you to everyone who cares for and maintains them.
-    </p>
+  <div class="respect-time">
+    <strong>We respect your time.</strong><br>
+    Food at community fridges is often claimed within minutes.  
+    This page only shows optional community reports — many donations are never reported.  
+    Please only make the trip if it works for you.
   </div>
 
-  <!-- ACTIONS -->
-  <div class="card" id="roleSelect">
-    <h2>How can we help today?</h2>
-    <button class="primary" onclick="showGive()">🥬 I Have Food to Share</button>
-    <button class="primary" onclick="showGet()">🥗 I'm Looking for Food</button>
+  <div class="disclaimer">
+    <strong>Pilot project.</strong><br>
+    This is an independent, lightweight directory.  
+    Hosts are not responsible for monitoring, storing, or guaranteeing availability.
+  </div>
+</div>
+
+<!-- LOCATIONS -->
+<div class="card">
+  <h2>📍 Community Food-Sharing Locations</h2>
+
+  <div class="disclaimer">
+    <strong>Important:</strong>  
+    This page does not show everything that may be available.  
+    Food moves quickly and many donations go unreported.
   </div>
 
-  <!-- GIVE MODE -->
-  <div class="card hidden" id="giveMode">
-    <button class="secondary" onclick="goBack()">← Back</button>
-    <h2>Share Where You Dropped Food</h2>
+  <ul>
+    <li>
+      <strong>Kitsilano Fridge</strong>
+      <div class="address">Alley behind 3066 W 13th Ave</div>
+      <span class="status-badge">No recent community reports</span>
+      <div class="location-link" onclick="showGuidelines()">View donation guidelines</div>
+    </li>
 
-    <p>
-      Please drop food first at one of the public locations above, 
-      then tell us where so others know where to look.
-    </p>
+    <li>
+      <strong>Victoria Drive Fridge</strong>
+      <div class="address">Alley behind 4040 Victoria Dr</div>
+      <span class="status-badge">No recent community reports</span>
+      <div class="location-link" onclick="showGuidelines()">View donation guidelines</div>
+    </li>
 
-    <select id="location">
-      <option value="">Choose location…</option>
-      <option>Kitsilano Fridge</option>
-      <option>Victoria Drive Fridge</option>
-      <option>Main Street Fridge</option>
-      <option>Food Stash Fridge</option>
-      <option>East Hastings LOAF</option>
-    </select>
+    <li>
+      <strong>Main Street Fridge</strong>
+      <div class="address">3718 Main St (buzz to enter)</div>
+      <span class="status-badge">No recent community reports</span>
+      <div class="location-link" onclick="showGuidelines()">View donation guidelines</div>
+    </li>
 
-    <label>
-      <input type="checkbox" id="dropped" />
-      <span>I confirm food is already dropped off</span>
-    </label>
+    <li>
+      <strong>Food Stash Fridge</strong>
+      <div class="address">Alley at E 4th & Scotia</div>
+      <span class="status-badge">No recent community reports</span>
+      <div class="location-link" onclick="showGuidelines()">View donation guidelines</div>
+    </li>
 
-    <button id="listBtn" disabled class="primary">Share Activity</button>
+    <li>
+      <strong>East Hastings LOAF</strong>
+      <div class="address">2297 E Hastings St</div>
+      <span class="status-badge">No recent community reports</span>
+      <div class="location-link" onclick="showGuidelines()">View donation guidelines</div>
+    </li>
+  </ul>
 
-    <p class="note">
-      Your report helps show which locations are active. 
-      No specific items or personal information is stored.
-    </p>
+  <p class="note">
+    These are volunteer-maintained community spaces.  
+    Status reflects only community-submitted activity, not actual availability.
+  </p>
+</div>
+
+<!-- ACTIONS -->
+<div class="card" id="roleSelect">
+  <h2>How can we help today?</h2>
+  <button class="primary" onclick="showGive()">🥬 I Dropped Food (optional report)</button>
+  <button class="primary" onclick="showGet()">🥗 I'm Looking for Food</button>
+</div>
+
+<!-- GIVE -->
+<div class="card hidden" id="giveMode">
+  <button class="secondary" onclick="goBack()">← Back</button>
+  <h2>Report Drop Activity</h2>
+
+  <p>
+    If you’ve already dropped food at a public location, you can optionally report it here.  
+    This helps show community activity patterns — not inventory.
+  </p>
+
+  <select id="location">
+    <option value="">Choose location…</option>
+    <option>Kitsilano Fridge</option>
+    <option>Victoria Drive Fridge</option>
+    <option>Main Street Fridge</option>
+    <option>Food Stash Fridge</option>
+    <option>East Hastings LOAF</option>
+  </select>
+
+  <label>
+    <input type="checkbox" id="dropped" />
+    <span>I confirm food is already dropped off</span>
+  </label>
+
+  <button id="listBtn" disabled class="primary">Submit activity report</button>
+
+  <p class="note">
+    Reporting is optional.  
+    No food details or personal information are collected.
+  </p>
+</div>
+
+<!-- GET -->
+<div class="card hidden" id="getMode">
+  <button class="secondary" onclick="goBack()">← Back</button>
+  <h2>Community Activity</h2>
+
+  <div class="respect-time">
+    <strong>Reminder:</strong>  
+    Food availability changes quickly.  
+    Consider checking locations you’re already passing by.
   </div>
 
-  <!-- GET MODE -->
-  <div class="card hidden" id="getMode">
-    <button class="secondary" onclick="goBack()">← Back</button>
-    <h2>Recent Activity</h2>
+  <p class="note" style="text-align:center; margin-top:20px;">
+    No recent community reports.  
+    This does not mean locations are empty.
+  </p>
+</div>
 
-    <div class="respect-time">
-      <strong>Important:</strong> Food moves within minutes.<br>
-      Activity patterns change quickly. Consider checking locations 
-      you're already passing by, or when multiple spots are nearby.
-    </div>
+<!-- HOST -->
+<div class="card">
+  <h2>🏠 Can Your Space Host Food?</h2>
 
-    <div style="margin-top: 20px; text-align: center; color: #6b7280; font-style: italic;">
-      <p>No recent activity reported. Please check back soon.</p>
-    </div>
+  <p>
+    Cafés, churches, housing co-ops, nonprofits, and other public-facing spaces  
+    can help by offering a visible drop-off spot.
+  </p>
+
+  <div class="note" style="background:#f9fafb; padding:14px; border-radius:8px;">
+    Hosts are not responsible for monitoring or guaranteeing availability.  
+    Participation is opt-in and can be changed at any time.
   </div>
 
-  <!-- HOST SECTION -->
-  <div class="card">
-    <h2>🏠 Can Your Space Host Food?</h2>
-    <p>
-      Cafés, churches, housing co-ops, nonprofits, and other 
-      public-facing spaces can help by providing a drop-off point.
-    </p>
+  <a href="mailto:adam.hind005@gmail.com?subject=Food%20Share%20Location%20Request">
+    <button class="outline">Contact to be listed</button>
+  </a>
+</div>
 
-    <div class="note" style="background: #f9fafb; padding: 14px; border-radius: 8px; margin: 14px 0;">
-      <strong>Hosts are not responsible for monitoring or guaranteeing availability.</strong><br>
-      Drop boxes are community-use and may be emptied quickly. 
-      Hosts simply provide a visible spot for temporary food sharing.
-    </div>
+<!-- FOOTER -->
+<div class="footer">
+  Independent community resource · Opt-in listings · No accounts · No tracking  
+  <br>Not affiliated with host organizations · Made with care for Vancouver
+</div>
 
-    <a href="mailto:adam.hind005@gmail.com?subject=Food%20Share%20Location%20Request">
-      <button class="outline">Contact to Be Listed</button>
-    </a>
+<script>
+  const role = document.getElementById("roleSelect");
+  const give = document.getElementById("giveMode");
+  const get = document.getElementById("getMode");
+  const dropped = document.getElementById("dropped");
+  const listBtn = document.getElementById("listBtn");
 
-    <p class="note">
-      When contacting, please mention:
-      <br>• Whether you can store <strong>perishable food (refrigerated)</strong> 
-      or <strong>non-perishable only</strong>
-      <br>• Your open hours or access details
-      <br><br>
-      Listings are opt-in and coordinated manually. No fees. No obligations.
-    </p>
-  </div>
+  function showGive() {
+    role.classList.add("hidden");
+    give.classList.remove("hidden");
+  }
 
-  <!-- FOOTER -->
-  <div class="footer">
-    Independent community resource · Opt-in listings · No accounts · No tracking
-    <br>Made with care for Vancouver
-  </div>
+  function showGet() {
+    role.classList.add("hidden");
+    get.classList.remove("hidden");
+  }
 
-  <script>
-    // Navigation
-    const role = document.getElementById("roleSelect");
-    const give = document.getElementById("giveMode");
-    const get = document.getElementById("getMode");
-    const dropped = document.getElementById("dropped");
-    const listBtn = document.getElementById("listBtn");
+  function goBack() {
+    give.classList.add("hidden");
+    get.classList.add("hidden");
+    role.classList.remove("hidden");
+  }
 
-    function showGive() {
-      role.classList.add("hidden");
-      give.classList.remove("hidden");
-    }
+  dropped.addEventListener("change", () => {
+    listBtn.disabled = !dropped.checked;
+  });
 
-    function showGet() {
-      role.classList.add("hidden");
-      get.classList.remove("hidden");
-    }
+  listBtn.addEventListener("click", () => {
+    alert("Thank you. Your report helps show community activity patterns.");
+    document.getElementById("location").value = "";
+    dropped.checked = false;
+    listBtn.disabled = true;
+    goBack();
+  });
 
-    function goBack() {
-      give.classList.add("hidden");
-      get.classList.add("hidden");
-      role.classList.remove("hidden");
-    }
-
-    // Enable list button only when checkbox is checked
-    dropped.addEventListener("change", () => {
-      listBtn.disabled = !dropped.checked;
-    });
-
-    // Handle listing submission
-    listBtn.addEventListener("click", () => {
-      const location = document.getElementById("location").value;
-      
-      if (location && dropped.checked) {
-        alert("✅ Thank you for sharing!\n\nYour activity report helps others know where to look.\n\nThe location will show as active for the next hour.");
-        
-        // Reset form
-        document.getElementById("location").value = "";
-        dropped.checked = false;
-        listBtn.disabled = true;
-        
-        goBack();
-      }
-    });
-  </script>
+  function showGuidelines() {
+    alert(
+      "Location-specific donation guidelines will be provided by host organizations.\n\n" +
+      "Common examples:\n" +
+      "• Label items with dates\n" +
+      "• No alcohol or raw meat\n" +
+      "• Follow posted hours\n\n" +
+      "Please always follow signs at the location."
+    );
+  }
+</script>
 
 </body>
 </html>
