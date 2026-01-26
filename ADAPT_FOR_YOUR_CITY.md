@@ -32,3 +32,7 @@ This project works best when it grows through trust, not ads.
 • Print QR Codes: Put a small flyer on the fridges themselves with a QR code linking to your site.
 • Share with Mutual Aid Groups: Send the link to local Discord, Slack, or Facebook groups dedicated to community care.
 • Keep it Lightweight: Don't worry about "inventory." Remind people that the goal is simply to show activity patterns, not to promise a full fridge.
+
+## 📎 QR Codes (Optional)
+
+Many communities choose to print a QR code linking to their local page and place it near fridges or drop-off points. Each city generates its own QR code using its own website URL.
