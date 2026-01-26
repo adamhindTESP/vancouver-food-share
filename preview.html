@@ -136,7 +136,7 @@
       background: white;
     }
 
-    /* FIXED: iOS Safari checkbox label bug */
+    /* iOS Safari checkbox fix */
     label {
       display: flex;
       align-items: flex-start;
@@ -201,6 +201,11 @@
       margin-top: 12px;
     }
 
+    .reuse {
+      background: #f8fafc;
+      border: 2px dashed #e5e7eb;
+    }
+
     .footer {
       text-align: center;
       font-size: 13px;
@@ -213,6 +218,7 @@
     .hidden { display: none; }
   </style>
 </head>
+
 <body>
 
 <!-- HERO -->
@@ -305,8 +311,8 @@
 
   <p>
     If you've already dropped food at a public location,
-    you can optionally note it here. This helps show community activity patterns —
-    not inventory.
+    you can optionally note it here.
+    This helps show community activity patterns — not inventory.
   </p>
 
   <select id="location">
@@ -347,6 +353,28 @@
   </p>
 </div>
 
+<!-- REUSE -->
+<div class="card reuse">
+  <h2>🌍 Want this for your city?</h2>
+
+  <p>
+    This page is just one local example.
+    The code is open and can be copied by anyone — anywhere —
+    to support food sharing in their own community.
+  </p>
+
+  <p class="note">
+    To reuse this:
+    <br>• Change the city name
+    <br>• Replace the locations
+    <br>• Translate the text into any language
+  </p>
+
+  <a href="https://github.com/adamhindTESP/vancouver-food-share" target="_blank">
+    <button class="outline">Use this for your community</button>
+  </a>
+</div>
+
 <!-- HOST -->
 <div class="card">
   <h2>🏠 Can Your Space Host Food?</h2>
@@ -369,33 +397,20 @@
 <!-- FOOTER -->
 <div class="footer">
   Independent community resource · Opt-in listings · No accounts · No tracking
-  <br>Not affiliated with host organizations · Made with care for Vancouver
+  <br>Not affiliated with host organizations · Made with care for Vancouver & beyond
 </div>
 
 <script>
-  // Wait for DOM to load
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const role = document.getElementById("roleSelect");
     const give = document.getElementById("giveMode");
     const get = document.getElementById("getMode");
     const dropped = document.getElementById("dropped");
     const listBtn = document.getElementById("listBtn");
 
-    window.showGive = function() {
-      role.classList.add("hidden");
-      give.classList.remove("hidden");
-    };
-
-    window.showGet = function() {
-      role.classList.add("hidden");
-      get.classList.remove("hidden");
-    };
-
-    window.goBack = function() {
-      give.classList.add("hidden");
-      get.classList.add("hidden");
-      role.classList.remove("hidden");
-    };
+    window.showGive = () => { role.classList.add("hidden"); give.classList.remove("hidden"); };
+    window.showGet  = () => { role.classList.add("hidden"); get.classList.remove("hidden"); };
+    window.goBack   = () => { give.classList.add("hidden"); get.classList.add("hidden"); role.classList.remove("hidden"); };
 
     dropped.addEventListener("change", () => {
       listBtn.disabled = !dropped.checked;
@@ -409,7 +424,7 @@
       goBack();
     });
 
-    window.showGuidelines = function() {
+    window.showGuidelines = function () {
       alert(
         "Location-specific donation guidelines are provided by host organizations.\n\n" +
         "Common examples:\n" +
