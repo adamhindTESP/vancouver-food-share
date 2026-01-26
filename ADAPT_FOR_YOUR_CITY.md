@@ -10,7 +10,7 @@ Open your index.html file in a text editor (like Notepad, TextEdit, or VS Code) 
 • Location List: Look for the <ul> section under ``. Update the names and addresses.
 • Example: Change Kitsilano Fridge to [Your Neighborhood] Pantry.
 • Contact Email: Search for adam.hind005@gmail.com and replace it with your own contact email so local hosts can reach you.
-• Drop-off Options: Ensure the <select> options in the `` section match the names of the locations you listed above.
+• Drop-off Options: Ensure the <select> options in the section match the names of the locations you listed above.
 3. Translate (Optional)
 Because all the text is in plain English within the HTML tags you can easily translate the site into any language.
 
