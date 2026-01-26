@@ -6,7 +6,7 @@ This project is a "Single-File App." That means everything—the design, the log
 • The GitHub Way: If you have a GitHub account, simply "Fork" this repository to create your own copy.
 2. Customize the Local Details
 Open your index.html file in a text editor (like Notepad, TextEdit, or VS Code) and search for these sections to make it yours:
-• City Name: Find <h1>🍅 Vancouver Food Share</h1> and change "Vancouver" to your city.
+• City Name: Find <h3>🍅 Vancouver Food Share</h3> and change "Vancouver" to your city.
 • Location List: Look for the <ul> section under ``. Update the names and addresses.
 • Example: Change Kitsilano Fridge to [Your Neighborhood] Pantry.
 • Contact Email: Search for adam.hind005@gmail.com and replace it with your own contact email so local hosts can reach you.
