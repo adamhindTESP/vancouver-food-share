@@ -1,176 +1,179 @@
-# 🍅 Vancouver Food Share
+# Vancouver Food Share
 
-A **lightweight, community‑run web directory** for public food‑sharing locations.  
+A lightweight, community-run web directory for public food-sharing locations.  
 Designed to be easily adapted for any city, language, or community network.
 
----
+***
 
 ## 🌍 Overview
 
-This project provides a simple **single‑page static web app** to help people:
+Vancouver Food Share is a single-page, **static web app** that helps people:
 
-- Discover **public food‑sharing and community fridge** locations.  
-- Optionally share when they’ve dropped food (no item tracking).  
-- Understand expected availability to prevent wasted trips.  
-- Support local hosts safely, without overpromising or creating harm.
+- Find public food-sharing and community fridge locations
+- Learn where food is welcome — and under what guidelines  
+- Avoid wasted trips by setting honest expectations
+- Support hosts and volunteers without pressure or over-demand
 
-Built for dignity, clarity, and simplicity — not for data collection or scaling for profit.
+**Built for dignity, clarity, and simplicity** — not for data collection, optimization, or growth at any cost.
 
-> **Note:** This is *not* a live inventory tracker.  
-> It only displays **community‑submitted activity patterns** when people choose to share them.
+> **Important**: This is **not** a live inventory system. It never guarantees food availability and never tracks items. At most, it may show optional, community-shared activity patterns to help set expectations.
+
+***
 
 ## 🤝 Relationship to Existing Food Networks
 
-This project is designed to **support and amplify existing community food-sharing efforts**, not replace them.
+This project **supports and amplifies** existing community food-sharing efforts, not replaces them.
 
-It works best alongside:
-- Community fridges  
-- Food rescue and redistribution organizations  
+**Works best alongside**:
+- Community fridges
+- Food rescue and redistribution organizations
 - Volunteer-run pantry networks  
-- Mutual aid and neighborhood sharing initiatives  
+- Mutual aid and neighborhood sharing initiatives
 
-The site simply helps **more people find and use what already exists**, and encourages small, everyday food drops that might not otherwise happen.
+**If a city already has an established organization or directory**, this tool can:
+- Point people toward it
+- Reduce confusion about where food is appropriate to drop
+- Help new hosts feel comfortable participating
+- Lighten the burden on organizers by clarifying expectations
 
-If a city already has an established directory or organization, this tool can:
-- Point people toward it  
-- Reduce confusion about where food is welcome  
-- Help new hosts feel comfortable participating  
+**Nothing about how organizations operate needs to change.**  
+This tool adapts to communities — not the other way around.
 
-Nothing about how organizations operate needs to change.
-
----
+***
 
 ## 🚀 Purpose
 
-Community fridges and food‑sharing spaces are powerful, but they face universal challenges:
+Community food-sharing spaces are powerful, but face universal challenges:
 
-- Food is often claimed within minutes.  
-- Visitors travel only to find fridges empty.  
-- Donation rules differ by location.  
-- Most tools overcomplicate something that should stay local and human.
+- Food is often claimed within **minutes**
+- Visitors travel only to find fridges **empty**
+- Rules differ by **location and host**
+- Many tools **overcomplicate** something that should remain local and human
 
-This project offers a calm alternative — a **self‑contained directory template** that helps people:
+This project offers a **calm alternative** — a self-contained directory template that helps people:
 
-- List public food‑sharing locations in one place.  
-- Display donation guidelines and host details clearly.  
-- Encourage optional, low‑pressure community reporting.
+- See where food is being shared publicly
+- Understand donation guidelines **before arriving**
+- Share awareness **without creating obligation**
 
-No promises. No tracking. Just shared awareness.
+**No promises. No optimization. Just shared awareness** that lowers hesitation and invites generosity.
 
----
+***
 
 ## 🛠 How It Works
 
-This is a **fully static site** (just HTML, CSS, and JavaScript).  
-It runs in any browser and can be hosted anywhere, such as **GitHub Pages**.
+**Fully static website** built with plain HTML, CSS, and JavaScript.  
+Runs in any browser. Host anywhere, including GitHub Pages.
 
-Visitors can:
+**Visitors can**:
+- Browse local food-sharing locations
+- Read host-provided guidelines
+- Optionally share they've dropped food (**no details required**)
+- See clear, respectful language about availability
 
-- Browse local food‑sharing locations.  
-- Optionally report when they’ve dropped food.  
-- Read guidelines provided by local hosts.  
-- See clear, respectful language about availability.
+**There is**:
+- ❌ **No backend**
+- ❌ **No database**  
+- ❌ **No accounts or logins**
 
-There is **no backend**, **no database**, and **no login required**.
+**Goal**: Not precision — **lowering hesitation**. Helping people with extra food feel confident about where it can be shared.
 
----
+***
 
 ## 📦 Adapting for Your City
 
-Anyone can reuse this template freely.
+**Anyone can reuse or adapt this project freely**:
 
-1. **Fork this repository** or copy the `index.html` file.  
-2. Edit key details such as:
-   - City name  
-   - Food‑sharing locations and addresses  
-   - Donation guidelines  
-   - Contact email  
-   - Local languages or translations  
-3. Host it using **GitHub Pages** or another static web host.
+1. Fork this repository or copy the `index.html` file
+2. Edit a few local details:
+   - City name
+   - Food-sharing locations and addresses
+   - Donation guidelines
+   - Contact email
+   - Languages or translations
+3. Host it using GitHub Pages or any static host
 
-Your local version will then be live at:
+**Your local version will be live at**:
 
+```
 https://your-username.github.io/your-repo-name/
+```
 
+**No servers, dashboards, or integrations required.**
 
-No technical setup, admin dashboard, or data connection required.
+See [ADAPT_FOR_YOUR_CITY.md](ADAPT_FOR_YOUR_CITY.md) for step-by-step guide.
 
-> For step‑by‑step setup, see the guide in  
-> **[ADAPT_FOR_YOUR_CITY.md](./ADAPT_FOR_YOUR_CITY.md)**
-
----
+***
 
 ## 🧠 Editable Content
 
-All text and data are stored directly inside the single HTML file.  
-You can open it in any text editor to customize labels, city names, or translated text.
+**All content lives directly inside a single HTML file**.  
+Open it in any text editor and make changes immediately.
 
-### You can easily change:
-- City and region names  
-- Location listings  
-- Guideline links  
-- Contact information  
-- Language content
+**Easily customizable**:
+- City and region names
+- Location listings
+- Host guidelines and notes
+- Contact information
+- Translated or multilingual text
 
-No build system or configuration files needed — just edit and publish.
+**No build tools. No configuration files.**  
+Just edit → publish.
 
----
+***
 
-## 📣 Who It’s For
+## 📣 Who It's For
 
-This template supports:
+**Supports**:
+- Community organizers
+- Volunteer-run fridge networks
+- Mutual aid groups
+- Local environmental initiatives
+- Schools, cafés, churches, nonprofits, housing co-ops
 
-- **Community organizers**  
-- **Volunteer‑run fridge networks**  
-- **Mutual aid groups**  
-- **Local environmental initiatives**  
-- **Schools, cafés, churches, nonprofits, and housing co‑ops**
+**Ideal for** anyone who wants to promote local food-sharing in a **trust-based, low-effort, non-extractive** way.
 
-Ideal for anyone who wants to share or promote local food‑drop locations in a **trust‑based**, **low‑effort** way.
-
----
+***
 
 ## ❤️ Philosophy
 
-**Guiding principles:**
+**Guiding principles**:
+- 🕊 **Honesty over optimism** — set grounded expectations
+- 🛡 **Safety by design** — protect hosts and guests alike
+- 💬 **Clarity over precision** — simple messages reduce harm
+- 🌱 **Community ownership** — anyone can adapt it freely
+- 🤝 **Complement, don't compete** — strengthen what communities already trust
 
-- 🕊 *Honesty over optimism* — set grounded expectations.  
-- 🛡 *Safety by design* — protect hosts and guests alike.  
-- 💬 *Clarity over precision* — keep messages simple.  
-- 🌱 *Community ownership* — everyone can adapt it freely.
+**This project does not**:
+- Track inventory
+- Guarantee food availability
+- Store personal data
+- Require accounts, logins, or APIs
 
-**It does not:**
-- Track inventory levels.  
-- Guarantee food availability.  
-- Collect or store personal data.  
-- Require accounts, logins, or APIs.
-
----
+***
 
 ## 📝 License
 
-Licensed under the **MIT License** — free to use, modify, and share for any community initiative.
+**[MIT License](LICENSE)** — free to use, modify, and share for any community initiative.
 
----
+***
 
 ## 📬 Contact
 
-Questions, suggestions, or help adapting for your area?  
-Reach out at:
+Questions, suggestions, or help adapting this for your area?
 
-📧 **adam.hind005@gmail.com**
+**📧** adam.hind005@gmail.com
 
----
+***
 
 ## 🌎 Example Use Cases
 
-- Vancouver, BC (this instance)  
-- Small‑town food‑share networks  
-- Seasonal drop‑off or harvest events  
-- Multi‑language community fridge projects  
-- Local mutual aid or solidarity hubs
+- **Vancouver, BC** (this instance)
+- Small-town food-share networks
+- Seasonal harvest or surplus drop-offs
+- Multi-language community fridge projects
+- Local mutual aid and solidarity hubs
 
----
+***
 
-Thank you for helping build open, respectful food‑sharing systems —  
-and for keeping generosity local 💛
+**Thank you for helping build food-sharing systems that are open, respectful, and human-scaled — and for keeping generosity local 💛**
