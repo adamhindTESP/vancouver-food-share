@@ -19,6 +19,25 @@ Built for dignity, clarity, and simplicity — not for data collection or scalin
 > **Note:** This is *not* a live inventory tracker.  
 > It only displays **community‑submitted activity patterns** when people choose to share them.
 
+## 🤝 Relationship to Existing Food Networks
+
+This project is designed to **support and amplify existing community food-sharing efforts**, not replace them.
+
+It works best alongside:
+- Community fridges  
+- Food rescue and redistribution organizations  
+- Volunteer-run pantry networks  
+- Mutual aid and neighborhood sharing initiatives  
+
+The site simply helps **more people find and use what already exists**, and encourages small, everyday food drops that might not otherwise happen.
+
+If a city already has an established directory or organization, this tool can:
+- Point people toward it  
+- Reduce confusion about where food is welcome  
+- Help new hosts feel comfortable participating  
+
+Nothing about how organizations operate needs to change.
+
 ---
 
 ## 🚀 Purpose
