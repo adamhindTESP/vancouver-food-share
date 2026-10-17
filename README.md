@@ -2,6 +2,14 @@
 
 A static, independent directory connecting people with existing community fridges in Vancouver. No backend, accounts, inventory feed or activity submission. Food availability varies.
 
+## Download posters
+
+- [Letter poster PDF — 8.5 × 11 inches](posters/Vancouver-Food-Share-Letter-8.5x11.pdf)
+- [Tabloid poster PDF — 11 × 17 inches](posters/Vancouver-Food-Share-Tabloid-11x17.pdf)
+- [Phone preview PNG](posters/Vancouver-Food-Share-Phone-Preview.png)
+
+Open the file and use GitHub's download button to save it. Print the PDF on matching paper at **Actual Size / 100%**. Print one proof and scan its QR code before printing a batch. Obtain permission before placing a poster. The PDFs have been digitally checked; physical print quality and scanning have not been validated. The phone PNG is a preview, not the print master.
+
 ## Use this in your city
 
 [Fork this repository](https://github.com/adamhindTESP/vancouver-food-share/fork) into your GitHub account, or choose **Code > Download ZIP** on the [repository page](https://github.com/adamhindTESP/vancouver-food-share). You can also [download the main-branch ZIP](https://github.com/adamhindTESP/vancouver-food-share/archive/refs/heads/main.zip).
