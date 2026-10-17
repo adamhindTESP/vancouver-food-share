@@ -1,303 +1,236 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>🍅 Vancouver Food Share</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 18px;
-      background: #fafafa;
-      color: #1f2937;
-      line-height: 1.6;
-    }
-
-    .card {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 22px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-      border: 1px solid #f0f0f0;
-    }
-
-    h1 { font-size: 24px; margin-bottom: 6px; font-weight: 700; color: #111827; }
-    h2 { font-size: 19px; margin-bottom: 10px; font-weight: 600; color: #111827; }
-    p { font-size: 15px; color: #4b5563; margin-bottom: 12px; }
-    .note { font-size: 13px; color: #6b7280; margin-top: 12px; }
-
-    ul { list-style: none; }
-    li {
-      background: #fafafa;
-      padding: 14px;
-      border-radius: 10px;
-      margin-bottom: 14px;
-      border-left: 3px solid #e5e7eb;
-    }
-    li strong { display: block; margin-bottom: 4px; color: #111827; }
-    .address { font-size: 14px; color: #6b7280; }
-
-    .status-badge {
-      display: inline-block;
-      margin-top: 6px;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-size: 12px;
-      background: #f3f4f6;
-      color: #6b7280;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 12px;
-      font-size: 16px;
-      font-weight: 600;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-    }
-
-    button.primary { background: #10b981; color: white; }
-    button.secondary { background: #6b7280; color: white; }
-    button.outline { background: white; border: 2px solid #10b981; color: #10b981; }
-    button:disabled { background: #d1d5db; color: #9ca3af; cursor: not-allowed; }
-
-    select, input {
-      width: 100%;
-      padding: 13px;
-      margin-top: 10px;
-      border-radius: 10px;
-      border: 1.5px solid #d1d5db;
-      font-size: 15px;
-    }
-
-    .hero { border-left: 4px solid #10b981; }
-    .respect-time {
-      background: #eff6ff;
-      border-left: 4px solid #3b82f6;
-      padding: 14px;
-      border-radius: 10px;
-      color: #1e40af;
-      font-size: 14px;
-    }
-
-    .reuse {
-      margin-top: 60px;
-      background: #f8fafc;
-      border: 1px dashed #cbd5e1;
-      opacity: 0.9;
-    }
-
-    .footer {
-      text-align: center;
-      font-size: 13px;
-      color: #9ca3af;
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid #e5e7eb;
-    }
-
-    .hidden { display: none; }
-  </style>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; style-src 'unsafe-inline'; img-src 'self'; base-uri 'none'; form-action 'none'; connect-src 'none'; frame-src 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Find Vancouver community fridges, check access details, and follow donation guidance. An independent directory; food availability varies.">
+<title>Vancouver Food Share — Find food. Share food.</title>
+<style>
+:root{--ink:#183c32;--muted:#53645c;--paper:#f7f5ee;--line:#d7dfd5;--green:#205b44;--pale:#eaf0e4;--gold:#f2cf72}*{box-sizing:border-box}html{scroll-padding-top:24px}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--green);text-underline-offset:4px}a:hover{text-decoration-thickness:2px}a:focus-visible,summary:focus-visible{outline:3px solid #a24f1d;outline-offset:5px}h1,h2,h3,p{margin:0}h1,h2,h3{line-height:1.13}h1,h2{font-family:Georgia,serif;font-weight:400}h1{font-size:clamp(44px,5.5vw,76px);letter-spacing:-2px}h2{font-size:clamp(32px,4vw,44px);letter-spacing:-1px}h3{font-size:23px;letter-spacing:-.4px}.wrap{max-width:1160px;margin:auto;padding:0 32px}.skip{position:absolute;top:-100px;background:white;padding:10px;z-index:3}.skip:focus{top:0}header{border-bottom:1px solid var(--line)}.header-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:23px}.brand{font-weight:750;font-size:19px;text-decoration:none;display:flex;align-items:center;gap:12px}.mark{width:35px;height:35px;border-radius:50%;background:var(--green);color:white;display:grid;place-items:center;font-size:24px}nav{display:flex;gap:26px}nav a{font-size:14px;font-weight:650;text-decoration:none;padding:8px 0}.hero{display:grid;grid-template-columns:1.6fr 1fr;gap:65px;align-items:center;padding-block:65px 46px}.eyebrow{font-size:12px;text-transform:uppercase;font-weight:750;letter-spacing:2px;margin-bottom:18px}.lead{font-size:19px;max-width:560px;margin-top:24px;color:var(--muted)}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.button{display:inline-flex;align-items:center;justify-content:center;gap:18px;padding:13px 22px;border:1px solid var(--green);border-radius:8px;text-decoration:none;font-weight:650;min-height:48px}.primary{background:var(--green);color:white}.hero-note{border:1px solid var(--line);border-radius:90px 90px 16px 16px;background:var(--pale);padding:36px 30px 29px;text-align:center}.hero-note svg{width:130px;height:130px;margin:0 auto 18px}.hero-note h2{font-size:29px;letter-spacing:-.5px}.hero-note p{font-size:15px;color:var(--muted);margin-top:14px}.notice{display:flex;gap:16px;padding:18px 24px;background:#eee7d6;border-radius:10px;font-size:15px}.notice strong{white-space:nowrap}.section{padding-block:52px;border-bottom:1px solid var(--line)}.section-top{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:25px}.intro{color:var(--muted);max-width:640px;margin-top:14px}.small{font-size:13px;color:var(--muted)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.location{background:#fffefa;border:1px solid var(--line);border-radius:14px;padding:27px;display:flex;flex-direction:column;gap:15px}.location .eyebrow{color:var(--muted);margin:0;font-size:11px}.address{font-size:17px;margin-top:8px}.pills{display:flex;gap:7px;flex-wrap:wrap}.pill{background:var(--pale);padding:4px 10px;border-radius:5px;font-size:12px;font-weight:650}.details{display:grid;grid-template-columns:76px 1fr;gap:10px;font-size:15px;margin:0}.details dt{font-weight:700}.details dd{margin:0;color:var(--muted)}.source{border-top:1px solid var(--line);padding-top:14px;margin-top:auto;font-size:12px;color:var(--muted)}.source a{font-size:14px;font-weight:650;display:inline-block;margin-top:6px}.map{font-size:14px;font-weight:650;align-self:start;padding:6px 0}.pending{border-left:3px solid #b98a2c;padding:15px 20px;background:#f0ebdf;margin-top:22px;font-size:15px}.pending p{margin-top:7px;color:var(--muted)}.resource{margin-top:25px;display:flex;justify-content:space-between;gap:25px;align-items:center}.resource p{max-width:650px;color:var(--muted);font-size:15px}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:30px}.step-number{display:grid;place-items:center;width:34px;height:34px;background:var(--gold);border-radius:50%;font-size:14px;font-weight:700;margin-bottom:16px}.steps h3{font-size:19px}.steps p{font-size:15px;color:var(--muted);margin-top:12px}.safety{margin-top:28px;padding:23px;background:var(--pale);border-radius:10px;font-size:15px}.safety p+p{margin-top:10px}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px}.about-grid h2{font-size:31px}.about-grid p{margin-top:16px;color:var(--muted);font-size:15px}.email{overflow-wrap:anywhere}footer{padding-block:26px 40px;font-size:12px;color:var(--muted)}footer .wrap{display:flex;justify-content:space-between;gap:20px}details{margin-top:20px;font-size:14px}summary{cursor:pointer;font-weight:650;padding:8px 0}details ul{padding-left:22px;color:var(--muted)}@media(max-width:720px){.wrap{padding-inline:20px}.header-inner{align-items:start;gap:16px;flex-direction:column;padding-block:18px}nav{gap:24px}.hero{grid-template-columns:1fr;gap:28px;padding-block:38px 28px}.hero-note{border-radius:12px;padding:22px;text-align:left;display:grid;grid-template-columns:66px 1fr;gap:0 18px}.hero-note svg{width:66px;height:66px;grid-row:1/3;margin:0}.hero-note h2{font-size:25px}.hero-note p{margin-top:8px}.notice{display:block;padding:18px}.notice strong{display:block;margin-bottom:5px}.section{padding-block:36px}.section-top,.resource{display:block}.section-top .small{margin-top:16px}.grid,.about-grid,.steps{grid-template-columns:1fr}.location{padding:23px}.steps{gap:25px}.step-number{margin-bottom:10px}.resource .button{margin-top:17px}.about-grid{gap:34px}footer .wrap{flex-direction:column}.lead{font-size:17px}.actions .button{flex:1;white-space:nowrap;padding-inline:15px}.details{grid-template-columns:68px 1fr}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{nav,.hero-note,.actions{display:none}.hero{display:block}.grid{grid-template-columns:1fr}.location{break-inside:avoid}body{background:white}}
+</style>
 </head>
-
 <body>
-
-<!-- HERO -->
-<div class="card hero">
-  <h1>🍅 Vancouver Food Share</h1>
-  <p>A simple, community-run directory to help food move freely across Vancouver.</p>
-
-  <div class="respect-time">
-    <strong>We respect your time.</strong><br>
-    Food at community fridges is often claimed quickly.
-    This page shows optional community activity only.
-    Please only make the trip if it works for you.
-  </div>
+<a class="skip" href="#find-food">Skip to food locations</a>
+<header>
+<div class="wrap header-inner">
+<a class="brand" href="#">
+<span class="mark" aria-hidden="true">↗</span>Vancouver Food Share</a>
+<nav aria-label="Main navigation">
+<a href="#find-food">Find food</a>
+<a href="#donate">Donate food</a>
+<a href="#corrections">Corrections</a>
+</nav>
 </div>
-
-<!-- LOCATIONS -->
-<div class="card">
-  <h2>📍 Food-Sharing Locations</h2>
-
-  <ul>
-    <li>
-      <strong>Kitsilano Fridge</strong>
-      <div class="address">Alley behind 3066 W 13th Ave</div>
-      <span class="status-badge">No recent reports</span>
-    </li>
-    <li>
-      <strong>Victoria Drive Fridge</strong>
-      <div class="address">Alley behind 4040 Victoria Dr</div>
-      <span class="status-badge">No recent reports</span>
-    </li>
-    <li>
-      <strong>Main Street Fridge</strong>
-      <div class="address">3718 Main St (buzz to enter)</div>
-      <span class="status-badge">No recent reports</span>
-    </li>
-    <li>
-      <strong>Food Stash Fridge</strong>
-      <div class="address">Alley at E 4th & Scotia</div>
-      <span class="status-badge">No recent reports</span>
-    </li>
-    <li>
-      <strong>East Hastings LOAF</strong>
-      <div class="address">2297 E Hastings St</div>
-      <span class="status-badge">No recent reports</span>
-    </li>
-  </ul>
-
-  <p class="note">
-    These are volunteer-maintained community spaces.
-    Status reflects community-submitted activity only, not actual availability.
-  </p>
+</header>
+<main class="wrap">
+<section class="hero" aria-labelledby="title">
+<div>
+<p class="eyebrow">Neighbours helping neighbours · Vancouver, BC</p>
+<h1 id="title">Good food.<br>For each other.</h1>
+<p class="lead">Find a community fridge. Share what you can.<br>A simple guide to existing places where food is shared freely.</p>
+<div class="actions">
+<a class="button primary" href="#find-food">Find food <span aria-hidden="true">↓</span>
+</a>
+<a class="button" href="#donate">I have food to give</a>
 </div>
-
-<!-- ACTIONS -->
-<div class="card" id="roleSelect">
-  <h2>How can we help today?</h2>
-  <button class="primary" onclick="showGive()">🥬 Share a Food Drop (optional)</button>
-  <button class="primary" onclick="showGet()">🥗 I'm Looking for Food</button>
 </div>
-
-<!-- GIVE -->
-<div class="card hidden" id="giveMode">
-  <button class="secondary" onclick="goBack()">← Back</button>
-  <h2 style="margin-top:15px;">Share a Food Drop</h2>
-
-  <p>
-    If you’ve already dropped food at a public location,
-    you can optionally note it here.
-    This helps show community activity patterns — not inventory.
-  </p>
-
-  <select id="location">
-    <option value="">Choose location…</option>
-    <option>Kitsilano Fridge</option>
-    <option>Victoria Drive Fridge</option>
-    <option>Main Street Fridge</option>
-    <option>Food Stash Fridge</option>
-    <option>East Hastings LOAF</option>
-  </select>
-
-  <label style="display:flex; gap:10px; margin-top:15px;">
-    <input type="checkbox" id="dropped" style="width:20px; height:20px;">
-    <span>I confirm the food has already been dropped off</span>
-  </label>
-
-  <button id="listBtn" disabled class="primary">Submit activity</button>
-
-  <p class="note">
-    Reporting is optional. No food details or personal information are collected.
-  </p>
+<aside class="hero-note">
+<svg viewBox="0 0 140 140" fill="none" aria-hidden="true">
+<circle cx="70" cy="70" r="66" fill="#d8e3cf"/>
+<rect x="37" y="18" width="66" height="105" rx="10" fill="#fffefa" stroke="#205b44" stroke-width="3"/>
+<path d="M38 55h64M48 32v12M48 67v17" stroke="#205b44" stroke-width="3" stroke-linecap="round"/>
+<path d="M67 86c-17-13-24 8 0 19 24-11 17-32 0-19Z" fill="#bd5a3b"/>
+<path d="M45 124v7M95 124v7" stroke="#205b44" stroke-width="4"/>
+</svg>
+<h2>Take what you need.<br>Leave what you can.</h2>
+<p>Community fridges are shared spaces.<br>No account needed to use this guide.</p>
+</aside>
+</section>
+<div class="notice">
+<strong>Before you make the trip</strong>
+<span>Food availability changes. We don’t track stock or receive live reports. Published access hours do not guarantee food will be there.</span>
 </div>
-
-<!-- GET -->
-<div class="card hidden" id="getMode">
-  <button class="secondary" onclick="goBack()">← Back</button>
-  <h2 style="margin-top:15px;">Community Activity</h2>
-
-  <p class="note" style="text-align:center; padding:20px;">
-    No recent reports.
-    This does not mean locations are empty.
-  </p>
+<section class="section" id="find-food" aria-labelledby="locations-title">
+<div class="section-top">
+<div>
+<p class="eyebrow">01 / Find food</p>
+<h2 id="locations-title">Community fridges</h2>
+<p class="intro">These four locations appear in the organizer’s directory. Pickup is open to all, with no sign-up. Check the source and on-site notices before visiting.</p>
 </div>
-
-<!-- HOST -->
-<div class="card">
-  <h2>🏠 Can Your Space Host Food?</h2>
-
-  <p>
-    Cafés, churches, housing co-ops, nonprofits, and other public-facing spaces
-    can help by offering a visible, community-accessible drop-off spot.
-  </p>
-
-  <div class="note" style="background:#f9fafb; padding:14px; border-radius:8px;">
-    <strong>How hosting works:</strong><br>
-    This directory lists locations and optional community activity only.
-    Hosts are not responsible for monitoring food, managing inventory,
-    guaranteeing availability, or coordinating pickups.
-  </div>
-
-  <p class="note">
-    Each host defines their own donation guidelines. These may include:
-  </p>
-
-  <ul>
-    <li style="background:none; border:none; padding:4px 0;">• Whether perishable food is accepted</li>
-    <li style="background:none; border:none; padding:4px 0;">• What items are allowed or not allowed</li>
-    <li style="background:none; border:none; padding:4px 0;">• Labeling or date requirements</li>
-    <li style="background:none; border:none; padding:4px 0;">• Hours of access or entry instructions</li>
-  </ul>
-
-  <p class="note">
-    Donors are asked to follow posted guidelines at each location.
-    If guidelines change, hosts can simply let us know and listings will be updated.
-  </p>
-
-  <p class="note" style="font-style:italic;">
-    When reaching out, please include whether perishable food is accepted
-    and any guidelines you’d like donors to follow.
-  </p>
-
-  <a href="mailto:adam.hind005@gmail.com?subject=Food%20Share%20Location%20Request">
-    <button class="outline">Contact to be listed</button>
-  </a>
+<p class="small">Sources checked<br>
+<time datetime="2026-10-16">16 October 2026</time>
+</p>
 </div>
-
-<!-- REUSE -->
-<div class="card reuse">
-  <h2 style="font-size:17px;">🌍 Want this for your city?</h2>
-  <p style="font-size:14px;">
-    This page is one local example.
-    The code is open and can be copied by anyone to support food sharing
-    in their own community.
-  </p>
-
-  <div class="note">
-    • Change the city name<br>
-    • Replace the locations<br>
-    • Translate the text into any language
-  </div>
-
-  <a href="https://github.com/adamhindTESP/vancouver-food-share" target="_blank">
-    <button class="outline" style="margin-top:10px; font-size:14px; border-color:#cbd5e1; color:#64748b;">
-      View reusable code
-    </button>
-  </a>
+<div class="grid">
+<article class="location">
+<p class="eyebrow">Mount Pleasant</p>
+<div>
+<h3>Food Stash community fridge</h3>
+<p class="address">273 E 4th Avenue</p>
 </div>
-
-<div class="footer">
-  Independent community resource · No accounts · No tracking
-  <br>Made for Vancouver — reusable everywhere
+<div class="pills">
+<span class="pill">Pickup</span>
+<span class="pill">Donations accepted · rules apply</span>
 </div>
-
-<script>
-  const role = document.getElementById("roleSelect");
-  const give = document.getElementById("giveMode");
-  const get = document.getElementById("getMode");
-  const dropped = document.getElementById("dropped");
-  const listBtn = document.getElementById("listBtn");
-
-  function showGive() { role.classList.add("hidden"); give.classList.remove("hidden"); }
-  function showGet()  { role.classList.add("hidden"); get.classList.remove("hidden"); }
-  function goBack()   { give.classList.add("hidden"); get.classList.add("hidden"); role.classList.remove("hidden"); }
-
-  dropped.addEventListener("change", () => { listBtn.disabled = !dropped.checked; });
-
-  listBtn.addEventListener("click", () => {
-    alert("Thank you — this helps show community activity patterns.");
-    location.reload();
-  });
-</script>
-
+<dl class="details">
+<dt>Hours</dt>
+<dd>24/7, according to Food Stash.</dd>
+<dt>Entrance</dt>
+<dd>Community garden facing the back alley at E 4th and Scotia.</dd>
+<dt>Storage</dt>
+<dd>Fridge, freezer and pantry.</dd>
+<dt>Give food</dt>
+<dd>Produce, sealed pantry goods and baked goods are listed. Other items have specific rules; read the full guide before donating.</dd>
+</dl>
+<a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=273+E+4th+Avenue+Vancouver+BC">View address on Google Maps ↗</a>
+<div class="source">Source checked 16 October 2026 · No stock information<br>
+<a href="https://www.foodstash.ca/fridge">Food Stash location &amp; donation rules ↗</a>
+</div>
+</article>
+<article class="location">
+<p class="eyebrow">Kitsilano</p>
+<div>
+<h3>Kitsilano community fridge</h3>
+<p class="address">3066 W 13th Avenue</p>
+</div>
+<div class="pills">
+<span class="pill">Pickup</span>
+<span class="pill">Check donation rules on site</span>
+</div>
+<dl class="details">
+<dt>Hours</dt>
+<dd>24/7, according to the organizer.</dd>
+<dt>Entrance</dt>
+<dd>Alley behind the red house and large garden. Use the public fridge access.</dd>
+<dt>Storage</dt>
+<dd>Fridge and pantry; freezer not confirmed.</dd>
+<dt>Give food</dt>
+<dd>A complete accepted-food list was not verified. Check posted rules before leaving food.</dd>
+</dl>
+<a class="map" href="https://maps.app.goo.gl/hBPW7jBAf4sLTWLZ6">Organizer’s map directions ↗</a>
+<div class="source">Source checked 16 October 2026 · No stock information<br>
+<a href="https://vcfp.square.site/find-a-fridge">Vancouver Community Fridge Project listing ↗</a>
+</div>
+</article>
+<article class="location">
+<p class="eyebrow">Kensington–Cedar Cottage</p>
+<div>
+<h3>Victoria Drive community fridge</h3>
+<p class="address">4040 Victoria Drive</p>
+</div>
+<div class="pills">
+<span class="pill">Pickup</span>
+<span class="pill">Check donation rules on site</span>
+</div>
+<dl class="details">
+<dt>Hours</dt>
+<dd>24/7, according to the organizer.</dd>
+<dt>Entrance</dt>
+<dd>Alley behind the green house. Use the public fridge access.</dd>
+<dt>Storage</dt>
+<dd>Fridge, freezer and pantry.</dd>
+<dt>Give food</dt>
+<dd>The organizer lists home-cooked meals as accepted. Label and handling requirements were not verified; confirm these before donating.</dd>
+</dl>
+<a class="map" href="https://maps.app.goo.gl/bf3sUMvF8VAfH41S7">Organizer’s map directions ↗</a>
+<div class="source">Source checked 16 October 2026 · No stock information<br>
+<a href="https://vcfp.square.site/find-a-fridge">Vancouver Community Fridge Project listing ↗</a>
+</div>
+</article>
+<article class="location">
+<p class="eyebrow">Riley Park · Temporary location</p>
+<div>
+<h3>Main Street community fridge</h3>
+<p class="address">The Soap Dispensary · 3718 Main Street</p>
+</div>
+<div class="pills">
+<span class="pill">Pickup</span>
+<span class="pill">Check donation rules on site</span>
+</div>
+<dl class="details">
+<dt>Hours</dt>
+<dd>24/7, according to the organizer.</dd>
+<dt>Entrance</dt>
+<dd>Exact fridge access is not described in the source. Check the organizer’s map and on-site signs.</dd>
+<dt>Storage</dt>
+<dd>Fridge, freezer and pantry.</dd>
+<dt>Give food</dt>
+<dd>A complete accepted-food list was not verified. Check posted rules before leaving food.</dd>
+</dl>
+<a class="map" href="https://maps.app.goo.gl/fXJp9bsAFUDbgZQQ7">Organizer’s map directions ↗</a>
+<div class="source">Source checked 16 October 2026 · No stock information<br>
+<a href="https://vcfp.square.site/find-a-fridge">Vancouver Community Fridge Project listing ↗</a>
+</div>
+</article>
+</div>
+<div class="pending">
+<strong>East Hastings LOAF — current details unconfirmed</strong>
+<p>This previously listed location could not be confirmed in the organizer’s current directory on 16 October 2026. Pickup, donations, hours and access remain unverified. Please use a confirmed listing above or <a href="#corrections">send a correction</a>. This does not establish that the location has closed.</p>
+</div>
+<p class="small" style="margin-top:18px">This is a focused guide, not a complete citywide list. <a href="https://vcfp.square.site/find-a-fridge">See all fridges in the organizer’s directory.</a> Physical accessibility and temporary closures have not been independently checked.</p>
+</section>
+<section class="section" id="donate" aria-labelledby="donate-title">
+<p class="eyebrow">02 / Donate food</p>
+<h2 id="donate-title">A little care goes a long way.</h2>
+<p class="intro">Donation rules differ from place to place. A fridge listing is not permission to leave every kind of food.</p>
+<div class="steps">
+<div>
+<span class="step-number">1</span>
+<h3>Check the location’s rules</h3>
+<p>Read the linked organizer guidance and posted signs. If accepted items or access are unclear, confirm with the organizer before bringing food.</p>
+</div>
+<div>
+<span class="step-number">2</span>
+<h3>Keep food safe</h3>
+<p>Follow safe handling and storage guidance. Keep chilled food cold during transport; never leave perishables in an unrefrigerated donation box.</p>
+</div>
+<div>
+<span class="step-number">3</span>
+<h3>Leave it in the right place</h3>
+<p>Use the designated storage only. If it is full, closed or unsuitable for your food, take the food with you. Respect the space and neighbours.</p>
+</div>
+</div>
+<div class="safety">
+<p>
+<strong>Unsure about food safety?</strong> Don’t donate food whose storage history or safety is uncertain. Follow the location’s rules alongside <a href="https://www.bccdc.ca/health-professionals/professional-resources/food-donation-guidelines">BC Centre for Disease Control food donation guidance</a>.</p>
+<p class="small">Guidance source checked 16 October 2026. Host acceptance does not by itself establish that an item is safe.</p>
+</div>
+</section>
+<section class="section about-grid">
+<div id="corrections">
+<p class="eyebrow">Keep this guide useful</p>
+<h2>Something changed?</h2>
+<p>Tell Adam which location needs updating or removing, what changed, and where the current information can be checked. Please leave out visitors’ personal information.</p>
+<a class="button" style="margin-top:20px" href="mailto:adam.hind005@gmail.com?subject=Food%20Share%20Correction&amp;body=Location%3A%0AWhat%20changed%3A%0ASource%20or%20date%20observed%3A">Email a correction ↗</a>
+<p class="small">Opens your email app; nothing is sent by this website. You can also email <a class="email" href="mailto:adam.hind005@gmail.com">adam.hind005@gmail.com</a>. Updates are reviewed manually; replies are not guaranteed.</p>
+</div>
+<div>
+<p class="eyebrow">Thinking about hosting?</p>
+<h2>A new space starts with a plan.</h2>
+<p>Storefront donation boxes are an idea being explored, separate from the established fridges above. No proposed hosts or private addresses are listed here.</p>
+<p>A host needs to agree to access, accepted food, cleaning, checks, storage and removal of unsuitable items. An unrefrigerated box is not suitable for perishable food.</p>
+<details>
+<summary>Questions to settle before listing a host</summary>
+<ul>
+<li>Has the host agreed to a public listing and address?</li>
+<li>Who checks, cleans and maintains the space?</li>
+<li>What food is accepted, and how must it be labelled?</li>
+<li>What are the public access hours and entrance?</li>
+<li>Who can confirm changes or temporary closure?</li>
+</ul>
+</details>
+</div>
+</section>
+</main>
+<footer>
+<div class="wrap">
+<p>Independent community directory. No formal partnership or endorsement implied.<br>No accounts, inventory reporting or analytics added by this site.</p>
+<p>
+<a href="https://github.com/adamhindTESP/vancouver-food-share">Use this in your city</a>
+<br>Made for Vancouver. Shared with care.</p>
+</div>
+</footer>
 </body>
 </html>

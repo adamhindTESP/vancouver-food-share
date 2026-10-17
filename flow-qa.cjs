@@ -1,0 +1,15 @@
+const {chromium}=require('C:/Users/adamh/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const assert=require('node:assert/strict');const fs=require('node:fs');
+(async()=>{const b=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});try{
+const p=await b.newPage({viewport:{width:390,height:844}});const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto('file:///'+process.cwd().replaceAll('\\','/')+'/index.html');
+await p.keyboard.press('Tab');assert.equal(await p.locator(':focus').textContent(),'Skip to food locations');const outline=await p.locator(':focus').evaluate(e=>getComputedStyle(e).outlineStyle);assert.notEqual(outline,'none');await p.keyboard.press('Enter');assert(p.url().endsWith('#find-food'));
+for(const target of ['#find-food','#donate','#corrections']){await p.locator('nav a[href="'+target+'"]').focus();await p.keyboard.press('Enter');assert(p.url().endsWith(target));}
+await p.locator('summary').focus();await p.keyboard.press('Enter');assert(await p.locator('details').evaluate(e=>e.open));await p.keyboard.press('Space');assert(!(await p.locator('details').evaluate(e=>e.open)));
+const links=await p.locator('a').evaluateAll(as=>as.map(a=>a.getAttribute('href')));for(const href of links){assert(/^(#|https:\/\/|mailto:)/.test(href),'Unexpected/local-only href: '+href)}
+const mail=await p.getByRole('link',{name:'Email a correction'}).getAttribute('href');const params=new URLSearchParams(mail.split('?')[1]);assert.equal(params.get('subject'),'Food Share Correction');assert.equal(params.get('body'),'Location:\nWhat changed:\nSource or date observed:');
+const missingLabels=await p.locator('[aria-labelledby]').evaluateAll(es=>es.flatMap(e=>e.getAttribute('aria-labelledby').split(/\s+/).filter(id=>!document.getElementById(id))));assert.deepEqual(missingLabels,[]);
+assert.equal(await p.locator('h1').count(),1);assert.equal(await p.locator('main').count(),1);assert.equal(await p.locator('form,input,button').count(),0);assert.deepEqual(errors,[]);
+const externalRequests=[];p.on('request',r=>{if(r.url().startsWith('http'))externalRequests.push(r.url())});await p.reload();assert.deepEqual(externalRequests,[]);
+await p.addStyleTag({content:'body {font-size: 200% !important}'});assert(!(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth)));
+const result={keyboardSkipLink:'pass',visibleFocus:'pass',keyboardNavigation:'all three nav anchors pass',keyboardDisclosure:'Enter opens; Space closes',linkSchemes:'HTTPS/mailto/fragments only',correctionPrefill:'validated; not sent',pageErrors:errors,externalRequestsOnLoad:externalRequests,textEnlargement:'200% body text at 390px: no horizontal overflow',limits:'Not a screen reader or real-device audit'};fs.writeFileSync('../review/final-flow-results.json',JSON.stringify(result,null,2));console.log(result);
+}finally{await b.close()}})().catch(e=>{console.error(e);process.exitCode=1});

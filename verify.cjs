@@ -1,0 +1,13 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const html=fs.readFileSync('index.html','utf8');
+assert(!html.includes('Submit activity'), 'Must remove non-persistent activity submission');
+assert(!html.includes('No recent reports'), 'Must remove fabricated report status');
+assert(!html.includes('buzz to enter'), 'Must remove unsupported entrance instruction');
+assert(html.includes('mailto:adam.hind005@gmail.com?subject=Food%20Share%20Correction'), 'Correction must use existing published email');
+assert(html.includes('2026-10-16'), 'Show source-check date');
+assert(html.includes('https://vcfp.square.site/find-a-fridge'), 'Link location evidence');
+assert(html.includes('https://www.foodstash.ca/fridge'), 'Link Food Stash rules');
+assert(!/<script[ >]/i.test(html), 'Core directory works without scripts');
+assert.equal(html,fs.readFileSync('preview.html','utf8'),'Preview must match index');
+console.log('PASS: content honesty, correction route, sources and preview parity');
