@@ -2,6 +2,14 @@
 
 Make a local guide using verified information from your community. This is a static HTML page: no backend, build tool or hosting integration is required.
 
+## Local editor route
+
+This repository includes starter.html and starter.js. Open [the city editor](https://adamhindtesp.github.io/vancouver-food-share/starter.html) in a compatible browser, enter your place, add local resources, preview and download. These steps do not require HTML editing or a GitHub account. Download the editable project JSON before leaving; reopen it in this editor for later revisions. The exported website ZIP has index.html, README.md, LICENSE.md and food-share-project.json, but not the editor. Keep the project JSON and reopen it in the editor to edit again.
+
+This route starts blank and retains unverified notices. It does not look up food locations or publish them. Verify every local fact, permission and safety requirement before the separate publishing step below. It creates no QR; make your own only after confirming your new URL.
+
+The manual fork/edit route below remains available. References to copied QR assets apply to a full repository download, not an editor-generated city kit.
+
 ## 1. Get your own copy
 
 Choose one route:
@@ -21,7 +29,7 @@ Open `index.html` in a text editor. All page content and styling are in this fil
 | Location cards | Use verified local locations, public sources, dates checked, pickup/donation roles, entrance, hours and storage details. Mark unknowns explicitly. |
 | Organizer and alternative-resource links | Replace Vancouver-specific maps, organizations and City resource links with appropriate local sources. |
 | Donation and safety guidance | Use official guidance for your region. Do not assume one host's accepted foods apply everywhere. |
-| Correction email | Replace every instance of Adam's email with a contact you are authorized to publish, including both mailto links. Check the subject/body wording and manual-send explanation. |
+| Correction email | Replace every instance of the Vancouver Food Share project email with a contact you are authorized to publish, including both mailto links. Check the subject/body wording and manual-send explanation. |
 | Reuse link and source register | Decide whether the reuse link should point to your own repository or this original; update `SOURCES.md` for your local evidence. |
 | QR image | The included `qr-code.png` points to Vancouver's site. Replace it only after your own public URL is confirmed. |
 
@@ -58,4 +66,5 @@ After confirming your published URL, replace the copied Vancouver QR with one fo
 
 ## Security maintenance
 
-Read [SECURITY.md](SECURITY.md) before accepting corrections, changing code, or publishing a fork. Preserve the browser policy and review links and permissions. Run `node security-qa.cjs` for local browser-policy regression checks. Account and publishing protections need a separate owner review.
+Read [SECURITY.md](SECURITY.md) before accepting corrections, changing code, or publishing a fork. Preserve the browser policy and review links and permissions. Use the current checks listed in README.md and TEST_REPORT.md. The legacy Windows-specific security-qa.cjs was not run here and does not validate this release. Account and publishing protections need a separate owner review.
+

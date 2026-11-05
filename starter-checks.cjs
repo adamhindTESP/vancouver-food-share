@@ -1,0 +1,13 @@
+const test = require('node:test'); const assert = require('node:assert/strict');const fs=require('node:fs');const vm=require('node:vm');
+const exists=fs.existsSync('starter.js');const context={TextEncoder,Uint8Array,DataView,URL,console};context.globalThis=context;if(exists)vm.runInNewContext(fs.readFileSync('starter.js','utf8'),context);
+const api=context.FoodShareStarter;
+test('starter exposes generator',()=>assert.ok(api,'generator must exist'));
+test('city and country create blank starter kit',()=>{const kit=api.generate('Coquitlam','Canada');assert.equal(kit.files.length,4);const h=kit.files.find(x=>x.name==='index.html').text;assert.match(h,/Coquitlam/);assert.match(h,/No local resources have been verified/);for(const x of ['273 E','4040 Victoria','adam.hind','qr-code','mailto:'])assert.ok(!h.includes(x));assert.ok(kit.files.find(x=>x.name==='LICENSE.md').text.includes('2026 Adam Hind'));});
+test('escapes injected markup without executing it',()=>{const h=api.generate('<img src=x onerror=alert(1)>','A & B').files[0].text;assert.ok(!h.includes('<img src=x'));assert.ok(h.includes('&lt;img'));assert.ok(h.includes('A &amp; B'));});
+test('international names preserved and safe filename',()=>{const k=api.generate('São Paulo / 東京','Brasil 日本');assert.ok(k.files[0].text.includes('São Paulo / 東京'));assert.match(k.filename,/^[a-z0-9-]+\.zip$/);assert.ok(!k.filename.includes('/'));});
+test('blank and excessive inputs are rejected',()=>{for(const [c,n]of [['','Canada'],['Vancouver',' '],['a'.repeat(81),'Canada'],['A','b'.repeat(81)]])assert.throws(()=>api.generate(c,n));});
+test('ZIP archive contains all real files',()=>{const k=api.generate('Test City','Canada');const zip=api.zip(k.files);assert.equal(new DataView(zip.buffer).getUint32(0,true),0x04034b50);fs.mkdirSync('evidence',{recursive:true});fs.writeFileSync('evidence/starter-test.zip',zip);});
+test('generator has no network, storage or automatic publication APIs',()=>{const s=fs.readFileSync('starter.js','utf8');assert.ok(!/\b(fetch|XMLHttpRequest|WebSocket|localStorage|sessionStorage|sendBeacon)\b/.test(s));});
+test('page lifecycle clears stale generated download',()=>{const source=fs.readFileSync('starter.js','utf8');assert.match(source,/window\.addEventListener\('pagehide',revoke\)/);});
+test('long words wrap in input result and generated body',()=>{assert.match(fs.readFileSync('starter.html','utf8'),/#result[^}]*overflow-wrap:anywhere/);assert.match(api.generate('A'.repeat(80),'B'.repeat(80)).files[0].text,/body\{[^}]*overflow-wrap:anywhere/);});
+test('decorative arrows use supported glyph',()=>{assert.ok(!fs.readFileSync('index.html','utf8').includes('↗'));assert.ok(!fs.readFileSync('starter.html','utf8').includes('↗'));});

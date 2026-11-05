@@ -1,45 +1,46 @@
 # Vancouver Food Share
 
-A static, independent directory connecting people with existing community fridges in Vancouver. No backend, accounts, inventory feed or activity submission. Food availability varies.
+An independent guide to community fridges, food-support directories and donation options.
 
-## Download posters
+Website: https://adamhindtesp.github.io/vancouver-food-share/
 
-- [Letter poster PDF — 8.5 × 11 inches](posters/Vancouver-Food-Share-Letter-8.5x11.pdf)
-- [Tabloid poster PDF — 11 × 17 inches](posters/Vancouver-Food-Share-Tabloid-11x17.pdf)
-- [Phone preview PNG](posters/Vancouver-Food-Share-Phone-Preview.png)
+## Find or give food
 
-Open the file and use GitHub's download button to save it. Print the PDF on matching paper at **Actual Size / 100%**. Print one proof and scan its QR code before printing a batch. Obtain permission before placing a poster. The PDFs have been digitally checked; physical print quality and scanning have not been validated. The phone PNG is a preview, not the print master.
+The two primary routes are “I need food” and “I have food to give”. Eight organizer-listed fridge cards keep their address, hours, entrance, pickup/donation caveats and map link visible. “More details” opens storage, longer rules and source notes. Neighbourhood links help readers jump around without granting location access.
 
-## Use this in your city
+Directories, registration and eligible paid delivery are labelled separately. This is not a live-stock service or a complete citywide list. Check each operator's current information before travelling or donating. Source-check dates record source-page reviews, not on-site inspections or guarantees.
 
-[Fork this repository](https://github.com/adamhindTESP/vancouver-food-share/fork) into your GitHub account, or choose **Code > Download ZIP** on the [repository page](https://github.com/adamhindTESP/vancouver-food-share). You can also [download the main-branch ZIP](https://github.com/adamhindTESP/vancouver-food-share/archive/refs/heads/main.zip).
+Project contact: Vancouverfoodshare.contact@gmail.com. Correction and hosting links open an email app; nothing is sent automatically. Hosting interest is exploratory, with no promised box, placement or date.
 
-Follow [Adapt for your city](ADAPT_FOR_YOUR_CITY.md) to replace the city, locations, guidelines and contact details, then publish your own copy with GitHub Pages. No build tool is needed. Keep the [MIT license](LICENSE.md) and copyright notice with your copy.
+## Start a guide for another city
 
-## Preview locally
+Open [the city editor](https://adamhindtesp.github.io/vancouver-food-share/starter.html).
 
-Open `index.html` in a browser. `preview.html` is an identical compatibility copy. The page needs no dependency installation to work.
+1. Enter a city/community and country, plus an optional public maintainer email you are authorized to publish.
+2. Add up to 25 local locations or resources. Choose pickup, donation, both, support/directory or delivery. Enter a public address where relevant, access instructions, separate pickup/donation hours, food rules, eligibility/fees, source and actual check date.
+3. Add each entry, then edit or remove it from the saved-entry list. Clear unfinished fields if you want to discard them.
+4. Update the preview and download the website ZIP or editable project JSON. Reopen that JSON in the editor to continue later without writing HTML.
 
-## Maintaining listings
+Generated websites use compact cards. All entered hours, access instructions, food rules and eligibility/fees stay visible because they may contain essential restrictions. Contact and source history open under More details. A long essential note can make a card taller. Both-purpose entries appear in both find/give sections.
 
-Edit `index.html`, then copy it to `preview.html`. Each location needs a public organizer source, the date actually checked, pickup/donation distinction, entrance and hours, storage details, and explicit unknowns. A source check is not an on-site inspection or a guarantee that a fridge is stocked or operating right now. Do not automatically refresh dates.
+The ZIP contains index.html, README.md, LICENSE.md and food-share-project.json. The exported website does not include the editor. City projects start blank and never inherit Vancouver listings, contact details or QR codes. They remain explicitly unverified until their maintainer checks them. The tool does not research, translate, certify, host or publish a site.
 
-Keep prospective hosts separate. Obtain consent before listing a new host or private address. Do not imply a partnership from an acknowledgment, silence, or a directory listing. Do not impose pickup limits on mutual-aid fridges.
+Save before leaving: work stays in page memory until downloaded. Closing/reloading can lose unsaved edits. Inputs are not uploaded or stored in browser storage. Downloaded files contain entered details. Loading a hosted editor still makes ordinary web requests. Do not enter visitors' private information.
 
-Corrections use the intentionally published contact email via `mailto`; a configured mail app or manually composed email is required. The site sends and stores nothing. The maintainer reviews changes manually.
+Read [ADAPT_FOR_YOUR_CITY.md](ADAPT_FOR_YOUR_CITY.md) before separately publishing. Verify local facts, consent, safety requirements and your contact. Create a new QR only after confirming your own URL. Preserve the MIT license and copyright notice.
 
-See the [source register](SOURCES.md) for Vancouver location evidence and gaps. Replace those facts with checked local sources when adapting the site.
+## Run locally and maintain
 
-## Developer checks
+Open index.html after downloading/extracting this repository. For the editor, keep starter.html and starter.js together; browsers that restrict local scripts need a local static server. A computer browser is recommended for editing. Physical iPhone/local-file behavior has not been certified.
 
-With Node.js installed, run `node verify.cjs` for content checks. `flow-qa.cjs` checks keyboard/link/accessibility flows; `browser-qa.cjs` checks mobile layout and creates screenshots. Both browser scripts require Playwright and Edge and currently use explicit Windows paths; adjust those paths for your machine. These tools are optional for viewing or hosting the site. Browser evidence is generated in a sibling review folder when the scripts run.
+The main directory and exported city websites work without JavaScript. The optional editor uses a local script and protected preview; there is no backend, account, analytics or live inventory feed.
 
-Update city-specific test expectations when adapting the content. Keep `index.html` and `preview.html` identical.
+Run:
 
-## License
+- `python draft-checks.py` (content and release checks)
+- `node verify.cjs`
+- `node --test editor-checks.cjs starter-checks.cjs`
 
-[MIT License](LICENSE.md), copyright 2026 Adam Hind. Preserve the copyright and permission notice when copying or adapting the software.
+See TEST_REPORT.md, SOURCES.md and SECURITY.md. Historical Windows-specific browser scripts remain for reference but were not used to validate this release. CHECKSUMS.json records the release's main source/document hashes.
 
-## Security maintenance
-
-Read [SECURITY.md](SECURITY.md) before accepting corrections, changing code, or publishing a fork. Preserve the browser policy and review links and permissions. Run `node security-qa.cjs` for local browser-policy regression checks. Account and publishing protections need a separate owner review.
+Review changes before publishing to main, which can update GitHub Pages. Preserve the existing public URL, qr-code.png and posters unless deliberately replacing them. Repository history retains earlier versions; rollback should use a reviewed revert rather than rewriting shared history.
