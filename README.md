@@ -6,7 +6,7 @@ Website: https://adamhindtesp.github.io/vancouver-food-share/
 
 ## Find or give food
 
-The two primary routes are “I need food” and “I have food to give”. Eight organizer-listed fridge cards keep their address, hours, entrance, pickup/donation caveats and map link visible. “More details” opens storage, longer rules and source notes. Neighbourhood links help readers jump around without granting location access.
+The two primary routes are “I need food” and “I have food to give”. Ten fridge cards (eight VCFP listings plus two operator-listed locations) keep their address, hours, entrance, pickup/donation caveats and map link visible. “More details” opens storage, longer rules and source notes. Neighbourhood links help readers jump around without granting location access.
 
 Directories, registration and eligible paid delivery are labelled separately. This is not a live-stock service or a complete citywide list. Check each operator's current information before travelling or donating. Source-check dates record source-page reviews, not on-site inspections or guarantees.
 

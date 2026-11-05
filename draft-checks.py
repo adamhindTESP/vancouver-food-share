@@ -19,16 +19,16 @@ class DraftChecks(unittest.TestCase):
  def test_reuse_checklist_secondary(self):
   block=self.html.split('id="your-city"')[1].split('</section>')[0]
   self.assertIn('<details>',block)
- def test_eight_fridge_cards(self): self.assertEqual(len(re.findall(r'<article class="location"(?: [^>]*)?>',self.html)),8)
+ def test_ten_fridge_cards(self): self.assertEqual(len(re.findall(r'<article class="location"(?: [^>]*)?>',self.html)),10)
  def test_compact_cards_keep_trip_essentials_visible(self):
   cards=re.findall(r'<article class="location"[^>]*>.*?</article>',self.html,re.S)
-  self.assertEqual(len(cards),8)
+  self.assertEqual(len(cards),10)
   for card in cards:
    self.assertIn('<details class="card-more">',card)
    visible=card.split('<details class="card-more">')[0]
    for field in ['<h3>','class="address"','Vancouver, BC','Pickup','Hours','Entrance','class="map"']:
     self.assertIn(field,visible)
-   self.assertRegex(visible,r'(rules apply|Check donation rules on site)')
+   self.assertRegex(visible,r'(rules apply|Check donation rules on site|Donation policy unconfirmed)')
    self.assertNotIn('<dt>Storage</dt>',visible)
    self.assertIn('<dt>Storage</dt>',card)
  def test_special_access_and_donation_limits_stay_visible(self):
@@ -43,7 +43,7 @@ class DraftChecks(unittest.TestCase):
   for card in cards:
    more=card.split('<details class="card-more">')[-1]
    self.assertRegex(more,r'<summary aria-label="More details about [^"]+">More details</summary>')
-   self.assertIn('Source checked 4 November 2026',more)
+   self.assertRegex(more,r'Source checked (4|5) November 2026')
    self.assertIn('Give food',more)
  def test_neighbourhood_links_do_not_need_location(self):
   self.assertIn('aria-label="Jump to a neighbourhood"',self.html)
@@ -64,6 +64,36 @@ class DraftChecks(unittest.TestCase):
    targets={href.split('?',1)[0] for href in Page(Path(file).read_text()).links if href.startswith('mailto:')}
    self.assertEqual(targets,{'mailto:Vancouverfoodshare.contact@gmail.com'})
   self.assertIn('Copyright (c) 2026 Adam Hind',Path('LICENSE.md').read_text())
+ def test_operator_fridges_keep_unknowns_and_hours_visible(self):
+  cards=re.findall(r'<article class="location"[^>]*>.*?</article>',self.html,re.S)
+  for name,address in [('Collingwood Neighbourhood House','5288 Joyce Street'),('Boundless community fridge','3213 Fraser Street')]:
+   matches=[c for c in cards if '<h3>'+name+'</h3>' in c]
+   self.assertEqual(len(matches),1)
+   c=matches[0];visible=c.split('<details')[0]
+   self.assertIn(address,visible);self.assertIn('Donation policy unconfirmed',visible)
+   self.assertIn('Check with the organizer before bringing donations.',visible)
+   self.assertNotIn('24/7',c)
+   if 'Collingwood' in name:
+    self.assertIn('Fridge hours are not published',visible)
+    self.assertIn('outside the main site’s front entrance',visible)
+    self.assertIn('https://www.cnh.bc.ca/food-justice/',c)
+   else:
+    self.assertIn('Monday, Tuesday, Wednesday and Friday: 9am–3pm',visible)
+    self.assertIn('Thursday: 1pm–3pm',visible)
+    self.assertIn('Weekend hours are not listed',visible)
+    self.assertIn('https://salvationarmyvancouver.com/services/community-fridge/',c)
+ def test_operator_group_does_not_claim_vcfp_membership(self):
+  self.assertIn('id="operator-fridges"',self.html)
+  group=self.html.split('id="operator-fridges"')[1].split('<div class="pending">')[0]
+  self.assertEqual(len(re.findall(r'<article class="location"',group)),2)
+  self.assertNotIn('href="https://vcfp.square.site/find-a-fridge"',group)
+ def test_foodbank_wheels_is_donation_not_pickup(self):
+  url='https://foodbankonwheels.org/donate/'
+  self.assertNotIn(url,self.html.split('id="donate"')[0])
+  donate=self.html.split('id="donate"')[1]
+  cards=re.findall(r'<article class="resource-card">.*?</article>',donate,re.S)
+  matches=[c for c in cards if url in c];self.assertEqual(len(matches),1)
+  self.assertIn('These are donation drop-offs, not food pickup sites.',matches[0])
  def test_resource_sections(self):
   for id in ['food-support','home-delivery','registration','host-interest','your-city']:self.assertIn(id,self.page.ids)
  def test_geography_and_delivery_are_separate(self):

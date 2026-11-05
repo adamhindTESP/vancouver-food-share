@@ -1,10 +1,10 @@
 # Food Share release validation
 
-Source-page checks: 4 November 2026. Code/release checks: 5 November 2026 UTC. This release is based on the approved 14-file source bundle (14 files plus a checksum manifest), with publication wording adjusted and the main review banner removed. Newly generated city websites remain unverified drafts.
+Original source-page checks: 4 November 2026. Additional operator and donation sources: 5 November 2026 UTC. Code/release checks: 5 November 2026 UTC. This release is based on the approved 14-file source bundle (14 files plus a checksum manifest), with publication wording adjusted and the main review banner removed. Newly generated city websites remain unverified drafts.
 
 ## Passed locally
 
-- 21 Python content checks: eight cards, visible trip essentials, accessible native disclosures, neighbourhood links, registration/delivery/geography distinctions, donation and host caveats, project email, source dates, safe link schemes, static main-page policy and index/preview parity.
+- 24 Python content checks: ten cards in separate VCFP/operator groups, visible trip essentials, accessible native disclosures, neighbourhood links, registration/delivery/geography distinctions, donation and host caveats, project email, source dates, safe link schemes, static main-page policy and index/preview parity.
 - Node verify.cjs: content honesty, correction route, sources and parity.
 - 28 Node editor checks: four-file output, project roundtrip, escaping, unsafe URL rejection, field/date/import limits, clear/cancel behavior, overwrite guard, map context, Unicode project capacity, responsive layout rules, compact disclosures, no inherited Vancouver contact, all five service types and preservation of every entered essential field.
 - ZIP CRC, fixed filenames and file checksums verified. The test that writes a sample ZIP creates its own evidence directory so it works in a fresh checkout.
@@ -26,3 +26,9 @@ The contact address is maintainer-provided; no test email was sent and no mailbo
 ## Publication checks
 
 Before declaring deployment complete, verify the exact release commit on main, the corresponding GitHub Pages build, served index/starter content and the unchanged QR/poster objects. Preserve the prior commit as a rollback point. This report records local validation, not an assertion that a future deployment or account setting has been verified.
+
+## Operator-resource addition — 5 November 2026 UTC
+
+Added Collingwood Neighbourhood House and Boundless as a separate operator-sourced group, and Food Bank on Wheels only as a donation route. CNH fridge hours and both operators' donation policies remain explicitly unconfirmed. Boundless has its actual weekday schedule, with weekends unconfirmed. The existing eight cards, 211 resource, city editor, contact, QR and posters are unchanged.
+
+Three new content regression checks were first run against the previous release and failed as expected, then passed after the additions. The full current checks pass: 24 Python, verify.cjs, and 28 Node. No operational claims were inferred from unrelated programs or donation drop-off sites. Source dates for older entries were not advanced.

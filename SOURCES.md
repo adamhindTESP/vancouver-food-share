@@ -1,4 +1,4 @@
-# Food Share source register — checked 4 November 2026
+# Food Share source register — checks through 5 November 2026 (UTC)
 
 This is a source-page check, not an in-person inspection, live inventory, operating guarantee or physical-accessibility audit. No host was contacted.
 
@@ -19,6 +19,13 @@ https://vcfp.square.site/find-a-fridge was freshly retrieved on 4 November 2026 
 
 Food Stash's own https://www.foodstash.ca/fridge confirms the 273 E 4th details and donation rules. The page contains a deliberately limited summary, not a food-safety clearance. East Hastings LOAF is absent from the retrieved organizer directory, but that does not establish closure. Its unconfirmed notice remains and no directions are supplied.
 
+## Additional operator-listed fridges — checked 5 November 2026 (UTC)
+
+These two locations are separate from the eight VCFP listings above. Operator-page checks do not verify current stock, physical accessibility or access on arrival. No donation permission is inferred.
+
+- Collingwood Neighbourhood House: https://www.cnh.bc.ca/food-justice/ — Community Fridge & Pantry outdoors outside the main site's front entrance; main site address 5288 Joyce Street, Vancouver. The operator says food is for everyone. Fridge hours and accepted donation/drop-off policy are not published. The separate Thursday food program's registration, catchment and hours are not assigned to this fridge; the Annex address is not used.
+- Boundless / Salvation Army Vancouver: https://salvationarmyvancouver.com/services/community-fridge/ — 3213 Fraser Street, Vancouver; Monday, Tuesday, Wednesday and Friday 9am–3pm; Thursday 1pm–3pm. Everyone welcome, free, no forms or referrals, while supplies last. Weekend hours, specific entrance and donation acceptance/drop-off arrangements are not published. Do not infer 24/7 access or donation permission.
+
 ## Directories and program links
 
 - City of Vancouver: https://vancouver.ca/people-programs/free-and-low-cost-resources.aspx — meals/groceries map and printable guide. A stated update schedule is not a promise that each detail is current.
@@ -30,6 +37,8 @@ Food Stash's own https://www.foodstash.ca/fridge confirms the 273 E 4th details 
 - SHARE: https://sharesociety.ca/share-food-bank — Tri-Cities registration and donations; donation drop-off and food collection have different hours and locations. The guide sends users to operator details rather than making all sites donation points.
 - Food Stash delivery: https://www.foodstash.ca/rescued-food-box — $12 per weekly delivery, eligible low-income people with disability/chronic health conditions and within service boundary. Not general/free delivery.
 - GVFB registration: https://foodbank.bc.ca/find-food/registration/ — service area Vancouver, Burnaby, New Westminster, North Shore. Not labelled as delivery.
+
+Food Bank on Wheels donation route, checked 5 November 2026 (UTC): https://foodbankonwheels.org/donate/ — operator-listed food-donation drop-off locations. Linked only in the donation section and explicitly not presented as food pickup. Readers must check accepted items and current drop-off details with the operator. No recipient eligibility or delivery promise is inferred from this donation page.
 
 Existing BCCDC guidance source retains its actual prior check date, 16 October 2026: https://www.bccdc.ca/health-professionals/professional-resources/food-donation-guidelines . It was not silently refreshed to the new date.
 
